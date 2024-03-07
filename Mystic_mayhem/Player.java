@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 
 import Mystic_mayhem.Character.Archer;
+import Mystic_mayhem.Character.Healer;
+import Mystic_mayhem.Character.Knight;
+import Mystic_mayhem.Character.Mage;
+import Mystic_mayhem.Character.MythicalCreatures;
 
 public class Player {
     public ArrayList<Character> army = new ArrayList<Character>();

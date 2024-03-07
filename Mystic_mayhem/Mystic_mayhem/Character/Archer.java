@@ -1,5 +1,4 @@
 package Mystic_mayhem.Character;
-
 public class Archer extends Character{
     public void Shooter(){
         this.name = "Archer";
