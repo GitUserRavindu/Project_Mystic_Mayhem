@@ -1,18 +1,6 @@
-package Mystic_mayhem;
+import Equipment.Equipment;
 
 public class Shop {
-    //Knights
-    static Character knight ;
-    //Mages
-    static Character mage;
-    //Mythical Creatures
-    static Character mythicalCreatures ;
-    //Archers
-    static Character zing=new archer() ;
-    //Healers
-    static Character healer ;
-
-
     public static void display(){
         System.out.println("Welcome to the shop!");
         System.out.println("1. Buy");
@@ -20,23 +8,15 @@ public class Shop {
         System.out.println("3. Exit");
     }
     public static void MakeCharactersToDisplay(){
-        zing.zing();
+        ;
     }
 
     public void display(Character character){
-        System.out.println(character.getName());
-        System.out.println("Health: " + character.getHealth());
-        System.out.println("Attack: " + character.getAttack());
-        System.out.println("Defense: " + character.getDefense());
-        System.out.println("Gold: " + character.getGold());
+        ;
     }
 
     public void display(Equipment equipment){
-        System.out.println(character.getName());
-        System.out.println("Health: " + character.getHealth());
-        System.out.println("Attack: " + character.getAttack());
-        System.out.println("Defense: " + character.getDefense());
-        System.out.println("Gold: " + character.getGold());
+        ;
     }
     public void buy(float gold, float prize, int army, int eq,Player player) {
         if (gold >= prize) {
@@ -46,30 +26,31 @@ public class Shop {
         }
     }
     public void SetAttributes(Player player, int army, int eq){
-        if(army>0){
+        if (army > 0) {
             switch (army) {
                 case 0:
-                    
-                break;
+
+                    break;
                 case 1:
-                
-                break;
+
+                    break;
                 case 2:
-                
-                break;
+
+                    break;
                 case 3:
-                
-                break;
+
+                    break;
                 case 4:
-                
-                break;
+
+                    break;
                 default:
-                break;
+                    break;
             }
 
         }
+
         if(eq>0){
-            player.setEq(eq);
+            //player.setEq(eq);
         }
     }
 }

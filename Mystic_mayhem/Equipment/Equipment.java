@@ -1,4 +1,4 @@
-package Mystic_mayhem.Equipment;
+package Equipment;
 
 public abstract class Equipment {
     public String name;

@@ -1,4 +1,4 @@
-package Mystic_mayhem.Character;
+package Character;
 
 public class Knight extends Character{
     public void Squire(){

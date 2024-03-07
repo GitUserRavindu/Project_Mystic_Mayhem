@@ -1,8 +1,8 @@
-package Mystic_mayhem.Equipment;
+package Equipment;
 
 public class Armor extends Equipment {
     public void Chainmail() {
-        
+
         this.name = "Chainmail";
         this.prize = 70;
         this.attack=0f;
@@ -11,7 +11,7 @@ public class Armor extends Equipment {
         this.speed=-1f;
     }
     public void Regalia() {
-        
+
         this.name = "Regalia";
         this.prize = 105;
         this.attack=0f;
@@ -20,7 +20,7 @@ public class Armor extends Equipment {
         this.speed=-0f;
     }
     public void Fleece() {
-        
+
         this.name = "Fleece";
         this.prize = 150;
         this.attack=0f;
