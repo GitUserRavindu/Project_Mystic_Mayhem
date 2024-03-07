@@ -1,4 +1,4 @@
-package Mystic_mayhem.Equipment;
+package Equipment;
 
 public class Armor extends Equipment {
     public void Chainmail() {

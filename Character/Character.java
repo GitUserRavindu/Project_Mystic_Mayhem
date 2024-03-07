@@ -1,5 +1,5 @@
-package Mystic_mayhem.Character;
-import Mystic_mayhem.Equipment.Equipment;
+package Character;
+import Equipment.Equipment;
 
 public abstract class Character {
     public String name;
