@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
-import Character.Archer;
-import Character.Healer;
-import Character.Knight;
-import Character.Mage;
-import Character.MythicalCreatures;
+import Character.Archer.Archer;
+import Character.Healer.Healer;
+import Character.Knight.Knight;
+import Character.Mage.Mage;
+import Character.MythicalCreature.MythicalCreatures;
 
 public class Player {
     public ArrayList<Character> army = new ArrayList<Character>();

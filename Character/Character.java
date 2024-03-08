@@ -4,6 +4,7 @@ import Equipment.Equipment;
 public abstract class Character {
     public String name;
     public float health;
+    public float maxHealth;
     public float attack;
     public float defense;
     public float speed;
@@ -12,6 +13,24 @@ public abstract class Character {
     public String type;
     public Equipment[] equipment;
     public Boolean status;
+
+    public void displayStats(){
+        System.out.println("Name: " + name);
+        System.out.println("Health: " + health);
+        System.out.println("Attack: " + attack);
+        System.out.println("Defense: " + defense);
+        System.out.println("Speed: " + speed);
+        System.out.println("Tribe: " + tribe);
+        System.out.println("Prize: " + prize);
+        System.out.println("Type: " + type);
+    }
+
+    public float getMaxHealth() {
+        return maxHealth;
+    }
+    public void setMaxHealth(float maxHealth) {
+        this.maxHealth = maxHealth;
+    }
     public String getName() {
         return name;
     }

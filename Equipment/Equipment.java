@@ -7,6 +7,33 @@ public abstract class Equipment {
     public float defense;
     public int prize;
     public float speed;
+
+    public void displayStats(){
+        System.out.println("Name: " + name);
+        System.out.println("Health: " + health);
+        System.out.println("Attack: " + attack);
+        System.out.println("Defense: " + defense);
+        System.out.println("Speed: " + speed);
+        System.out.println("Prize: " + prize);
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setHealth(float health) {
+        this.health = health;
+    }
+    public void setAttack(float attack) {
+        this.attack = attack;
+    }
+    public void setDefense(float defense) {
+        this.defense = defense;
+    }
+    public void setPrize(int prize) {
+        this.prize = prize;
+    }
+    public void setSpeed(float speed) {
+        this.speed = speed;
+    }
     public String getName() {
         return name;
     }
