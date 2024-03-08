@@ -1,22 +1,6 @@
 package Character;
 
-public class Knight extends Character {
-    public Knight()
-    {
-
-    }
-
-    public Knight(Character other)
-    {
-        super(other);
-    }
-
-    @Override
-    public Character makeClone()
-    {
-        return (new Knight(this));
-    }
-
+public class Knight extends Character{
     public void Squire(){
         this.name = "Squire";
         this.prize = 85;

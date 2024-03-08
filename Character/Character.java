@@ -12,29 +12,6 @@ public abstract class Character {
     public String type;
     public Equipment[] equipment;
     public Boolean status;
-
-    // Constructors
-
-    // regular constructor
-    public Character() {
-
-    }
-
-    // special constructor for cloning
-    public Character(Character other)
-    {
-        if (other != null)
-        {
-            this.name = other.name;
-            this.prize = other.prize;
-            this.attack = other.attack;
-            this.defense = other.defense;
-            this.health = other.defense;
-            this.speed = other.speed;
-        }
-    }
-
-    // getters and setters
     public String getName() {
         return name;
     }
@@ -86,11 +63,8 @@ public abstract class Character {
     public Boolean getStatus() {
         return status;
     }
-
     public void setStatus(Boolean status) {
         this.status = status;
     }
 
-    // abstract classes
-    public abstract Character makeClone();
 }

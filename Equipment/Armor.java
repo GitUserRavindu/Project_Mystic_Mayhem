@@ -2,14 +2,14 @@ package Equipment;
 
 public class Armor extends Equipment {
     public void Chainmail() {
+
         this.name = "Chainmail";
         this.prize = 70;
-        this.attack = 0f;
-        this.defense = 1f;
-        this.health = 0f;
-        this.speed = -1f;
+        this.attack=0f;
+        this.defense=1f;
+        this.health=0f;
+        this.speed=-1f;
     }
-
     public void Regalia() {
 
         this.name = "Regalia";
