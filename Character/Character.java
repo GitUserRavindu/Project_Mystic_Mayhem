@@ -24,6 +24,9 @@ public abstract class Character {
         System.out.println("Prize: " + prize);
         System.out.println("Type: " + type);
     }
+    public float attack(float damage, float defense){
+        return 0.5f*damage-0.1f*defense;
+    }
 
     public float getMaxHealth() {
         return maxHealth;
