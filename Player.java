@@ -4,7 +4,7 @@ import Character.Archer;
 import Character.Healer;
 import Character.Knight;
 import Character.Mage;
-import Character.MythicalCreatures;
+import Character.MythicalCreature;
 
 public class Player {
     public ArrayList<Character> army = new ArrayList<Character>();
