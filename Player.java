@@ -20,12 +20,14 @@ public class Player {
     //HomeGround is a class that contains the home ground of the player.
     //Will the Player can change the home ground after creation?
     public HomeGround homeGround;
+    //How the shop will work? Is it static?
+    public static Shop shop = new Shop();
 
     //List of all players. Can be used to check if a username is already taken or not.
     //If the game is off, this must be saved to a file and loaded when the game starts.
     public static ArrayList<Player> players = new ArrayList<Player>();
 
-    public Player(String name, byte[] UserName) {
+    public Player(String name, byte[] UserName) throws IOException {
         if(UserName == null || name == null|| name.equals("") || name.equals(null)){
             // Handle the case when the UserName or name is null
             System.out.println("Username or name is empty.\n Please enter a valid username and name.");
@@ -52,8 +54,19 @@ public class Player {
             }
             setUserName(UserName);
         }*/
-
         this.setUserName(UserName);
+
+        //Didn't add for equipments. Will be added later.
+        while(true){
+            Character c;
+            //c=shop.buyCharacter();
+            //addCharacter(c);
+            //System.out.println("Do you want to buy another character? (Y/N)");
+            char ch = (char) System.in.read();
+            if(ch == 'N' || ch == 'n') {
+                break;
+            }
+        }
     }
 
     public void setUserName(byte[] userName2) {
