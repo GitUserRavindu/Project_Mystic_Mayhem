@@ -14,6 +14,8 @@ public class Player {
     public String UserName;//Can not be change after creation. Like a email.
     public static int UserId = 0; // A unique id for each user. Can be generated using number of users.
     public ArrayList<Character> army = new ArrayList<Character>();
+    public static int  turns = 5;
+    public static int  bonusTurns = 0;
 
     //HomeGround is a class that contains the home ground of the player.
     //Will the Player can change the home ground after creation?
@@ -98,7 +100,7 @@ public class Player {
         return name;
     }
 
-    public void setHomeGround(HomeGround homeGround) {
+    public void setHomeGround() {
         System.out.println("Choose a home ground");
         System.out.println("1. Hillcrest");
         System.out.println("2. Marshland");
@@ -134,6 +136,14 @@ public class Player {
                 System.out.println("Invalid input. Please enter a valid number.");
         }
     }
+    
+    public void setHomeGroundBonus() {
+        //Set the bonus of the home ground.
+        //Most of them just increase the stats of the characters.
+        //But Hillcrest can give highlanders a bonus turn with 20% attack power.
+        homeGround.setBonus(army,bonusTurns);
+    }
+    
     public void setName(String name) {
         this.name = name;
     }
