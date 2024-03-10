@@ -1,5 +1,7 @@
 package Character;
-public class MythicalCreature extends Character{
+
+public class MythicalCreature extends Character {
+    // All the structures are same as characters
     public MythicalCreature()
     {
 
