@@ -8,7 +8,7 @@ public class Main {
         // of Characters, and we use name to return certain character
         Character a = CharacterRegistry.returnCharacter("Zing");
         Character b = CharacterRegistry.returnCharacter("Zing");
-        Character c = CharacterRegistry.returnCharacter("Sunfire");
+        Character c = CharacterRegistry.returnCharacter("Hydra");
 
         System.out.println(a);
         System.out.println(b);
