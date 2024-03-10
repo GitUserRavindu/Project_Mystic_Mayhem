@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+import Character.Character;
 import Character.Archer;
 import Character.Healer;
 import Character.Knight;

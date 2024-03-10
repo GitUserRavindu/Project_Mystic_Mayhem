@@ -10,6 +10,10 @@ public class Main {
         Character b = CharacterRegistry.returnCharacter("Zing");
         Character c = CharacterRegistry.returnCharacter("Sunfire");
 
+        // Player playerP = new Player();
+        // Market market = Market.getInstance();
+        // market.marketMenu(playerP, 200);
+
         System.out.println(a);
         System.out.println(b);
 
