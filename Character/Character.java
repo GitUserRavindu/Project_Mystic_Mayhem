@@ -102,6 +102,10 @@ public abstract class Character {
         this.status = status;
     }
 
+    public Equipment[] getEquipments() {
+        return equipments;
+    }
+
     // abstract methods
     public abstract Character makeClone();
 }

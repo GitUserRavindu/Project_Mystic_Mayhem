@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.lang.Math;
 
 import Character.Character;
 import Character.Archer;
@@ -8,6 +9,8 @@ import Character.Healer;
 import Character.MythicalCreature;
 
 import Equipment.Equipment;
+import Equipment.Armor;
+import Equipment.Artefacts;
 
 public class Market {
     private Player player;
@@ -445,14 +448,14 @@ public class Market {
         //scanner.close();
     }
 
-    //Performs the transaction of buying a character.
+    //Performs the transaction of buying a character. Setting player attributes with updated gold coins and adding the character to the army.
     private void buyTransaction(String boughtCharacter) {
         Character character = CharacterRegistry.returnCharacter(boughtCharacter);
         neededGoldCoins = character.getPrize();
 
         if (existingGoldCoins >= neededGoldCoins) {
             existingGoldCoins -= neededGoldCoins;
-            //player.setGoldCoins(existingGoldCoins);           
+            //player.setGold(existingGoldCoins);           
             player.army.add(character);
             System.out.println("You have bought " + boughtCharacter + " for " + neededGoldCoins + " gold coins.");
         } else {
@@ -462,7 +465,161 @@ public class Market {
 
     //Displays the equipment that can be bought.
     private void buyEquipment(){
+        System.out.println("-----------------------------------");
         System.out.println("You have selected to buy equipment.");
+        System.out.println("-----------------------------------");
+
+        System.out.println("Please select which character you want to buy equipment for: ");
+        System.out.println("-------------------------------------------------------------");
+        
+        int i = 0;
+        for (Character character : player.army) {
+            System.out.println("      " + i + " " +character.getName());
+            i++;
+        }
+
+        Scanner scanner = new Scanner(System.in);
+        int characterChoice = scanner.nextInt();
+
+        Character selectedCharacter = player.army.get(characterChoice);
+        System.out.println("You have selected " + characterChoice);
+        System.out.println("You have selected " + selectedCharacter.getName());
+        //scanner.close();
+        
+        System.out.println("Please select the equipment you want to buy: ");
+        System.out.println("---------------------------------------------");
+        System.out.println("    1. Armour");
+        System.out.println("    2. Artefact");
+
+        int choice = scanner.nextInt();
+        //scanner.close();
+        System.out.println("You have selected " + choice);
+
+        switch (choice) {
+            case 1:
+                System.out.println("You have selected to buy armour for " + selectedCharacter.getName());
+
+                //Check whether an armour is equipped by the selectedCharacter.
+                for (Equipment equipment : selectedCharacter.getEquipments()) {
+                    if (equipment instanceof Armor) {
+                        System.out.println("You already have an armour equipped by " + selectedCharacter.getName());
+                        return;
+                    }
+                }
+
+                System.out.println("Please select the armour you want to buy: ");
+                System.out.println("-------------------------------------------");
+                System.out.format("%20s %20s %20s %20s %20s %20s", "Armour Type", "Price (gc)", "Attack", "Defence", "Health", "Speed\n");
+                System.out.format("%20s %20s %20s %20s %20s %20s", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------\n");
+
+                Armor displayChainmail = EquipmentRegistry.returnEquipment("Chainmail");
+                System.out.format("%20s %20s %20s %20s %20s %20s", "01. " + displayChainmail.getName(), displayChainmail.getPrize(), displayChainmail.getAttack(), displayChainmail.getDefense(), displayChainmail.getHealth(), displayChainmail.getSpeed()+"\n");
+                Armor displayRegalia = EquipmentRegistry.returnEquipment("Regalia");
+                System.out.format("%20s %20s %20s %20s %20s %20s", "02. " + displayRegalia.getName(), displayRegalia.getPrize(), displayRegalia.getAttack(), displayRegalia.getDefense(), displayRegalia.getHealth(), displayRegalia.getSpeed()+"\n");
+                Armor displayFleece = EquipmentRegistry.returnEquipment("Fleece");
+                System.out.format("%20s %20s %20s %20s %20s %20s", "03. " + displayFleece.getName(), displayFleece.getPrize(), displayFleece.getAttack(), displayFleece.getDefense(), displayFleece.getHealth(), displayFleece.getSpeed()+"\n");
+
+                int armourChoice = scanner.nextInt();
+                System.out.println("You have selected " + armourChoice);
+
+                switch (armourChoice) {
+                    case 1:
+                        buyEquipmentTransaction(selectedCharacter, "Chainmail");
+                        break;
+                    case 2:
+                        buyEquipmentTransaction(selectedCharacter, "Regalia");
+                        break;
+                    case 3: 
+                        buyEquipmentTransaction(selectedCharacter, "Fleece");
+                        break;
+                    default:
+                        System.out.println("Invalid choice.");
+                        break;
+                }
+
+                break;
+            case 2:
+                System.out.println("You have selected to buy artefact for " + selectedCharacter.getName());
+
+                //Check whether an artefact is equipped by the selectedCharacter.
+                for (Equipment equipment : selectedCharacter.getEquipments()) {
+                    if (equipment instanceof Artefacts) {
+                        System.out.println("You already have an artefact equipped by " + selectedCharacter.getName());
+                        return;
+                    }
+                }
+
+                System.out.println("Please select the artefact you want to buy: ");
+                System.out.format("%20s %20s %20s %20s %20s %20s", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------\n");
+                System.out.format("%20s %20s %20s %20s %20s %20s", "Artefact Type", "Price (gc)", "Attack", "Defence", "Health", "Speed\n");
+                System.out.format("%20s %20s %20s %20s %20s %20s", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------\n");
+
+                Artefacts displayExcalibur= EquipmentRegistry.returnEquipment("Excalibur");
+                System.out.format("%20s %20s %20s %20s %20s %20s", "01. " + displayExcalibur.getName(), displayExcalibur.getPrize(), displayExcalibur.getAttack(), displayExcalibur.getDefense(), displayExcalibur.getHealth(), displayExcalibur.getSpeed()+"\n");
+                Artefacts displayAmulet = EquipmentRegistry.returnEquipment("Amulet");
+                System.out.format("%20s %20s %20s %20s %20s %20s", "02. " + displayAmulet.getName(), displayAmulet.getPrize(), displayAmulet.getAttack(), displayAmulet.getDefense(), displayAmulet.getHealth(), displayAmulet.getSpeed()+"\n");
+                Artefacts displayCrystal = EquipmentRegistry.returnEquipment("Crystal");
+                System.out.format("%20s %20s %20s %20s %20s %20s", "03. " + displayCrystal.getName(), displayCrystal.getPrize(), displayCrystal.getAttack(), displayCrystal.getDefense(), displayCrystal.getHealth(), displayCrystal.getSpeed()+"\n");
+
+                int artefactChoice = scanner.nextInt();
+                System.out.println("You have selected " + artefactChoice);
+
+                switch (artefactChoice) {
+                    case 1:
+                        buyEquipmentTransaction(selectedCharacter, "Excalibur");
+                        break;
+                    case 2:
+                        buyEquipmentTransaction(selectedCharacter, "Amulet");
+                        break;
+                    case 3: 
+                        buyEquipmentTransaction(selectedCharacter, "Crystal");
+                        break;
+                    default:
+                        System.out.println("Invalid choice.");
+                        break;
+                }
+                break;
+            default:
+                System.out.println("Invalid choice.");
+                break;
+        }
+    }
+
+    //Performs the transaction of buying an equipment. Setting player attributes with updated gold coins and adding the equipment to the character.
+    private void buyEquipmentTransaction(Character selectedCharacter, String boughtEquipment) {
+        Equipment equipment = EquipmentRegistry.returnEquipment(boughtEquipment);
+        neededGoldCoins = equipment.getPrize();
+
+        if (existingGoldCoins >= neededGoldCoins) {
+            existingGoldCoins -= neededGoldCoins;
+
+            //set the new gold coins of player
+            player.setGold(existingGoldCoins);
+
+            //add the equipment to the character
+            selectedCharacter.getEquipments().add(equipment);
+
+            //set the new price of character
+            int valueIncrease = Math.round(neededGoldCoins * 20/100);
+            selectedCharacter.setPrize(selectedCharacter.getPrize() + valueIncrease);
+
+            //set the new attack, defense, health and speed of character
+            selectedCharacter.setAttack(selectedCharacter.getAttack() + equipment.getAttack());
+            selectedCharacter.setDefense(selectedCharacter.getDefense() + equipment.getDefense());
+            selectedCharacter.setHealth(selectedCharacter.getHealth() + equipment.getHealth());
+            selectedCharacter.setSpeed(selectedCharacter.getSpeed() + equipment.getSpeed());
+
+            //display the new character attributes
+            // System.out.println("New attributes of " + selectedCharacter.getName() + " are: ");
+            // System.out.println("Attack: " + selectedCharacter.getAttack());
+            // System.out.println("Defense: " + selectedCharacter.getDefense());
+            // System.out.println("Health: " + selectedCharacter.getHealth());
+            // System.out.println("Speed: " + selectedCharacter.getSpeed());
+
+            System.out.println("You have bought " + boughtEquipment + " for " + selectedCharacter.getName() + " for " + neededGoldCoins + " gold coins.");
+        } else {
+            System.out.println("You don't have enough gold!");
+        }
     }
 
     //Displays the characters that can be sold.
