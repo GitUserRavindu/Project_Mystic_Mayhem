@@ -10,7 +10,7 @@ import Character.MythicalCreature;
 
 import Equipment.Equipment;
 import Equipment.Armor;
-import Equipment.Artefacts;
+import Equipment.Artefact;
 
 public class Market {
     private Player player;
@@ -77,6 +77,7 @@ public class Market {
 
         while (choice != 3) {
             marketMenu(player, existingGoldCoins);
+            return;
         }
 
     }
@@ -512,11 +513,11 @@ public class Market {
                 System.out.format("%20s %20s %20s %20s %20s %20s", "Armour Type", "Price (gc)", "Attack", "Defence", "Health", "Speed\n");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------\n");
 
-                Armor displayChainmail = EquipmentRegistry.returnEquipment("Chainmail");
+                Equipment displayChainmail = Registry.returnEquipment("Chainmail");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "01. " + displayChainmail.getName(), displayChainmail.getPrize(), displayChainmail.getAttack(), displayChainmail.getDefense(), displayChainmail.getHealth(), displayChainmail.getSpeed()+"\n");
-                Armor displayRegalia = EquipmentRegistry.returnEquipment("Regalia");
+                Equipment displayRegalia = Registry.returnEquipment("Regalia");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "02. " + displayRegalia.getName(), displayRegalia.getPrize(), displayRegalia.getAttack(), displayRegalia.getDefense(), displayRegalia.getHealth(), displayRegalia.getSpeed()+"\n");
-                Armor displayFleece = EquipmentRegistry.returnEquipment("Fleece");
+                Equipment displayFleece = Registry.returnEquipment("Fleece");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "03. " + displayFleece.getName(), displayFleece.getPrize(), displayFleece.getAttack(), displayFleece.getDefense(), displayFleece.getHealth(), displayFleece.getSpeed()+"\n");
 
                 int armourChoice = scanner.nextInt();
@@ -543,7 +544,7 @@ public class Market {
 
                 //Check whether an artefact is equipped by the selectedCharacter.
                 for (Equipment equipment : selectedCharacter.getEquipments()) {
-                    if (equipment instanceof Artefacts) {
+                    if (equipment instanceof Artefact) {
                         System.out.println("You already have an artefact equipped by " + selectedCharacter.getName());
                         return;
                     }
@@ -554,11 +555,11 @@ public class Market {
                 System.out.format("%20s %20s %20s %20s %20s %20s", "Artefact Type", "Price (gc)", "Attack", "Defence", "Health", "Speed\n");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------\n");
 
-                Artefacts displayExcalibur= EquipmentRegistry.returnEquipment("Excalibur");
+                Equipment displayExcalibur= Registry.returnEquipment("Excalibur");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "01. " + displayExcalibur.getName(), displayExcalibur.getPrize(), displayExcalibur.getAttack(), displayExcalibur.getDefense(), displayExcalibur.getHealth(), displayExcalibur.getSpeed()+"\n");
-                Artefacts displayAmulet = EquipmentRegistry.returnEquipment("Amulet");
+                Equipment displayAmulet = Registry.returnEquipment("Amulet");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "02. " + displayAmulet.getName(), displayAmulet.getPrize(), displayAmulet.getAttack(), displayAmulet.getDefense(), displayAmulet.getHealth(), displayAmulet.getSpeed()+"\n");
-                Artefacts displayCrystal = EquipmentRegistry.returnEquipment("Crystal");
+                Equipment displayCrystal = Registry.returnEquipment("Crystal");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "03. " + displayCrystal.getName(), displayCrystal.getPrize(), displayCrystal.getAttack(), displayCrystal.getDefense(), displayCrystal.getHealth(), displayCrystal.getSpeed()+"\n");
 
                 int artefactChoice = scanner.nextInt();
@@ -587,7 +588,7 @@ public class Market {
 
     //Performs the transaction of buying an equipment. Setting player attributes with updated gold coins and adding the equipment to the character.
     private void buyEquipmentTransaction(Character selectedCharacter, String boughtEquipment) {
-        Equipment equipment = EquipmentRegistry.returnEquipment(boughtEquipment);
+        Equipment equipment = Registry.returnEquipment(boughtEquipment);
         neededGoldCoins = equipment.getPrize();
 
         if (existingGoldCoins >= neededGoldCoins) {

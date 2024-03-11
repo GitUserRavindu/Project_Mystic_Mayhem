@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.util.ArrayList;
 
+import Character.Character;
+
 public class Player {
     public String name;//Can be change after creation
     public int gold;

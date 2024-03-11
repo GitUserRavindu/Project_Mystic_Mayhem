@@ -113,10 +113,6 @@ public abstract class Character implements MakeClone {
         this.status = status;
     }
 
-    public Equipment[] getEquipments() {
-        return equipments;
-    }
-
     // abstract methods
     public abstract Character makeClone();
 }

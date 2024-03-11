@@ -23,3 +23,5 @@ Maybe, instead of buy -> buyMenu -> buyArmy etc, We can show in the market menu
 
 br careful: file is "Armor" , not "Armour"
 also "Artefacts", not "Artefact"
+
+Maybe display items can be take into one function. that will shorten the code
