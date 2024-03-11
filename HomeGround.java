@@ -10,15 +10,15 @@ public class HomeGround {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'setBonus'");
     }
-
-    public Object getName() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getName'");
-    }
-
     public void setBonus(ArrayList<Character> army, int bonusTurns) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'setBonus'");
     }
+
+    public String getName() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getName'");
+    }
+
 
 }

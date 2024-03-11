@@ -1,7 +1,9 @@
 package Character;
-import Equipment.Equipment;
 
-public abstract class Character {
+import Equipment.Equipment;
+import Interfaces.MakeClone;
+
+public abstract class Character implements MakeClone {
     protected String name;
     protected float health;
     protected float attack;

@@ -14,9 +14,9 @@ public class Market {
     private int existingGoldCoins;
     private int neededGoldCoins;
 
-    //Singleton Design Pattern is used. Only one Market object can be created.   
+    //Singleton Design Pattern is used. Only one Market object can be created.
     private static Market instance = null;
-    
+
     //Constructor is private to prevent creating new Market objects.
     private Market() {
     }
@@ -129,7 +129,7 @@ public class Market {
                 break;
         }
     }
-    
+
     //Displays the characters that can be bought.
     private void buyArmy(){
         System.out.println("You have selected to buy an army.");
@@ -144,7 +144,7 @@ public class Market {
 
         Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
-        
+
         int characterChoice;
         String boughtCharacter;
         //scanner.close();
@@ -169,15 +169,15 @@ public class Market {
                 System.out.format("%18s %18s %18s %18s %18s %18s", "Character |", "Price (gc) |", "Attack |", "Defence |", "Health |", "Speed |\n");
                 System.out.format("%18s %18s %18s %18s %18s %18s", "------------------", "------------------", "------------------", "------------------", "------------------", "------------------\n");
 
-                Character displayShooter = CharacterRegistry.returnCharacter("Shooter");
+                Character displayShooter = Registry.returnCharacter("Shooter");
                 System.out.format("%18s %18s %18s %18s %18s %18s", "1. "+displayShooter.getName(), displayShooter.getPrize(), displayShooter.getAttack(), displayShooter.getDefense(), displayShooter.getHealth(), displayShooter.getSpeed()+"\n");
-                Character dispalyRanger = CharacterRegistry.returnCharacter("Ranger");
+                Character dispalyRanger = Registry.returnCharacter("Ranger");
                 System.out.format("%18s %18s %18s %18s %18s %18s", "2. "+dispalyRanger.getName(), dispalyRanger.getPrize(), dispalyRanger.getAttack(), dispalyRanger.getDefense(), dispalyRanger.getHealth(), dispalyRanger.getSpeed()+"\n");
-                Character displaySunfire = CharacterRegistry.returnCharacter("Sunfire");
+                Character displaySunfire = Registry.returnCharacter("Sunfire");
                 System.out.format("%18s %18s %18s %18s %18s %18s", "3. "+displaySunfire.getName(), displaySunfire.getPrize(), displaySunfire.getAttack(), displaySunfire.getDefense(), displaySunfire.getHealth(), displaySunfire.getSpeed()+"\n");
-                Character displayZing = CharacterRegistry.returnCharacter("Zing");
+                Character displayZing = Registry.returnCharacter("Zing");
                 System.out.format("%18s %18s %18s %18s %18s %18s", "4. "+displayZing.getName(), displayZing.getPrize(), displayZing.getAttack(), displayZing.getDefense(), displayZing.getHealth(), displayZing.getSpeed()+"\n");
-                Character displaySaggitarius = CharacterRegistry.returnCharacter("Saggitarius");
+                Character displaySaggitarius = Registry.returnCharacter("Saggitarius");
                 System.out.format("%18s %18s %18s %18s %18s %18s", "5. "+displaySaggitarius.getName(), displaySaggitarius.getPrize(), displaySaggitarius.getAttack(), displaySaggitarius.getDefense(), displaySaggitarius.getHealth(), displaySaggitarius.getSpeed()+"\n");
 
                 characterChoice = scanner.nextInt();
@@ -226,15 +226,15 @@ public class Market {
                 System.out.format("%20s %20s %20s %20s %20s %20s", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------\n");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "Character |", "Price (gc) |", "Attack |", "Defence |", "Health |", "Speed |\n");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------\n");
-                Character displaySquire = CharacterRegistry.returnCharacter("Squire");
+                Character displaySquire = Registry.returnCharacter("Squire");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "1. "+displaySquire.getName(), displaySquire.getPrize(), displaySquire.getAttack(), displaySquire.getDefense(), displaySquire.getHealth(), displaySquire.getSpeed()+"\n");
-                Character displayCavalier = CharacterRegistry.returnCharacter("Cavalier");
+                Character displayCavalier = Registry.returnCharacter("Cavalier");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "2. "+displayCavalier.getName(), displayCavalier.getPrize(), displayCavalier.getAttack(), displayCavalier.getDefense(), displayCavalier.getHealth(), displayCavalier.getSpeed()+"\n");
-                Character displayTemplar = CharacterRegistry.returnCharacter("Templar");
+                Character displayTemplar = Registry.returnCharacter("Templar");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "3. "+displayTemplar.getName(), displayTemplar.getPrize(), displayTemplar.getAttack(), displayTemplar.getDefense(), displayTemplar.getHealth(), displayTemplar.getSpeed()+"\n");
-                Character displayZoro = CharacterRegistry.returnCharacter("Zoro");
+                Character displayZoro = Registry.returnCharacter("Zoro");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "4. "+displayZoro.getName(), displayZoro.getPrize(), displayZoro.getAttack(), displayZoro.getDefense(), displayZoro.getHealth(), displayZoro.getSpeed()+"\n");
-                Character displaySwiftblade = CharacterRegistry.returnCharacter("Swiftblade");
+                Character displaySwiftblade = Registry.returnCharacter("Swiftblade");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "5. "+displaySwiftblade.getName(), displaySwiftblade.getPrize(), displaySwiftblade.getAttack(), displaySwiftblade.getDefense(), displaySwiftblade.getHealth(), displaySwiftblade.getSpeed()+"\n");
 
                 characterChoice = scanner.nextInt();
@@ -283,15 +283,15 @@ public class Market {
                 System.out.format("%20s %20s %20s %20s %20s %20s", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------\n");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "Character |", "Price (gc) |", "Attack |", "Defence |", "Health |", "Speed |\n");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------\n");
-                Character displayWarlock = CharacterRegistry.returnCharacter("Warlock");
+                Character displayWarlock = Registry.returnCharacter("Warlock");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "1. "+displayWarlock.getName(), displayWarlock.getPrize(), displayWarlock.getAttack(), displayWarlock.getDefense(), displayWarlock.getHealth(), displayWarlock.getSpeed()+"\n");
-                Character displayIllusionist = CharacterRegistry.returnCharacter("Illusionist");
+                Character displayIllusionist = Registry.returnCharacter("Illusionist");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "2. "+displayIllusionist.getName(), displayIllusionist.getPrize(), displayIllusionist.getAttack(), displayIllusionist.getDefense(), displayIllusionist.getHealth(), displayIllusionist.getSpeed()+"\n");
-                Character displayEnchanter = CharacterRegistry.returnCharacter("Enchanter");
+                Character displayEnchanter = Registry.returnCharacter("Enchanter");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "3. "+displayEnchanter.getName(), displayEnchanter.getPrize(), displayEnchanter.getAttack(), displayEnchanter.getDefense(), displayEnchanter.getHealth(), displayEnchanter.getSpeed()+"\n");
-                Character displayConjurer = CharacterRegistry.returnCharacter("Conjurer");
+                Character displayConjurer = Registry.returnCharacter("Conjurer");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "4. "+displayConjurer.getName(), displayConjurer.getPrize(), displayConjurer.getAttack(), displayConjurer.getDefense(), displayConjurer.getHealth(), displayConjurer.getSpeed()+"\n");
-                Character displayEldritch = CharacterRegistry.returnCharacter("Eldritch");
+                Character displayEldritch = Registry.returnCharacter("Eldritch");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "5. "+displayEldritch.getName(), displayEldritch.getPrize(), displayEldritch.getAttack(), displayEldritch.getDefense(), displayEldritch.getHealth(), displayEldritch.getSpeed()+"\n");
 
                 characterChoice = scanner.nextInt();
@@ -340,15 +340,15 @@ public class Market {
                 System.out.format("%20s %20s %20s %20s %20s %20s", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------\n");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "Character |", "Price (gc) |", "Attack |", "Defence |", "Health |", "Speed |\n");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------\n");
-                Character displaySoother = CharacterRegistry.returnCharacter("Soother");
+                Character displaySoother = Registry.returnCharacter("Soother");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "1. "+displaySoother.getName(), displaySoother.getPrize(), displaySoother.getAttack(), displaySoother.getDefense(), displaySoother.getHealth(), displaySoother.getSpeed()+"\n");
-                Character displayMedic = CharacterRegistry.returnCharacter("Medic");
+                Character displayMedic = Registry.returnCharacter("Medic");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "2. "+displayMedic.getName(), displayMedic.getPrize(), displayMedic.getAttack(), displayMedic.getDefense(), displayMedic.getHealth(), displayMedic.getSpeed()+"\n");
-                Character displayAlchemist = CharacterRegistry.returnCharacter("Alchemist");
+                Character displayAlchemist = Registry.returnCharacter("Alchemist");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "3. "+displayAlchemist.getName(), displayAlchemist.getPrize(), displayAlchemist.getAttack(), displayAlchemist.getDefense(), displayAlchemist.getHealth(), displayAlchemist.getSpeed()+"\n");
-                Character displaySaint = CharacterRegistry.returnCharacter("Saint");
+                Character displaySaint = Registry.returnCharacter("Saint");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "4. "+displaySaint.getName(), displaySaint.getPrize(), displaySaint.getAttack(), displaySaint.getDefense(), displaySaint.getHealth(), displaySaint.getSpeed()+"\n");
-                Character displayLightbringer = CharacterRegistry.returnCharacter("Lightbringer");
+                Character displayLightbringer = Registry.returnCharacter("Lightbringer");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "5. "+displayLightbringer.getName(), displayLightbringer.getPrize(), displayLightbringer.getAttack(), displayLightbringer.getDefense(), displayLightbringer.getHealth(), displayLightbringer.getSpeed()+"\n");
 
                 characterChoice = scanner.nextInt();
@@ -397,15 +397,15 @@ public class Market {
                 System.out.format("%20s %20s %20s %20s %20s %20s", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------\n");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "Character |", "Price (gc) |", "Attack |", "Defence |", "Health |", "Speed |\n");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------\n");
-                Character displayDragon = CharacterRegistry.returnCharacter("Dragon");
+                Character displayDragon = Registry.returnCharacter("Dragon");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "1. "+displayDragon.getName(), displayDragon.getPrize(), displayDragon.getAttack(), displayDragon.getDefense(), displayDragon.getHealth(), displayDragon.getSpeed()+"\n");
-                Character displayBasilisk = CharacterRegistry.returnCharacter("Basilisk");
+                Character displayBasilisk = Registry.returnCharacter("Basilisk");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "2. "+displayBasilisk.getName(), displayBasilisk.getPrize(), displayBasilisk.getAttack(), displayBasilisk.getDefense(), displayBasilisk.getHealth(), displayBasilisk.getSpeed()+"\n");
-                Character displayHydra = CharacterRegistry.returnCharacter("Hydra");
+                Character displayHydra = Registry.returnCharacter("Hydra");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "3. "+displayHydra.getName(), displayHydra.getPrize(), displayHydra.getAttack(), displayHydra.getDefense(), displayHydra.getHealth(), displayHydra.getSpeed()+"\n");
-                Character displayPhoenix = CharacterRegistry.returnCharacter("Phoenix");
+                Character displayPhoenix = Registry.returnCharacter("Phoenix");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "4. "+displayPhoenix.getName(), displayPhoenix.getPrize(), displayPhoenix.getAttack(), displayPhoenix.getDefense(), displayPhoenix.getHealth(), displayPhoenix.getSpeed()+"\n");
-                Character displayPegasus = CharacterRegistry.returnCharacter("Pegasus");
+                Character displayPegasus = Registry.returnCharacter("Pegasus");
                 System.out.format("%20s %20s %20s %20s %20s %20s", "5. "+displayPegasus.getName(), displayPegasus.getPrize(), displayPegasus.getAttack(), displayPegasus.getDefense(), displayPegasus.getHealth(), displayPegasus.getSpeed()+"\n");
 
                 characterChoice = scanner.nextInt();
@@ -441,18 +441,18 @@ public class Market {
                 System.out.println("Invalid choice.");
                 break;
         }
-        
+
         //scanner.close();
     }
 
     //Performs the transaction of buying a character.
     private void buyTransaction(String boughtCharacter) {
-        Character character = CharacterRegistry.returnCharacter(boughtCharacter);
+        Character character = Registry.returnCharacter(boughtCharacter);
         neededGoldCoins = character.getPrize();
 
         if (existingGoldCoins >= neededGoldCoins) {
             existingGoldCoins -= neededGoldCoins;
-            //player.setGoldCoins(existingGoldCoins);           
+            //player.setGoldCoins(existingGoldCoins);
             player.army.add(character);
             System.out.println("You have bought " + boughtCharacter + " for " + neededGoldCoins + " gold coins.");
         } else {

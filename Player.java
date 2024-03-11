@@ -14,7 +14,9 @@ public class Player {
     public String UserName;//Can not be change after creation. Like a email.
     public static int UserId = 0; // A unique id for each user. Can be generated using number of users.
     public ArrayList<Character> army = new ArrayList<Character>();
-    public static int  turns = 5;
+
+    
+    public static int  turns = 5; // Thinking of implementing with a seperate class
     public static int  bonusTurns = 0;
 
     //HomeGround is a class that contains the home ground of the player.

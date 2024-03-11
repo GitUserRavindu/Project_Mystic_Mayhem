@@ -6,21 +6,94 @@ import Character.Healer;
 import Character.Knight;
 import Character.Mage;
 import Character.MythicalCreature;
+import Equipment.Armor;
+import Equipment.Artefact;
+import Equipment.Equipment;
 
-public class CharacterRegistry {
-    private static HashMap<String, Character> data = new HashMap<>();
+public class Registry {
+    private static HashMap<String, Character> characters = new HashMap<>();
+    private static HashMap<String, Equipment> equipments = new HashMap<>();
 
     public static void addCharacter(String name, Character character)
     {
-        data.put(name, character);
+        characters.put(name, character);
     }
 
     public static Character returnCharacter(String name)
     {
-        return data.get(name).makeClone();
+        return characters.get(name).makeClone();
     }
 
-    public static void bundledCache()
+    public static void addEquipment(String name, Equipment equipment)
+    {
+        equipments.put(name, equipment);
+    }
+
+    public static Equipment returnEquipment(String name)
+    {
+        return equipments.get(name).makeClone();
+    }
+
+    public static void equipmentCache()
+    {
+        Armor chainmail = new Armor();
+        chainmail.setName("Chainmail");
+        chainmail.setPrize(70);
+        chainmail.setAttack(0f);
+        chainmail.setDefense(1f);
+        chainmail.setHealth(0f);
+        chainmail.setSpeed(-1f);
+
+        Armor regalia = new Armor();
+        regalia.setName("Regalia");
+        regalia.setPrize(105);
+        regalia.setAttack(0f);
+        regalia.setDefense(1f);
+        regalia.setHealth(0f);
+        regalia.setSpeed(-0f);
+
+        Armor fleece = new Armor();
+        fleece.setName("Fleece");
+        fleece.setPrize(150);
+        fleece.setAttack(0f);
+        fleece.setDefense(2f);
+        fleece.setHealth(1f);
+        fleece.setSpeed(-1f);
+
+        Artefact amulet = new Artefact();
+        amulet.setName("Amulet");
+        amulet.setPrize(200);
+        amulet.setAttack(1f);
+        amulet.setDefense(-1f);
+        amulet.setHealth(1f);
+        amulet.setSpeed(1f);
+
+        Artefact excalibur = new Artefact();
+        excalibur.setName("Excalibur");
+        excalibur.setPrize(150);
+        excalibur.setAttack(2f);
+        excalibur.setDefense(0f);
+        excalibur.setHealth(0f);
+        excalibur.setSpeed(0f);
+
+        Artefact crystal = new Artefact();
+        crystal.setName("Crystal");
+        crystal.setPrize(210);
+        crystal.setAttack(2f);
+        crystal.setDefense(1f);
+        crystal.setHealth(-1f);
+        crystal.setSpeed(-1f);
+
+        // Adding everything to the hashmap
+        addEquipment("Chainmail", chainmail);
+        addEquipment("Regalia", regalia);
+        addEquipment("Fleece", fleece);
+        addEquipment("Amulet", amulet);
+        addEquipment("Excalibur", excalibur);
+        addEquipment("Crystal", crystal);
+    }
+
+    public static void characterCache()
     {
         // Archers
         Archer shooter = new Archer();
