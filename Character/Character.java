@@ -33,10 +33,19 @@ public abstract class Character implements MakeClone {
             this.defense = other.defense;
             this.health = other.defense;
             this.speed = other.speed;
+            this.tribe = other.tribe;
         }
     }
 
     // getters and setters
+
+    public Equipment[] getEquipments() {
+        return equipments;
+    }
+
+    public void setEquipments(Equipment[] equipments) {
+        this.equipments = equipments;
+    }
 
     public String getName() {
         return name;
