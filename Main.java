@@ -1,14 +1,16 @@
 import Character.Character;
+import Equipment.Equipment;
 
 public class Main {
     public static void main(String[] args) {
-        CharacterRegistry.bundledCache(); // Making game character configurations
+        Registry.characterCache(); // Making game character configurations
+        Registry.equipmentCache(); // Making game equipment configurations
 
-        // We use CharacterRegistry as a library to store the different configurations
+        // We use Registry as a library to store the different configurations
         // of Characters, and we use name to return certain character
-        Character a = CharacterRegistry.returnCharacter("Zing");
-        Character b = CharacterRegistry.returnCharacter("Zing");
-        Character c = CharacterRegistry.returnCharacter("Sunfire");
+        Equipment a = Registry.returnEquipment("Crystal");
+        Equipment b = Registry.returnEquipment("Crystal");
+        Character c = Registry.returnCharacter("Hydra");
 
         // Player playerP = new Player();
         // Market market = Market.getInstance();
