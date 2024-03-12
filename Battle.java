@@ -111,6 +111,18 @@ public class Battle {
             c.setHealth(c.getMaxHealth());
         }
     }
+    public void setOrder(ArrayList<Character> army){
+        for(int i=0;i<5;i++){
+            for(int j=0;j<5;j++){
+                if(army.get(i).getSpeed()<army.get(j).getSpeed()){
+                    Character temp=army.get(i);
+                    army.set(i,army.get(j));
+                    army.set(j,temp);
+                }else if(army.get(i).getSpeed()==army.get(j).getSpeed()){
+                    
+            }
+        }
+    }
     public void fight(ArrayList<Character> army1,ArrayList<Character> army2,String name1,String name2){
         Buff(army1);
         Buff(army2);
@@ -129,10 +141,12 @@ public class Battle {
             }
             for(int j=0;j<5;j++){
                 System.out.println("Turn "+i+":"+name1);
-                
+                army1.get(j)
                 System.out.println("Turn "+i+":"+name2);}
         }
         resetBuff(army1);
         resetBuff(army2);
+        resetHealth(army1);
+        resetHealth(army2);
     }
 }
