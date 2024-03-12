@@ -4,6 +4,7 @@ import Equipment.Equipment;
 import Interfaces.MakeClone;
 
 public abstract class Character implements MakeClone {
+    protected float maxHealth;
     protected String name;
     protected float health;
     protected float attack;
@@ -113,6 +114,13 @@ public abstract class Character implements MakeClone {
         this.status = status;
     }
 
+    public void setMaxHealth(float addHealth) {
+        this.maxHealth = addHealth;
+    }
+    public float getMaxHealth() {
+        return maxHealth;
+    }
+    
     // abstract methods
     public abstract Character makeClone();
 }
