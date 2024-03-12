@@ -15,8 +15,11 @@ public class Hillcrest extends HomeGround {
                 c.setAttack(c.getAttack() + 1f);
                 c.setDefense(c.getDefense() + 1f);
             } else if (c.getTribe().equals("Marshlanders")) {
-                c.setAttack(c.getSpeed() - 1f);
-            }
+                c.setSpeed(c.getSpeed() - 1f);
+            }else if(c.getTribe().equals("Sunchild")){
+                c.setSpeed(c.getSpeed() - 1f);}
+
+                
         }
     }
 
@@ -26,8 +29,9 @@ public class Hillcrest extends HomeGround {
                 c.setAttack(c.getAttack() - 1f);
                 c.setDefense(c.getDefense() - 1f);
             } else if (c.getTribe().equals("Marshlanders")) {
-                c.setAttack(c.getSpeed() + 1f);
-            }
+                c.setSpeed(c.getSpeed() + 1f);
+            }else if(c.getTribe().equals("Sunchild")){
+                c.setSpeed(c.getSpeed() + 1f);}
         }
     }
 }

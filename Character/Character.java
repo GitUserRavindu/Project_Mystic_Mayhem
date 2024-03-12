@@ -14,7 +14,7 @@ public abstract class Character implements MakeClone {
     protected int prize;
     protected String type;
     protected Equipment[] equipments;
-    protected Boolean status;
+    protected Boolean status=true;
 
     // Constructors
 
@@ -32,7 +32,7 @@ public abstract class Character implements MakeClone {
             this.prize = other.prize;
             this.attack = other.attack;
             this.defense = other.defense;
-            this.health = other.defense;
+            this.health = other.health;
             this.speed = other.speed;
             this.tribe = other.tribe;
         }

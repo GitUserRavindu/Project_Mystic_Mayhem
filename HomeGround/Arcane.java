@@ -14,7 +14,8 @@ public class Arcane extends HomeGround {
             if (c.getTribe().equals("Mystic")) {
                 c.setAttack(c.getAttack() + 2f);
             } else if (c.getTribe().equals("Highlander")) {
-                c.setSpeed(c.getSpeed() + 1f);
+                c.setSpeed(c.getSpeed() - 1f);
+                c.setDefense(c.getDefense() - 1f);
             } else if (c.getTribe().equals("Marshlander")) {
                 c.setSpeed(c.getSpeed() - 1f);
                 c.setDefense(c.getDefense() - 1f);
@@ -27,7 +28,8 @@ public class Arcane extends HomeGround {
             if (c.getTribe().equals("Mystic")) {
                 c.setAttack(c.getAttack() - 2f);
             } else if (c.getTribe().equals("Highlander")) {
-                c.setSpeed(c.getSpeed() - 1f);
+                c.setSpeed(c.getSpeed() + 1f);
+                c.setDefense(c.getDefense() + 1f);
             } else if (c.getTribe().equals("Marshlander")) {
                 c.setSpeed(c.getSpeed() + 1f);
                 c.setDefense(c.getDefense() + 1f);

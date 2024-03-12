@@ -22,8 +22,8 @@ public class Player {
     public static int UserId = 0; // A unique id for each user. Can be generated using number of users.
     public ArrayList<Character> army = new ArrayList<Character>();
 
-    public static int turns = 5; // Thinking of implementing with a seperate class
-    public static int bonusTurns = 0;
+    //public static int turns = 5; // Thinking of implementing with a seperate class
+    //public static int bonusTurns = 0;
 
     //HomeGround is a class that contains the home ground of the player.
     //Will the Player can change the home ground after creation?
