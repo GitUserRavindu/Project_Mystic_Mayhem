@@ -4,6 +4,7 @@ import Equipment.Equipment;
 import Interfaces.MakeClone;
 
 public abstract class Character implements MakeClone {
+    protected float maxHealth;
     protected String name;
     protected float health;
     protected float attack;
@@ -111,6 +112,25 @@ public abstract class Character implements MakeClone {
     }
     public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public void setMaxHealth(float addHealth) {
+        this.maxHealth = addHealth;
+    }
+
+    public float getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void displayStats() {
+        System.out.println("Name: " + this.name);
+        System.out.println("Health: " + this.health);
+        System.out.println("Attack: " + this.attack);
+        System.out.println("Defense: " + this.defense);
+        System.out.println("Speed: " + this.speed);
+        System.out.println("Tribe: " + this.tribe);
+        System.out.println("Prize: " + this.prize);
+        System.out.println("Type: " + this.type);
     }
 
     // abstract methods
