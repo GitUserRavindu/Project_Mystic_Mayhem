@@ -12,10 +12,6 @@ public class Main {
         Equipment b = Registry.returnEquipment("Crystal");
         Character c = Registry.returnCharacter("Hydra");
 
-        // Player playerP = new Player();
-        // Market market = Market.getInstance();
-        // market.marketMenu(playerP, 200);
-
         System.out.println(a);
         System.out.println(b);
 
@@ -24,5 +20,9 @@ public class Main {
         System.out.println(a.getAttack() + " " + b.getAttack());
 
         System.out.println(c.getName());
+
+        // Player playerP = new Player();
+        // Market market = Market.getInstance();
+        // market.marketMenu(playerP, 800);
     }
 }

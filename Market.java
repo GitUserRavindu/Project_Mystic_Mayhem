@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.lang.Math;
 
 import Character.Character;
 import Character.Archer;
@@ -8,6 +9,8 @@ import Character.Healer;
 import Character.MythicalCreature;
 
 import Equipment.Equipment;
+import Equipment.Armor;
+import Equipment.Artefact;
 
 public class Market {
     private Player player;
@@ -38,8 +41,8 @@ public class Market {
         System.out.println("Welcome to the Market Place!");
         System.out.println("----------------------------");
         System.out.println("What you want to do today? Please select an option: ");
-        System.out.println("    1. Buy");
-        System.out.println("    2. Sell");
+        System.out.println("    1. Buy Army or Equipment");
+        System.out.println("    2. Sell Army");
         System.out.println("    3. Exit");
 
         Scanner scanner = new Scanner(System.in);
@@ -52,11 +55,12 @@ public class Market {
                 buyMenu();
                 break;
             case 2:
-                sellMenu();
+                sellArmy();
                 break;
             case 3:
                 System.out.println("You have selected to exit.");
-                break;
+                return;
+                //break;
             default:
                 System.out.println("Invalid choice.");
                 break;
@@ -68,14 +72,15 @@ public class Market {
             System.out.println(cha.getName());
         }
 
-        if (choice == 3) {
-            return;
-        }
+        // if (choice == 3) {
+        //     return;
+        // }
 
         while (choice != 3) {
             marketMenu(player, existingGoldCoins);
+            //scanner.close();
+            return;
         }
-
     }
 
     //Displays the options for the player to choose what to buy.
@@ -104,29 +109,40 @@ public class Market {
         }
     }
 
-    //Displays the options for the player to choose what to sell.
-    private void sellMenu() {
-        System.out.println("------------------------------------------------");
-        System.out.println("What you want to sell? Please select an option: ");
-        System.out.println("------------------------------------------------");
-        System.out.println("    1. Army");
-        System.out.println("    2. Equipment");
+    //Display items
+    private void tableHeader(String type) {
+        if (type == "character") {
+            System.out.println("---------------------------------------------");
+            System.out.println("Please select the character you want to buy: ");
+            System.out.println("---------------------------------------------");
+            System.out.format("%18s %18s %18s %18s %18s %18s", "------------------", "------------------", "------------------", "------------------", "------------------", "------------------\n");
+            System.out.format("%18s %18s %18s %18s %18s %18s", "Character |", "Price (gc) |", "Attack |", "Defence |", "Health |", "Speed |\n");
+            System.out.format("%18s %18s %18s %18s %18s %18s", "------------------", "------------------", "------------------", "------------------", "------------------", "------------------\n");
+        }
 
-        Scanner scanner = new Scanner(System.in);
-        int choice = scanner.nextInt();
-        //scanner.close();
-        System.out.println("You have selected " + choice);
+        else {
+            System.out.println("------------------------------------------");
+            System.out.println("Please select the equipment you want to buy: ");
+            System.out.println("------------------------------------------");
+            System.out.format("%20s %20s %20s %20s %20s %20s", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------\n");
+            System.out.format("%20s %20s %20s %20s %20s %20s", "Type", "Price (gc)", "Attack", "Defence", "Health", "Speed\n");
+            System.out.format("%20s %20s %20s %20s %20s %20s", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------\n");
+        }
+    }
+    
+    private void dispalyItems(String type, String name, int k) { //type: character or equipment
+        if (type == "character") {
+            Character displayItem = Registry.returnCharacter(name);
+            System.out.format("%18s %18s %18s %18s %18s %18s", k + ". " + displayItem.getName(), displayItem.getPrize(), displayItem.getAttack(), displayItem.getDefense(), displayItem.getHealth(), displayItem.getSpeed()+"\n");            
+        }
 
-        switch (choice) {
-            case 1:
-                sellArmy();
-                break;
-            case 2:
-                sellEquipment();
-                break;
-            default:
-                System.out.println("Invalid choice.");
-                break;
+        else if (type == "equipment") {
+            Equipment displayItem = Registry.returnEquipment(name);
+            System.out.format("%20s %20s %20s %20s %20s %20s", k + ". " + displayItem.getName(), displayItem.getPrize(), displayItem.getAttack(), displayItem.getDefense(), displayItem.getHealth(), displayItem.getSpeed()+"\n");
+        }
+
+        else {
+            System.out.println("Invalid type.");
         }
     }
 
@@ -162,23 +178,31 @@ public class Market {
                     }
                 }
 
-                System.out.println("---------------------------------------------");
-                System.out.println("Please select the character you want to buy: ");
-                System.out.println("---------------------------------------------");
-                System.out.format("%18s %18s %18s %18s %18s %18s", "------------------", "------------------", "------------------", "------------------", "------------------", "------------------\n");
-                System.out.format("%18s %18s %18s %18s %18s %18s", "Character |", "Price (gc) |", "Attack |", "Defence |", "Health |", "Speed |\n");
-                System.out.format("%18s %18s %18s %18s %18s %18s", "------------------", "------------------", "------------------", "------------------", "------------------", "------------------\n");
+                // System.out.println("---------------------------------------------");
+                // System.out.println("Please select the character you want to buy: ");
+                // System.out.println("---------------------------------------------");
+                // System.out.format("%18s %18s %18s %18s %18s %18s", "------------------", "------------------", "------------------", "------------------", "------------------", "------------------\n");
+                // System.out.format("%18s %18s %18s %18s %18s %18s", "Character |", "Price (gc) |", "Attack |", "Defence |", "Health |", "Speed |\n");
+                // System.out.format("%18s %18s %18s %18s %18s %18s", "------------------", "------------------", "------------------", "------------------", "------------------", "------------------\n");
 
-                Character displayShooter = Registry.returnCharacter("Shooter");
-                System.out.format("%18s %18s %18s %18s %18s %18s", "1. "+displayShooter.getName(), displayShooter.getPrize(), displayShooter.getAttack(), displayShooter.getDefense(), displayShooter.getHealth(), displayShooter.getSpeed()+"\n");
-                Character dispalyRanger = Registry.returnCharacter("Ranger");
-                System.out.format("%18s %18s %18s %18s %18s %18s", "2. "+dispalyRanger.getName(), dispalyRanger.getPrize(), dispalyRanger.getAttack(), dispalyRanger.getDefense(), dispalyRanger.getHealth(), dispalyRanger.getSpeed()+"\n");
-                Character displaySunfire = Registry.returnCharacter("Sunfire");
-                System.out.format("%18s %18s %18s %18s %18s %18s", "3. "+displaySunfire.getName(), displaySunfire.getPrize(), displaySunfire.getAttack(), displaySunfire.getDefense(), displaySunfire.getHealth(), displaySunfire.getSpeed()+"\n");
-                Character displayZing = Registry.returnCharacter("Zing");
-                System.out.format("%18s %18s %18s %18s %18s %18s", "4. "+displayZing.getName(), displayZing.getPrize(), displayZing.getAttack(), displayZing.getDefense(), displayZing.getHealth(), displayZing.getSpeed()+"\n");
-                Character displaySaggitarius = Registry.returnCharacter("Saggitarius");
-                System.out.format("%18s %18s %18s %18s %18s %18s", "5. "+displaySaggitarius.getName(), displaySaggitarius.getPrize(), displaySaggitarius.getAttack(), displaySaggitarius.getDefense(), displaySaggitarius.getHealth(), displaySaggitarius.getSpeed()+"\n");
+                String[] archer = {"Shooter", "Ranger", "Sunfire", "Zing", "Saggitarius"};
+
+                tableHeader("character");
+                for (int i=0; i<archer.length; i++) {
+                    dispalyItems("character", archer[i], i+1);
+                }
+                
+                
+                // Character displayShooter = Registry.returnCharacter("Shooter");
+                // System.out.format("%18s %18s %18s %18s %18s %18s", "1. "+displayShooter.getName(), displayShooter.getPrize(), displayShooter.getAttack(), displayShooter.getDefense(), displayShooter.getHealth(), displayShooter.getSpeed()+"\n");
+                // Character dispalyRanger = Registry.returnCharacter("Ranger");
+                // System.out.format("%18s %18s %18s %18s %18s %18s", "2. "+dispalyRanger.getName(), dispalyRanger.getPrize(), dispalyRanger.getAttack(), dispalyRanger.getDefense(), dispalyRanger.getHealth(), dispalyRanger.getSpeed()+"\n");
+                // Character displaySunfire = Registry.returnCharacter("Sunfire");
+                // System.out.format("%18s %18s %18s %18s %18s %18s", "3. "+displaySunfire.getName(), displaySunfire.getPrize(), displaySunfire.getAttack(), displaySunfire.getDefense(), displaySunfire.getHealth(), displaySunfire.getSpeed()+"\n");
+                // Character displayZing = Registry.returnCharacter("Zing");
+                // System.out.format("%18s %18s %18s %18s %18s %18s", "4. "+displayZing.getName(), displayZing.getPrize(), displayZing.getAttack(), displayZing.getDefense(), displayZing.getHealth(), displayZing.getSpeed()+"\n");
+                // Character displaySaggitarius = Registry.returnCharacter("Saggitarius");
+                // System.out.format("%18s %18s %18s %18s %18s %18s", "5. "+displaySaggitarius.getName(), displaySaggitarius.getPrize(), displaySaggitarius.getAttack(), displaySaggitarius.getDefense(), displaySaggitarius.getHealth(), displaySaggitarius.getSpeed()+"\n");
 
                 characterChoice = scanner.nextInt();
                 System.out.println("You have selected " + characterChoice);
@@ -220,23 +244,13 @@ public class Market {
                     }
                 }
 
-                System.out.println("---------------------------------------------");
-                System.out.println("Please select the character you want to buy: ");
-                System.out.println("---------------------------------------------");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------\n");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "Character |", "Price (gc) |", "Attack |", "Defence |", "Health |", "Speed |\n");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------\n");
-                Character displaySquire = Registry.returnCharacter("Squire");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "1. "+displaySquire.getName(), displaySquire.getPrize(), displaySquire.getAttack(), displaySquire.getDefense(), displaySquire.getHealth(), displaySquire.getSpeed()+"\n");
-                Character displayCavalier = Registry.returnCharacter("Cavalier");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "2. "+displayCavalier.getName(), displayCavalier.getPrize(), displayCavalier.getAttack(), displayCavalier.getDefense(), displayCavalier.getHealth(), displayCavalier.getSpeed()+"\n");
-                Character displayTemplar = Registry.returnCharacter("Templar");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "3. "+displayTemplar.getName(), displayTemplar.getPrize(), displayTemplar.getAttack(), displayTemplar.getDefense(), displayTemplar.getHealth(), displayTemplar.getSpeed()+"\n");
-                Character displayZoro = Registry.returnCharacter("Zoro");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "4. "+displayZoro.getName(), displayZoro.getPrize(), displayZoro.getAttack(), displayZoro.getDefense(), displayZoro.getHealth(), displayZoro.getSpeed()+"\n");
-                Character displaySwiftblade = Registry.returnCharacter("Swiftblade");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "5. "+displaySwiftblade.getName(), displaySwiftblade.getPrize(), displaySwiftblade.getAttack(), displaySwiftblade.getDefense(), displaySwiftblade.getHealth(), displaySwiftblade.getSpeed()+"\n");
+                String[] knights = {"Squire", "Cavalier", "Templar", "Zoro", "Swiftblade"};
 
+                tableHeader("character");
+                for (int i=0; i<knights.length; i++) {
+                    dispalyItems("character", knights[i], i+1);
+                }
+                
                 characterChoice = scanner.nextInt();
                 System.out.println("You have selected " + characterChoice);
 
@@ -277,23 +291,13 @@ public class Market {
                     }
                 }
 
-                System.out.println("---------------------------------------------");
-                System.out.println("Please select the character you want to buy: ");
-                System.out.println("---------------------------------------------");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------\n");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "Character |", "Price (gc) |", "Attack |", "Defence |", "Health |", "Speed |\n");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------\n");
-                Character displayWarlock = Registry.returnCharacter("Warlock");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "1. "+displayWarlock.getName(), displayWarlock.getPrize(), displayWarlock.getAttack(), displayWarlock.getDefense(), displayWarlock.getHealth(), displayWarlock.getSpeed()+"\n");
-                Character displayIllusionist = Registry.returnCharacter("Illusionist");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "2. "+displayIllusionist.getName(), displayIllusionist.getPrize(), displayIllusionist.getAttack(), displayIllusionist.getDefense(), displayIllusionist.getHealth(), displayIllusionist.getSpeed()+"\n");
-                Character displayEnchanter = Registry.returnCharacter("Enchanter");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "3. "+displayEnchanter.getName(), displayEnchanter.getPrize(), displayEnchanter.getAttack(), displayEnchanter.getDefense(), displayEnchanter.getHealth(), displayEnchanter.getSpeed()+"\n");
-                Character displayConjurer = Registry.returnCharacter("Conjurer");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "4. "+displayConjurer.getName(), displayConjurer.getPrize(), displayConjurer.getAttack(), displayConjurer.getDefense(), displayConjurer.getHealth(), displayConjurer.getSpeed()+"\n");
-                Character displayEldritch = Registry.returnCharacter("Eldritch");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "5. "+displayEldritch.getName(), displayEldritch.getPrize(), displayEldritch.getAttack(), displayEldritch.getDefense(), displayEldritch.getHealth(), displayEldritch.getSpeed()+"\n");
+                String[] mages = {"Warlock", "Illusionist", "Enchanter", "Conjurer", "Eldritch"};
 
+                tableHeader("character");
+                for (int i=0; i<mages.length; i++) {
+                    dispalyItems("character", mages[i], i+1);
+                }
+                
                 characterChoice = scanner.nextInt();
                 System.out.println("You have selected " + characterChoice);
 
@@ -334,22 +338,12 @@ public class Market {
                     }
                 }
 
-                System.out.println("---------------------------------------------");
-                System.out.println("Please select the character you want to buy: ");
-                System.out.println("---------------------------------------------");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------\n");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "Character |", "Price (gc) |", "Attack |", "Defence |", "Health |", "Speed |\n");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------\n");
-                Character displaySoother = Registry.returnCharacter("Soother");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "1. "+displaySoother.getName(), displaySoother.getPrize(), displaySoother.getAttack(), displaySoother.getDefense(), displaySoother.getHealth(), displaySoother.getSpeed()+"\n");
-                Character displayMedic = Registry.returnCharacter("Medic");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "2. "+displayMedic.getName(), displayMedic.getPrize(), displayMedic.getAttack(), displayMedic.getDefense(), displayMedic.getHealth(), displayMedic.getSpeed()+"\n");
-                Character displayAlchemist = Registry.returnCharacter("Alchemist");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "3. "+displayAlchemist.getName(), displayAlchemist.getPrize(), displayAlchemist.getAttack(), displayAlchemist.getDefense(), displayAlchemist.getHealth(), displayAlchemist.getSpeed()+"\n");
-                Character displaySaint = Registry.returnCharacter("Saint");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "4. "+displaySaint.getName(), displaySaint.getPrize(), displaySaint.getAttack(), displaySaint.getDefense(), displaySaint.getHealth(), displaySaint.getSpeed()+"\n");
-                Character displayLightbringer = Registry.returnCharacter("Lightbringer");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "5. "+displayLightbringer.getName(), displayLightbringer.getPrize(), displayLightbringer.getAttack(), displayLightbringer.getDefense(), displayLightbringer.getHealth(), displayLightbringer.getSpeed()+"\n");
+                String[] healers = {"Soother", "Medic", "Alchemist", "Saint", "Lightbringer"};
+
+                tableHeader("character");
+                for (int i=0; i<healers.length; i++) {
+                    dispalyItems("character", healers[i], i+1);
+                }
 
                 characterChoice = scanner.nextInt();
                 System.out.println("You have selected " + characterChoice);
@@ -391,22 +385,12 @@ public class Market {
                     }
                 }
 
-                System.out.println("---------------------------------------------");
-                System.out.println("Please select the character you want to buy: ");
-                System.out.println("---------------------------------------------");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------\n");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "Character |", "Price (gc) |", "Attack |", "Defence |", "Health |", "Speed |\n");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------\n");
-                Character displayDragon = Registry.returnCharacter("Dragon");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "1. "+displayDragon.getName(), displayDragon.getPrize(), displayDragon.getAttack(), displayDragon.getDefense(), displayDragon.getHealth(), displayDragon.getSpeed()+"\n");
-                Character displayBasilisk = Registry.returnCharacter("Basilisk");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "2. "+displayBasilisk.getName(), displayBasilisk.getPrize(), displayBasilisk.getAttack(), displayBasilisk.getDefense(), displayBasilisk.getHealth(), displayBasilisk.getSpeed()+"\n");
-                Character displayHydra = Registry.returnCharacter("Hydra");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "3. "+displayHydra.getName(), displayHydra.getPrize(), displayHydra.getAttack(), displayHydra.getDefense(), displayHydra.getHealth(), displayHydra.getSpeed()+"\n");
-                Character displayPhoenix = Registry.returnCharacter("Phoenix");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "4. "+displayPhoenix.getName(), displayPhoenix.getPrize(), displayPhoenix.getAttack(), displayPhoenix.getDefense(), displayPhoenix.getHealth(), displayPhoenix.getSpeed()+"\n");
-                Character displayPegasus = Registry.returnCharacter("Pegasus");
-                System.out.format("%20s %20s %20s %20s %20s %20s", "5. "+displayPegasus.getName(), displayPegasus.getPrize(), displayPegasus.getAttack(), displayPegasus.getDefense(), displayPegasus.getHealth(), displayPegasus.getSpeed()+"\n");
+                String[] mythicalCreatures = {"Dragon", "Basilisk", "Hydra", "Phoenix", "Pegasus"};
+
+                tableHeader("character");
+                for (int i=0; i<mythicalCreatures.length; i++) {
+                    dispalyItems("character", mythicalCreatures[i], i+1);
+                }
 
                 characterChoice = scanner.nextInt();
                 System.out.println("You have selected " + characterChoice);
@@ -445,7 +429,7 @@ public class Market {
         //scanner.close();
     }
 
-    //Performs the transaction of buying a character.
+    //Performs the transaction of buying a character. Setting player attributes with updated gold coins and adding the character to the army.
     private void buyTransaction(String boughtCharacter) {
         Character character = Registry.returnCharacter(boughtCharacter);
         neededGoldCoins = character.getPrize();
@@ -462,16 +446,209 @@ public class Market {
 
     //Displays the equipment that can be bought.
     private void buyEquipment(){
+        System.out.println("-----------------------------------");
         System.out.println("You have selected to buy equipment.");
+        System.out.println("-----------------------------------");
+
+        System.out.println("Please select which character you want to buy equipment for: ");
+        System.out.println("-------------------------------------------------------------");
+        
+        int i = 1;
+        for (Character character : player.army) {
+            System.out.println("      " + i + " " +character.getName());
+            i++;
+        }
+
+        Scanner scanner = new Scanner(System.in);
+        int characterChoice = scanner.nextInt();
+
+        try {
+            if (characterChoice < 0 || characterChoice >= player.army.size()) {
+                throw new Exception("Invalid choice.");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        Character selectedCharacter = player.army.get(characterChoice-1);
+        System.out.println("You have selected " + characterChoice);
+        System.out.println("You have selected " + selectedCharacter.getName());
+        //scanner.close();
+        
+        System.out.println("Please select the equipment you want to buy: ");
+        System.out.println("---------------------------------------------");
+        System.out.println("    1. Armour");
+        System.out.println("    2. Artefact");
+
+        int choice = scanner.nextInt();
+
+        try {
+            if (choice < 1 || choice > 2) {
+                throw new Exception("Invalid choice.");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        //scanner.close();
+        System.out.println("You have selected " + choice);
+
+        switch (choice) {
+            case 1:
+                System.out.println("You have selected to buy armour for " + selectedCharacter.getName());
+
+                //Check whether an armour is equipped by the selectedCharacter.
+                if (selectedCharacter.getEquipments() != null) {
+                    for (Equipment equipment : selectedCharacter.getEquipments()) {
+                        if (equipment instanceof Armor) {
+                            System.out.println("You already have an armour equipped by " + selectedCharacter.getName());
+                            return;
+                        }
+                    }
+                }
+                
+                String[] armours = { "Chainmail", "Regalia", "Fleece" };
+
+                tableHeader("equipment");
+                for (int j=0; j<armours.length; j++) {
+                    dispalyItems("equipment", armours[j], j+1);
+                }
+
+                int armourChoice = scanner.nextInt();
+                System.out.println("You have selected " + armourChoice);
+
+                switch (armourChoice) {
+                    case 1:
+                        buyEquipmentTransaction(selectedCharacter, "Chainmail");
+                        break;
+                    case 2:
+                        buyEquipmentTransaction(selectedCharacter, "Regalia");
+                        break;
+                    case 3: 
+                        buyEquipmentTransaction(selectedCharacter, "Fleece");
+                        break;
+                    default:
+                        System.out.println("Invalid choice.");
+                        break;
+                }
+
+                break;
+            case 2:
+                System.out.println("You have selected to buy artefact for " + selectedCharacter.getName());
+
+                //Check whether an artefact is equipped by the selectedCharacter.
+                if (selectedCharacter.getEquipments() != null) {
+                    for (Equipment equipment : selectedCharacter.getEquipments()) {
+                        if (equipment instanceof Artefact) {
+                            System.out.println("You already have an artefact equipped by " + selectedCharacter.getName());
+                            return;
+                        }
+                    }
+                }
+
+                String[] artefacts = { "Excalibur", "Amulet", "Crystal" };
+
+                tableHeader("equipment");
+                for (int j=0; j<artefacts.length; j++) {
+                    dispalyItems("equipment", artefacts[j], j+1);
+                }
+
+                int artefactChoice = scanner.nextInt();
+                System.out.println("You have selected " + artefactChoice);
+
+                switch (artefactChoice) {
+                    case 1:
+                        buyEquipmentTransaction(selectedCharacter, "Excalibur");
+                        break;
+                    case 2:
+                        buyEquipmentTransaction(selectedCharacter, "Amulet");
+                        break;
+                    case 3: 
+                        buyEquipmentTransaction(selectedCharacter, "Crystal");
+                        break;
+                    default:
+                        System.out.println("Invalid choice.");
+                        break;
+                }
+                break;
+            default:
+                System.out.println("Invalid choice.");
+                break;
+        }
+    }
+
+    //Performs the transaction of buying an equipment. Setting player attributes with updated gold coins and adding the equipment to the character.
+    private void buyEquipmentTransaction(Character selectedCharacter, String boughtEquipment) {
+        Equipment equipment = Registry.returnEquipment(boughtEquipment);
+        neededGoldCoins = equipment.getPrize();
+
+        if (existingGoldCoins >= neededGoldCoins) {
+            existingGoldCoins -= neededGoldCoins;
+
+            //set the new gold coins of player
+            player.setGold(existingGoldCoins);
+
+            //add the equipment to the character ///////////////////Make array list
+            //selectedCharacter.getEquipments().add(equipment);
+
+            //set the new price of character
+            int valueIncrease = Math.round(neededGoldCoins * 20/100);
+            selectedCharacter.setPrize(selectedCharacter.getPrize() + valueIncrease);
+
+            //set the new attack, defense, health and speed of character
+            selectedCharacter.setAttack(selectedCharacter.getAttack() + equipment.getAttack());
+            selectedCharacter.setDefense(selectedCharacter.getDefense() + equipment.getDefense());
+            selectedCharacter.setHealth(selectedCharacter.getHealth() + equipment.getHealth());
+            selectedCharacter.setSpeed(selectedCharacter.getSpeed() + equipment.getSpeed());
+
+            //display the new character attributes
+            // System.out.println("New attributes of " + selectedCharacter.getName() + " are: ");
+            // System.out.println("Attack: " + selectedCharacter.getAttack());
+            // System.out.println("Defense: " + selectedCharacter.getDefense());
+            // System.out.println("Health: " + selectedCharacter.getHealth());
+            // System.out.println("Speed: " + selectedCharacter.getSpeed());
+
+            System.out.println("You have bought " + boughtEquipment + " for " + selectedCharacter.getName() + " for " + neededGoldCoins + " gold coins.");
+        } else {
+            System.out.println("You don't have enough gold!");
+        }
     }
 
     //Displays the characters that can be sold.
     private void sellArmy(){
-        System.out.println("You have selected to sell an army.");
+        System.out.println("You have selected to sell an army character");
+        System.out.println("----------------------------------------------");
+        System.out.println("Please select the character you want to sell: ");
+        System.out.println("----------------------------------------------");
+
+        int i = 1;
+        for (Character character : player.army) {
+            System.out.println("      " + i + " " +character.getName());
+            i++;
+        }
+
+        Scanner scanner = new Scanner(System.in);
+        int characterChoice = scanner.nextInt(); //Need to handle invalid inputs
+
+        try {
+            if (characterChoice < 0 || characterChoice >= player.army.size()) {
+                throw new Exception("Invalid choice.");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+        
+        Character selectedCharacter = player.army.get(characterChoice-1);
+        System.out.println("You have selected " + selectedCharacter.getName());
+
+        int sellPrice = Math.round(selectedCharacter.getPrize() * 90/100);
+        existingGoldCoins += sellPrice;
+
+        player.setGold(existingGoldCoins);
+        player.army.remove(selectedCharacter);
+
+        System.out.println("You have sold " + selectedCharacter.getName() + " for " + sellPrice + " gold coins.");
+        //scanner.close();
     }
 
-    //Displays the equipment that can be sold.
-    private void sellEquipment(){
-        System.out.println("You have selected to sell equipment.");
-    }
 }
