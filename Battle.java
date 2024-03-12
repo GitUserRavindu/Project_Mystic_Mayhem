@@ -210,7 +210,7 @@ public class Battle {
             }
         }if(!w1){break;}
         
-    }
+    }}
     boolean draw,win1,win2;
     win1=(!w1)&&w2;
     win2=w1&&(!w2);
