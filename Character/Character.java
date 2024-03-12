@@ -14,7 +14,7 @@ public abstract class Character implements MakeClone {
     protected int prize;
     protected String type;
     protected Equipment[] equipments;
-    protected Boolean status;
+    protected Boolean status=true;
 
     // Constructors
 
