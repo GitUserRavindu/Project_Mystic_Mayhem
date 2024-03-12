@@ -2,8 +2,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import Character.Character;
+import HomeGround.Arcane;
+import HomeGround.Desert;
+import HomeGround.Hillcrest;
+import HomeGround.HomeGround;
+import HomeGround.Marshland;
+import java.util.Scanner;
+
+
 
 public class Player {
+
+    Scanner sc = new Scanner(System.in);
+
     public String name;//Can be change after creation
     public int gold;
     public static float xp;
@@ -11,15 +22,14 @@ public class Player {
     public static int UserId = 0; // A unique id for each user. Can be generated using number of users.
     public ArrayList<Character> army = new ArrayList<Character>();
 
-    
-    public static int  turns = 5; // Thinking of implementing with a seperate class
-    public static int  bonusTurns = 0;
+    public static int turns = 5; // Thinking of implementing with a seperate class
+    public static int bonusTurns = 0;
 
     //HomeGround is a class that contains the home ground of the player.
     //Will the Player can change the home ground after creation?
-    public String homeGround;
-    
-    public String getHomeGround() {
+    public HomeGround homeGround;
+
+    public HomeGround getHomeGround() {
         return homeGround;
     }
 
@@ -34,12 +44,8 @@ public class Player {
     //If the game is off, this must be saved to a file and loaded when the game starts.
     public static ArrayList<Player> players = new ArrayList<Player>();
 
-    public Player(String name, byte[] UserName) throws IOException {
-        if(UserName == null || name == null|| name.equals("") || name.equals(null)){
-            // Handle the case when the UserName or name is null
-            System.out.println("Username or name is empty.\n Please enter a valid username and name.");
-            return;
-        }
+    public Player(String name, /* byte[]*/ String UserName)/*throws IOException*/ {
+
         UserId++;
         gold = 500;
         xp = 0;//Should we inclde a level system? If yes, we can use xp to calculate the level.
@@ -64,47 +70,41 @@ public class Player {
         this.setUserName(UserName);
 
         //Didn't add for equipments. Will be added later.
-        while(true){
-            Character c;
-            //c=shop.buyCharacter();
-            //addCharacter(c);
-            //System.out.println("Do you want to buy another character? (Y/N)");
-            char ch = (char) System.in.read();
-            if(ch == 'N' || ch == 'n') {
-                break;
-            }
-        }
+
     }
+
+
 
     public void setUserName(byte[] userName2) {
         this.UserName = new String(userName2);
     }
 
-    public void addCharacter(Character character,int position) {
+    public void addCharacter(Character character, int position) {
         //Lets set a position for each character in the army. 0-5. It will be much easier to manage the army.
         //If the position is already taken, (A archer already taken) that archer will be sold.
         //If the position is empty, the character will be added to the army.
-        try {
-            if (army.get(position) != null) {
+        // try {
+            // if (army.get(position) != null) {
                 // Handle the case when the position is already taken
-                System.out.println("Position is already taken");
-                System.out.println("Do you want to sell the character in the position? (Y/N)");
-                char c = (char) System.in.read();
-                if(c == 'Y' || c == 'y') {
+            //     System.out.println("Position is already taken");
+            //     System.out.println("Do you want to sell the character in the position? (Y/N)");
+            //     char c = (char) System.in.read();
+            //     if (c == 'Y' || c == 'y') {
 
-                    //Add a sell method to the character class
-                    //army.get(position).sell();
-                    army.set(position, character);
-                    return;
-                }
-                else{return;}
-            }
-        } catch (Exception e) {
-            // Handle the case when the position is empty
-            System.out.println("Position is empty");
-            army.add(character);
-            return;
-        }
+            //         //Add a sell method to the character class
+            //         //army.get(position).sell();
+            //         army.set(position, character);
+            //         return;
+            //     } else {
+            //         return;
+            //     }
+            // }
+        // } catch (Exception e) {
+        //     // Handle the case when the position is empty
+        //     System.out.println("Position is empty");
+        //     army.add(character);
+        //     return;
+        // }
         //Following must be implemented in the shop class.
 
         /*if(army.contains(character)) {
@@ -112,7 +112,10 @@ public class Player {
             System.out.println("Character is already in the army");
             return;
         }*/
+
+        army.add(character);
     }
+
     public String getName() {
         return name;
     }
@@ -126,70 +129,77 @@ public class Player {
         System.out.println("Enter the number of the home ground: ");
 
         //Did not implement for invalid integer input.
-        int n=0;
-        while (true) {
-            try {
-                n = (int) System.in.read();
-                break;
-            } catch (IOException e) {
-                System.out.println("Invalid input. Please enter a valid number.");
-            }
-        }
+        int n = 0;
+        // while (true) {
+            // try {
+                n = sc.nextInt();
+        //         break;
+        //     // } catch (IOException e) {
+        //     //     System.out.println("Invalid input. Please enter a valid number.");
+        //     // }
+        // }
 
-		switch (n) {
+        switch (n) {
             case 1:
-                homeGround = "Hillcrest";
+                homeGround = new Hillcrest();
                 break;
             case 2:
-                homeGround = "Marshland";
+                homeGround = new Marshland();
                 break;
             case 3:
-                homeGround = "Desert";
+                homeGround = new Desert();
                 break;
             case 4:
-                homeGround = "Arcane";
+                homeGround = new Arcane();
                 break;
             default:
                 System.out.println("Invalid input. Please enter a valid number.");
         }
     }
-    
+
     // public void setHomeGroundBonus() {
     //     //Set the bonus of the home ground.
     //     //Most of them just increase the stats of the characters.
     //     //But Hillcrest can give highlanders a bonus turn with 20% attack power.
     //     homeGround.setBonus(army,bonusTurns);
     // }
-    
+
     public void setName(String name) {
         this.name = name;
     }
+
     public int getGold() {
         return gold;
     }
+
     public void setGold(int gold) {
         this.gold = gold;
     }
+
     public float getXp() {
         return xp;
     }
+
     public void setXp(float xp) {
         this.xp = xp;
     }
+
     public String getUserName() {
         return UserName;
     }
+
     public void setUserName(String userName) {
         UserName = userName;
-    }    
+    }
 
     public ArrayList<Character> getArmy() {
         return army;
     }
+
     public void setArmy(ArrayList<Character> army) {
         this.army = army;
     }
-    
+
     public static int getUserId() {
         return UserId;
     }

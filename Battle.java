@@ -1,63 +1,18 @@
 import java.util.ArrayList;
 
 import Character.Character;
+import HomeGround.HomeGround;
+
 public class Battle {
     public ArrayList<Character> army1,army2;
-    public String home;
+    public HomeGround home;
 
-    public Battle(String home,ArrayList<Character> army1,ArrayList<Character> army2) {
-        this.home = home;
-        this.army1= army1;
-        this.army2= army2;
+    public Battle(Player attacker, Player defender) {
+        this.home = defender.getHomeGround();
+        this.army1 = attacker.getArmy();
+        this.army2 = defender.getArmy();
     }
-    public void Buff(ArrayList<Character> army){
-        switch(home){
-            case "Hillcrest":
-                for(Character c:army){
-                    if(c.getTribe().equals("Highlander")){
-                        c.setAttack(c.getAttack()+1f);
-                        c.setDefense(c.getDefense()+1f);
-                    }else if(c.getTribe().equals("Marshlanders")){
-                        c.setAttack(c.getSpeed()-1f);}
-                }
-                break;
-            case "Marshland":
-                for(Character c:army){
-                    if(c.getTribe().equals("Marshlander")){
-                        c.setDefense(c.getDefense()+2f);}
-                    else if(c.getTribe().equals("Highlander")){
-                        c.setAttack(c.getAttack()-1f);
-                    }else if(c.getTribe().equals("Mystic")){
-                        c.setSpeed(c.getSpeed()-1f);
-                    }  
-                }
-                break;
-            case "Desert":
-                for(Character c:army){
-                    if(c.getTribe().equals("Marshlander")){
-                        c.setHealth(c.getHealth()-1f);
-                    }else if(c.getTribe().equals("Sunchild")){
-                        c.setAttack(c.getAttack()+1f);
-                    }
-                }
-                break;
-            case "Arcane":
-                for(Character c:army){
-                    if(c.getTribe().equals("Mystic")){
-                        c.setAttack(c.getAttack()+2f);
-                    }else if(c.getTribe().equals("Highlander")){
-                        c.setSpeed(c.getSpeed()+1f);
-                    }
-                    else if(c.getTribe().equals("Marshlander")){
-                        c.setSpeed(c.getSpeed()-1f);
-                        c.setDefense(c.getDefense()-1f);
-                    }
-                }
-                break;
-            default:
-                break;
-        }
-    }
+
     public int getPosition(String[] array, String element) {
         for (int i = 0; i < array.length; i++) {
             if (array[i].equals(element)) {
@@ -66,54 +21,7 @@ public class Battle {
         }
         return -1; // return -1 if the element is not found in the array
     }
-    public void resetBuff(ArrayList<Character> army){
-        switch(home){
-            case "Hillcrest":
-                for(Character c:army){
-                    if(c.getTribe().equals("Highlander")){
-                        c.setAttack(c.getAttack()-1f);
-                        c.setDefense(c.getDefense()-1f);
-                    }else if(c.getTribe().equals("Marshlanders")){
-                        c.setAttack(c.getSpeed()+1f);}
-                }
-                break;
-            case "Marshland":
-                for(Character c:army){
-                    if(c.getTribe().equals("Marshlander")){
-                        c.setDefense(c.getDefense()-2f);}
-                    else if(c.getTribe().equals("Highlander")){
-                        c.setAttack(c.getAttack()+1f);
-                    }else if(c.getTribe().equals("Mystic")){
-                        c.setSpeed(c.getSpeed()+1f);
-                    }  
-                }
-                break;
-            case "Desert":
-                for(Character c:army){
-                    if(c.getTribe().equals("Marshlander")){
-                        //c.setHealth(c.getHealth()+1f);
-                    }else if(c.getTribe().equals("Sunchild")){
-                        c.setAttack(c.getAttack()-1f);
-                    }
-                }
-                break;
-            case "Arcane":
-                for(Character c:army){
-                    if(c.getTribe().equals("Mystic")){
-                        c.setAttack(c.getAttack()-2f);
-                    }else if(c.getTribe().equals("Highlander")){
-                        c.setSpeed(c.getSpeed()-1f);
-                    }
-                    else if(c.getTribe().equals("Marshlander")){
-                        c.setSpeed(c.getSpeed()+1f);
-                        c.setDefense(c.getDefense()+1f);
-                    }
-                }
-                break;
-            default:
-                break;
-        }
-    }
+
     public void resetHealth(ArrayList<Character> army){
         for(Character c:army){
             c.setHealth(c.getMaxHealth());
@@ -166,10 +74,10 @@ public class Battle {
                         army.set(k+1,temp);}}
             }}
         }
-    
+
     public void fight(ArrayList<Character> army1,ArrayList<Character> army2,String name1,String name2){
-        Buff(army1);
-        Buff(army2);
+        this.home.buff(army1);
+        this.home.buff(army2);
         int i=0;
         float s1=0,s2=0;
         Character O1=null,O2=null,D1=null,D2=null;
@@ -266,7 +174,7 @@ public class Battle {
     if(D1.getHealth()<=0){
         D1.setHealth(0);;
         D1.setStatus(false);}
-    
+
     //Result of second attack
     System.out.println(D1.getName()+"'s health : "+D1.getHealth());
     System.out.println(O2.getName()+"'s health : "+O2.getHealth());
@@ -274,15 +182,15 @@ public class Battle {
         System.out.println(D1.getName()+" died!");}
         if(w1&&w2){}else{
             break;}
-    }  
+    }
     checkVictory(w1, w2);
         //Resetting the status of the characters
-        resetBuff(army1);
-        resetBuff(army2);
+        this.home.resetBuff(army1);
+        this.home.resetBuff(army2);
         resetHealth(army1);
         resetHealth(army2);
     }
-    
+
 private void checkVictory(Boolean w1, Boolean w2) {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'checkVictory'");
