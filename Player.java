@@ -23,6 +23,10 @@ public class Player {
         return homeGround;
     }
 
+    public Player() {
+
+    }
+
     //How the shop will work? Is it static?
     public static Shop shop = new Shop();
 
