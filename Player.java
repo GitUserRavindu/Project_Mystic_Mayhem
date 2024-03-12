@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.util.ArrayList;
 
+import Character.Character;
+
 public class Player {
     public String name;//Can be change after creation
     public int gold;
@@ -19,6 +21,10 @@ public class Player {
     
     public String getHomeGround() {
         return homeGround;
+    }
+
+    public Player() {
+
     }
 
     //How the shop will work? Is it static?
