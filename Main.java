@@ -25,7 +25,10 @@ public class Main {
         ArrayList<Character> army = p.getArmy();
 
         HomeGround hg = p.getHomeGround();
-
+        for (Character ch : army) {
+            ch.displayStats();
+            System.out.println("");
+        }
         hg.buff(army);
 
         for (Character ch : army) {

@@ -32,7 +32,7 @@ public abstract class Character implements MakeClone {
             this.prize = other.prize;
             this.attack = other.attack;
             this.defense = other.defense;
-            this.health = other.defense;
+            this.health = other.health;
             this.speed = other.speed;
             this.tribe = other.tribe;
         }
