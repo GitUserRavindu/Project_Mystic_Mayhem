@@ -52,8 +52,14 @@ public class Profile {
         // Player name
         System.out.println("---> Please Enter a name : \n");
 
-        ScannerUtil.scanner.nextLine(); // This is because we previously used nextInt() and it left a newline character in the buffer.
+        
+        // ScannerUtil.scanner.nextLine(); // This is because we previously used nextInt() and it left a newline character in the buffer.
         String name = ScannerUtil.scanner.nextLine();
+
+        while (name.length() == 0) {
+            name = ScannerUtil.scanner.nextLine();
+        }
+
         player.setName(name);
         System.out.println("Your name has been set to : " + player.getName() + "\n");
 
@@ -111,6 +117,10 @@ public class Profile {
         System.out.println("Please enter the new name : ");
         
         String newName = ScannerUtil.scanner.nextLine();
+
+        while (newName.length() == 0) {
+            newName = ScannerUtil.scanner.nextLine();
+        }
 
         player.setName(newName);
         System.out.println("Name has been changed to : " + player.getName() + "\n");
