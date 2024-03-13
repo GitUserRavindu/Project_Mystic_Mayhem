@@ -31,3 +31,13 @@ userId and xp changed to not static
 Characters already equipped items should be displayed
 
 one scanner for whole program! Should I try it?
+
+Sample : Main menu
+            Create Profile (Make a new Player)
+            Change Name
+            Market (buy, sell)
+            Own Status Check (Current attributes of player)
+            Own Army characters check (Their equipments and details)
+            Select player (There are many players. Users can select a player.)
+            Battle
+            Exit

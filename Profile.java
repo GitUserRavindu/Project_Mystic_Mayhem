@@ -1,16 +1,26 @@
-import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Profile {
-    private static int profileCount = 0; // how many profiles have been created
-    private static ArrayList<String> userNameList = new ArrayList<String>(); // list of usernames
-    private static HashMap<Integer, Player> playerMap = new HashMap<Integer, Player>(); // map of userIds to profiles
+import Utils.ScannerUtil;
 
-    public static int getProfileCount() {
-        return profileCount;
-    }
+public class Profile {
+
+    // Profile attributes ----------------------------------------------------------------------------------------------
+    private static int profileCount = 0; // how many profiles have been created
+    private static ArrayList<String> userNameList = new ArrayList<String>();
+    private static HashMap<Integer, Player> playerMap = new HashMap<Integer, Player>(); // map of userIds to profiles.should it be public?
+    // End of Profile Attributes ---------------------------------------------------------------------------------------
+
     
+    // Profile Getters -------------------------------------------------------------------------------------------------
+    public static int getProfileCount() { return profileCount; }
+    public static ArrayList<String> getUserNameList() { return userNameList; } //This will not be used in the game.
+    public static HashMap<Integer, Player> getPlayerMap() { return playerMap; }
+    // End of Profile Getters ------------------------------------------------------------------------------------------
+    
+    // No need of Setters for Profile attributes. They are being set within the Profile class only.
+
+    // Other Profile Methods -------------------------------------------------------------------------------------------
     public static Player createProfile() {
         System.out.println("---------------------------");
         System.out.println("Let's create your profile! ");
@@ -19,12 +29,10 @@ public class Profile {
         System.out.println("    2. Go back");
         System.out.println("Please enter the corresponding option : (1/2)\n");
 
-        Scanner scanner = new Scanner(System.in);
-        int choice = scanner.nextInt();
+        int choice = ScannerUtil.scanner.nextInt();
 
         if (choice != 1) {
             System.out.println("Profile is not created. Going back...\n");
-            //scanner.close();
             return null;
         }
 
@@ -34,78 +42,76 @@ public class Profile {
         System.out.println("Please enter the required details carefully?");
         System.out.println("--------------------------------------------");
 
-        //Player name
+        // Player name
         System.out.println("---> Please Enter a name : \n");
-        scanner.nextLine();
-        String name = scanner.nextLine();
+
+        ScannerUtil.scanner.nextLine(); // This is because we previously used nextInt() and it left a newline character in the buffer.
+        String name = ScannerUtil.scanner.nextLine();
         player.setName(name);
         System.out.println("Your name has been set to : " + player.getName() + "\n");
 
-        //Player Gold
+        // Player Gold
         player.setGold(500);
 
-        //Player XP
+        // Player XP
         player.setXp(1f);
 
-        //Player userId
+        // Player userId
         player.setUserId(profileCount); //Zero based
         
-        //Player userName
+        // Player userName
         System.out.println("---> Please Enter a Username (This has to be unique) : \n");
-        //scanner.nextLine();
-        String userName = scanner.nextLine();
+
+        String userName = ScannerUtil.scanner.nextLine();
         while (userNameList.contains(userName)) {
             System.out.println("---> Username already exists. Please enter a different username : \n");
-            //scanner.nextLine();
-            userName = scanner.nextLine();
+            userName = ScannerUtil.scanner.nextLine();
         }
         player.setUserName(userName);
         userNameList.add(userName);
         System.out.println("Your username has been set to : " + player.getUserName() + "\n");
 
-        //Player Homeground
+        // Player Homeground
         System.out.println("---> Please Enter a HomeGround : \n");
         player.setHomeGround();
-        //System.out.println();
-        System.out.println("Your homeground has been set to : " + player.getHomeGround() + "\n");
+        System.out.println("Your homeground has been set to : " + player.getHomeGround().getName() + "\n");
 
-        //Player Army
+        // Player Army
         System.out.println("---> For building your army, Please visit to the market menu in the main menu. \n");
               
-        //Add to playerMap
+        // Add to playerMap
         playerMap.put(player.getUserId(), player);
 
-        //Profile Created Successfully
+        // Profile Created Successfully
         System.out.println("---------------------------------------------------------------------------------");
         System.out.println(player.getName() + ", your user Profile has been created successfully!");
         System.out.println("---------------------------------------------------------------------------------");
 
+        // Displaying the current status of the player
         player.displayCurrentStatus();
 
         System.out.println("Going back to Main Menu...\n");
-        //scanner.close();
 
-        //update profile count
+        // Update profile count
         profileCount++;
 
         return player;
     }
 
-    public static void changeName(Player player) {
+    public static void changeName(Player player) { // User can change name whenever they want
         System.out.println("You have selected to change your name.");
         System.out.println("Your current name is : " + player.getName() + "\n");
         System.out.println("Please enter the new name : ");
         
-        Scanner scanner = new Scanner(System.in);
-        //scanner.nextLine();
-        String newName = scanner.nextLine();
+        String newName = ScannerUtil.scanner.nextLine();
 
         player.setName(newName);
         System.out.println("Name has been changed to : " + player.getName() + "\n");
         player.displayCurrentStatus();
 
         System.out.println("Going back to Main Menu...\n");
-        //scanner.close();
+
     }
+    // End of Other Profile Methods ------------------------------------------------------------------------------------
 
 }
