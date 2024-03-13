@@ -18,7 +18,14 @@ public class Profile {
     public static HashMap<Integer, Player> getPlayerMap() { return playerMap; }
     // End of Profile Getters ------------------------------------------------------------------------------------------
     
-    // No need of Setters for Profile attributes. They are being set within the Profile class only.
+    
+    // Need setters for saving and loading purposes.
+    // Profile Setters -------------------------------------------------------------------------------------------------
+    public static void setProfileCount(int profileCount) { Profile.profileCount = profileCount; }
+    public static void setUserNameList(ArrayList<String> userNameList) { Profile.userNameList = userNameList; }
+    public static void setPlayerMap(HashMap<Integer, Player> playerMap) { Profile.playerMap = playerMap; }
+    // End of Profile Setters ------------------------------------------------------------------------------------------
+    
 
     // Other Profile Methods -------------------------------------------------------------------------------------------
     public static Player createProfile() {
