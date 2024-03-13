@@ -18,8 +18,6 @@ public class Hillcrest extends HomeGround {
                 c.setSpeed(c.getSpeed() - 1f);
             }else if(c.getTribe().equals("Sunchild")){
                 c.setSpeed(c.getSpeed() - 1f);}
-
-                
         }
     }
 

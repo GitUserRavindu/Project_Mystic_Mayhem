@@ -3,65 +3,35 @@ import java.util.ArrayList;
 import Character.Character;
 import Equipment.Equipment;
 import HomeGround.HomeGround;
+import HomeGround.Hillcrest;
+import HomeGround.Marshland;
 
 public class Main {
     public static void main(String[] args) {
         Registry.characterCache(); // Making game character configurations
         Registry.equipmentCache(); // Making game equipment configurations
 
-        // We use Registry as a library to store the different configurations
-        // of Characters, and we use name to return certain character
-        Character a = Registry.returnCharacter("Shooter");
-        Character b = Registry.returnCharacter("Squire");
-        Character c = Registry.returnCharacter("Warlock");
-        Character d= Registry.returnCharacter("Soother");
-        Character e = Registry.returnCharacter("Dragon");
+        Market market = Market.getInstance(); // Creating a market
 
-        Player p0 = new Player("himala", "Himala");
-        Player p2= new Player("yutharsan","Ravindu");
-        Player p1 = new Player("himala", "Himala");
+        ArrayList<Character> army1 = new ArrayList<>();
+        army1.add(Registry.returnCharacter("Shooter"));
+        army1.add(Registry.returnCharacter("Warlock"));
 
-        // p.setHomeGround();
-        System.out.println(p0.getName()+" "+p0.getUserName());
-        System.out.println(p1.getName()+" "+p1.getUserName());
-        System.out.println(p2.getName()+" "+p2.getUserName());
+        ArrayList<Character> army2 = new ArrayList<>();
+        army2.add(Registry.returnCharacter("Ranger"));
+        army2.add(Registry.returnCharacter("Squire"));
 
-        // p.addCharacter(c, 0);
-        // p.addCharacter(b, 0);
-        // p.addCharacter(a, 0);
-        // p.addCharacter(d, 0);
-        // p.addCharacter(e, 0);
-        // ArrayList<Character> army = p.getArmy();
-        // Battle ba=new Battle(p,p);
-        // ba.setOrderSpeed(army);
-        // ba.setOrderToEqualStats(army,new String[]{"Archer","Knight","Mythical Creature","Mage","Healer"} );
-        // // // HomeGround hg = p.getHomeGround();
-        // for (Character ch : army) {
-        //     ch.displayStats();
-        //     System.out.println("");
-        // }
-        // hg.buff(army);
 
-        // for (Character ch : army) {
-        //     ch.displayStats();
-        //     System.out.println("");
-        // }
+        Player player1 = new Player("himala", "Himala"); // Creating a player
+        player1.homeGround = new Hillcrest();// Setting the home ground
+        player1.army = army1;
 
-        // System.out.println(a);
-        // System.out.println(b);
+        Player player2 = new Player("yutharsan", "Yutharsan");
+        player2.homeGround = new Marshland();
+        player2.army = army2;
 
-        // a.setAttack(0);
+        Battle new_battle = new Battle(player1, player2);
+        new_battle.fight();
 
-        // System.out.println(a.getAttack() + " " + b.getAttack());
-
-        // System.out.println(a.getName());
-        // System.out.println(b.getName());
-        // System.out.println(c.getName());
-        // System.out.println(d.getName());
-        // System.out.println(e.getName());
-
-        // Player playerP = new Player();
-        // Market market = Market.getInstance();
-        // market.marketMenu(playerP, 800);
     }
 }
