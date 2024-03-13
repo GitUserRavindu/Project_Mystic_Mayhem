@@ -2,8 +2,10 @@ package Character;
 
 import Equipment.Equipment;
 import Interfaces.MakeClone;
+import java.io.Serializable;
 
-public abstract class Character implements MakeClone {
+
+public abstract class Character implements MakeClone, Serializable {
     protected float maxHealth;
     protected String name;
     protected float health;
@@ -13,7 +15,9 @@ public abstract class Character implements MakeClone {
     protected String tribe;
     protected int prize;
     protected String type;
-    protected Equipment[] equipments;
+    // index 0 - Armor
+    // Index 1 - Artefact
+    protected Equipment[] equipments = new Equipment[2];
     protected Boolean status=true;
 
     // Constructors
@@ -123,6 +127,18 @@ public abstract class Character implements MakeClone {
         return maxHealth;
     }
 
+    public Equipment[] getEquipment() {
+        return equipments;
+    }
+
+    public Equipment getArmour() {
+        return equipments[0];
+    }
+
+    public Equipment getArtefact() {
+        return equipments[1];
+    }
+
     public void displayStats() {
         System.out.println("Name: " + this.getName());
         System.out.println("Health: " + this.getHealth());
@@ -133,6 +149,9 @@ public abstract class Character implements MakeClone {
         System.out.println("Prize: " + this.getPrize());
         System.out.println("Type: " + this.getType());
     }
+
+    // Buying Equipment
+
 
     // abstract methods
     public abstract Character makeClone();

@@ -15,13 +15,12 @@ Make equipment attribute of characters a arraylist.
 Is there a method to display the current status of player and characters? Dispaly their attributes etc. That will be good. 
 Then I can print that upon buying equipments and characters.
 
-Maybe, instead of buy -> buyMenu -> buyArmy etc, We can show in the market menu 
-    01. buy army 
-    02. buy equipment
-    03. sell army
-    04. sell equipment etc.
-
-br careful: file is "Armor" , not "Armour"
+be careful: file is "Armor" , not "Armour"
 also "Artefacts", not "Artefact"
 
-Maybe display items can be take into one function. that will shorten the code
+Maybe add a confirm before buying
+
+Add character type (Archer, Knight, etc) attribute. Then We can print it (after byuing character etc) 
+e.g.    "You have.... bla bla  
+            Archer : Shooter
+            Knight : Squire ..."

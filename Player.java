@@ -1,6 +1,6 @@
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.Serializable;
+
 import java.util.ArrayList;
 
 import Character.Character;
@@ -9,21 +9,22 @@ import HomeGround.Desert;
 import HomeGround.Hillcrest;
 import HomeGround.HomeGround;
 import HomeGround.Marshland;
+
 import java.util.Scanner;
 
 
 
-public class Player {
+
+public class Player implements Serializable {
 
     Scanner sc = new Scanner(System.in);
 
     public String name;//Can be change after creation
     public int gold;
-    public static float xp;
+    public float xp;
     public String UserName;//Can not be change after creation. Like a email.
     public static int UserId = 0; // A unique id for each user. Can be generated using number of users.
     public ArrayList<Character> army = new ArrayList<Character>();
-
 
     //HomeGround is a class that contains the home ground of the player.
     //Will the Player can change the home ground after creation?
@@ -34,7 +35,7 @@ public class Player {
     }
 
     public Player() {
-
+        this.gold = 500;
     }
 
     //How the shop will work? Is it static?
@@ -44,7 +45,7 @@ public class Player {
     //If the game is off, this must be saved to a file and loaded when the game starts.
     public static ArrayList<String> players = new ArrayList<String>();
 
-    public Player(String name, /* byte[]*/ String UserName)/*throws IOException*/ {
+    public Player(String name, String UserName) {
 
         UserId++;
         gold = 500;
@@ -53,22 +54,17 @@ public class Player {
 
         //Check if the username is already taken. While loop will be used to check if the username is already taken.
         //Have to check if this loop is working or not.
-        Scanner sc=new Scanner(System.in);
-        InputStreamReader in=new InputStreamReader(System.in);
-        BufferedReader bf=new BufferedReader(in);
-        while(players.contains(UserName)) {
-            UserName="";
+
+        while (players.contains(UserName)) {
+            UserName = "";
             // Handle the case when the UserName is already taken
             System.out.println("Username is already taken");
             System.out.println("Please enter a new username");
             System.out.print("Username: ");
-            try {
-                UserName=sc.nextLine();
-            } catch (Exception e) {
-            } finally {
-                sc.close();
-            }
+
+            UserName = sc.nextLine();
         }
+
         players.add(UserName);
         this.setUserName(UserName);
 
@@ -76,18 +72,16 @@ public class Player {
 
     }
 
-
-
     public void setUserName(byte[] userName2) {
         this.UserName = new String(userName2);
     }
 
     public void addCharacter(Character character, int position) {
-        for(Character c:army){
-            if(c.getName().equals(character.getName())){
+        for (Character c : army) {
+            if (c.getName().equals(character.getName())) {
                 System.out.println("Character is already in the army");
                 return;
-            }else if(c.getType().equals(character.getType())){
+            } else if (c.getType().equals(character.getType())) {
                 System.out.println("Character of this type is already in the army");
                 System.out.println("Do you want to sell the character in the position? (Y/N)");
                 char check = sc.next().charAt(0);
@@ -98,9 +92,12 @@ public class Player {
                     army.add(character);
                     return;
                 } else {
-                return;
-            }}}
-    this.army.add(character);}
+                    return;
+                }
+            }
+        }
+        this.army.add(character);
+    }
 
     public String getName() {
         return name;
@@ -117,7 +114,7 @@ public class Player {
         //Did not implement for invalid integer input.
         int n = 0;
         // while (true) {
-            // try {
+        // try {
         n = sc.nextInt();
         //         break;
         //     // } catch (IOException e) {
