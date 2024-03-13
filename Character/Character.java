@@ -4,7 +4,9 @@ import Equipment.Equipment;
 import Interfaces.MakeClone;
 import java.io.Serializable;
 
+
 public abstract class Character implements MakeClone, Serializable {
+    protected float maxHealth;
     protected String name;
     protected float health;
     protected float attack;
@@ -14,7 +16,7 @@ public abstract class Character implements MakeClone, Serializable {
     protected int prize;
     protected String type;
     protected Equipment[] equipments;
-    protected Boolean status;
+    protected Boolean status=true;
 
     // Constructors
 
@@ -32,9 +34,10 @@ public abstract class Character implements MakeClone, Serializable {
             this.prize = other.prize;
             this.attack = other.attack;
             this.defense = other.defense;
-            this.health = other.defense;
+            this.health = other.health;
             this.speed = other.speed;
             this.tribe = other.tribe;
+            this.type = other.type;
         }
     }
 
@@ -112,6 +115,25 @@ public abstract class Character implements MakeClone, Serializable {
     }
     public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public void setMaxHealth(float addHealth) {
+        this.maxHealth = addHealth;
+    }
+
+    public float getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void displayStats() {
+        System.out.println("Name: " + this.getName());
+        System.out.println("Health: " + this.getHealth());
+        System.out.println("Attack: " + this.getAttack());
+        System.out.println("Defense: " + this.getDefense());
+        System.out.println("Speed: " + this.getSpeed());
+        System.out.println("Tribe: " + this.getTribe());
+        System.out.println("Prize: " + this.getPrize());
+        System.out.println("Type: " + this.getType());
     }
 
     // abstract methods
