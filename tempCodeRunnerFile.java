@@ -1,2 +1,3 @@
-nt"));
-        army2.add(Registry.returnCharacter("Enchanter"));
+haracter("Ranger"));
+        army2.add(Registry.returnCharacter("Squire"));
+        army2.add(Registry.returnC

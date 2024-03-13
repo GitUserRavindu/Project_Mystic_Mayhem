@@ -81,7 +81,7 @@ public void fight(){
     }
     
     Boolean bonusAttack1=bonusAttack&&O1.getTribe().equals("Highlander");
-    Boolean bonusHeal1=bonusHeal&&O1.getTribe().equals("Mystics");
+    Boolean bonusHeal1=bonusHeal&&O1.getTribe().equals("Mystic");
         
     if(O1.getType().equals("Healer")){
         sub.setOrderHealth(army1);
@@ -93,7 +93,7 @@ public void fight(){
                 System.out.println(O1.getName()+" heals "+H.getName());
 
                 if(bonusAttack1){H.setHealth((0.2f*H.getHealth()*0.1f+H.getHealth()));}
-                System.out.println(O1.getName()+" heals again "+H.getName());
+                System.out.println(O1.getName()+" heals "+H.getName()+" again");
                 
                 if(bonusHeal1){O1.setHealth((O1.getHealth()*(1.1f)));
                 System.out.println(O1.getName()+" self heal");}
@@ -108,7 +108,7 @@ public void fight(){
         System.out.println(O1.getName()+" attacks "+D2.getName());
         float damage1=0.5f*(O1.getAttack())-0.1f*(D2.getDefense());
 
-        if(bonusAttack1){System.out.println(O1.getName()+" attacks again "+D2.getName());
+        if(bonusAttack1){System.out.println(O1.getName()+" attacks "+D2.getName()+" again");
         damage1=damage1+0.2f*0.5f*(O1.getAttack())-0.1f*(D2.getDefense());}
 
         if(bonusHeal1){O1.setHealth((O1.getHealth()*(1.1f)));
@@ -165,7 +165,7 @@ public void fight(){
     }
     
     Boolean bonusAttack2=bonusAttack&&O2.getTribe().equals("Highlander");
-    Boolean bonusHeal2=bonusHeal&&O2.getTribe().equals("Mystics");
+    Boolean bonusHeal2=bonusHeal&&O2.getTribe().equals("Mystic");
     
     if(O2.getType().equals("Healer")){
         sub.setOrderHealth(army2);
@@ -177,7 +177,7 @@ public void fight(){
                 System.out.println(O2.getName()+" heals "+H1.getName());
                 
                 if(bonusAttack2){H1.setHealth((0.2f*H1.getHealth()*0.1f+H1.getHealth()));}
-                System.out.println(O2.getName()+" heals again "+H1.getName());
+                System.out.println(O2.getName()+" heals "+H1.getName()+" again");
                 
                 if(bonusHeal2){O2.setHealth((O2.getHealth()*(1.1f)));
                 System.out.println(O2.getName()+" self heal");}
@@ -189,7 +189,7 @@ public void fight(){
         System.out.println(O2.getName()+" attacks "+D1.getName());
         float damage2=0.5f*(O2.getAttack())-0.1f*(D1.getDefense());
 
-        if(bonusAttack2){System.out.println(O2.getName()+" attacks again "+D1.getName());
+        if(bonusAttack2){System.out.println(O2.getName()+" attacks "+D1.getName()+" again");
         damage2=damage2+0.2f*0.5f*(O2.getAttack())-0.1f*(D1.getDefense());}
 
         if(bonusHeal2){O2.setHealth((O2.getHealth()*(1.1f)));
