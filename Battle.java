@@ -50,6 +50,7 @@ public void fight(){
 
     String attackOrder[]={"Archer","Knight","Mythical Creature","Mage","Healer"};
     String defenseOrder[]={"Healer","Mythical Creature","Archer","Knight","Mage"};
+    int tmp1=0,tmp2=0;
 
     for(int j=0;j<5;j++){
         System.out.println("\nTurn "+(2*j+1)+":"+name1+"\n");
@@ -59,14 +60,13 @@ public void fight(){
 
         //Offencer1 character choosing
         sub.setOrderSpeed(army1);sub.setOrderToEqualStats(army1, attackOrder);
-        for (int k = j % (int) army1.size(); k < 2 * (int) army1.size(); k++) {
-
+    for (int k = tmp1; k < 2 * (int) army1.size(); k++) {
         int i = k % army1.size();
-
-        if(army1.get(i).getStatus()){
-            O1=army1.get(i);
-            break;
-        }
+    if(army1.get(i).getStatus()){
+        O1=army1.get(i);
+        tmp1=i+1;
+        break;
+    }
        
     }
     
@@ -145,11 +145,12 @@ public void fight(){
         System.out.println("\nTurn "+(2*j+2)+":"+name2+"\n");
 
     //Offencer2 character choosing
-    for (int k = j % (int) army2.size(); k < 2 * (int) army2.size(); k++) {
-        int i = k % army1.size();
+    for (int k = tmp2; k < 2 * (int) army2.size(); k++) {
+        int i = k % army2.size();
 
         if(army2.get(i).getStatus()){
             O2=army2.get(i);
+            tmp2=i+1;
             break;
         }
     }
@@ -232,19 +233,19 @@ public void fight(){
 
 private void checkVictory(Boolean win1, Boolean win2,Boolean draw) {
     if(win1){
-        System.out.println(name1+" won!");
+        System.out.println("\n"+name1+" won!");
         p1.setXp(p1.getXp()+1f);
         p1.setGold((int)(p1.getGold()+p2.getGold()*0.1));
         p2.setGold((int)(p2.getGold()-p2.getGold()*0.1));
     }else if(win2){
-        System.out.println(name2+" won!");
+        System.out.println("\n"+name2+" won!");
         p2.setXp(p2.getXp()+1f);
         p2.setGold((int)(p2.getGold()+p1.getGold()*0.1));
         p1.setGold((int)(p1.getGold()-p1.getGold()*0.1));
     }else if(draw){
-    System.out.println("It's a draw!");}
+    System.out.println("\n"+"It's a draw!");}
 
     System.out.println(name1+ "XP:"+p1.getXp()+" gold coins:"+p1.getGold());
-    System.out.println(name2+ "XP:"+p2.getXp()+" gold coins:"+p2.getGold());
+    System.out.println(name2+ "XP:"+p2.getXp()+" gold coins:"+p2.getGold()+"\n");
 }
 }

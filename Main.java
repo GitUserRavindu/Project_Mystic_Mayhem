@@ -14,13 +14,18 @@ public class Main {
         Market market = Market.getInstance(); // Creating a market
 
         ArrayList<Character> army1 = new ArrayList<>();
-        army1.add(Registry.returnCharacter("Alchemist"));
-        army1.add(Registry.returnCharacter("Warlock"));
+        // army1.add(Registry.returnCharacter("Alchemist"));
+        // army1.add(Registry.returnCharacter("Warlock"));
+        // army1.add(Registry.returnCharacter("Shooter"));
+        // army1.add(Registry.returnCharacter("Cavalier"));
+        army1.add(Registry.returnCharacter("Phoenix"));
 
         ArrayList<Character> army2 = new ArrayList<>();
-        army2.add(Registry.returnCharacter("Ranger"));
-        army2.add(Registry.returnCharacter("Squire"));
-
+        // army2.add(Registry.returnCharacter("Ranger"));
+        // army2.add(Registry.returnCharacter("Squire"));
+        army2.add(Registry.returnCharacter("Basilisk"));
+        army2.add(Registry.returnCharacter("Saint"));
+        army2.add(Registry.returnCharacter("Enchanter"));
 
         Player player1 = new Player("himala", "Himala"); // Creating a player
         player1.homeGround = new Hillcrest();// Setting the home ground
