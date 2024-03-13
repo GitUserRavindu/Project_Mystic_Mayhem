@@ -1,9 +1,10 @@
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import Character.Character;
 
-public class Player {
+public class Player implements Serializable {
     public String name;//Can be change after creation
     public int gold;
     public static float xp;
@@ -24,7 +25,7 @@ public class Player {
     }
 
     public Player() {
-
+        this.gold = 500;
     }
 
     //How the shop will work? Is it static?
