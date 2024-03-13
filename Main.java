@@ -14,7 +14,7 @@ public class Main {
         Market market = Market.getInstance(); // Creating a market
 
         ArrayList<Character> army1 = new ArrayList<>();
-        army1.add(Registry.returnCharacter("Shooter"));
+        army1.add(Registry.returnCharacter("Alchemist"));
         army1.add(Registry.returnCharacter("Warlock"));
 
         ArrayList<Character> army2 = new ArrayList<>();

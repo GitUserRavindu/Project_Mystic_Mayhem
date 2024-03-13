@@ -40,6 +40,7 @@ public abstract class Character implements MakeClone, Serializable {
             this.speed = other.speed;
             this.tribe = other.tribe;
             this.type = other.type;
+            this.maxHealth=other.health;
         }
     }
 
