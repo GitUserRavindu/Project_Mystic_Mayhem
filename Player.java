@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import Utils.ScannerUtil;
 
@@ -15,44 +16,70 @@ import HomeGround.Marshland;
 
 public class Player implements Serializable {
 
-    // Player attributes ------------------------------------------------------------------------------    
+    // Player attributes ------------------------------------------------------------------------------
     private String name;//Can be change after creation
     private String userName;//Can not be change after creation. Unique for each user.
     private int userId; // A unique id for each user. Can be generated using number of users.
     private int goldCoins;
     private float xp;
-    private HomeGround homeGround; //HomeGround is a class that contains the home ground of the player.
-    public ArrayList<Character> army = new ArrayList<Character>(); //////!!!!!Public, Check with market    
-    // End of Player Attributes -----------------------------------------------------------------------   
-    
-    
+    public HomeGround homeGround; //HomeGround is a class that contains the home ground of the player.
+    public ArrayList<Character> army = new ArrayList<Character>(); //////!!!!!Public, Check with market
+    // End of Player Attributes -----------------------------------------------------------------------
+    private static ArrayList<String> players = new ArrayList<String>();
+    Scanner sc = new Scanner(System.in);
+
     // Constructor ------------------------------------------------------------------------------------
     public Player() {}
     // End of Constructor -----------------------------------------------------------------------------
-    
-    
+
+    public Player(String name, String UserName) {
+
+        userId++;
+        goldCoins = 500;
+        xp = 0;//Should we inclde a level system? If yes, we can use xp to calculate the level.
+        this.setName(name);
+
+        //Check if the username is already taken. While loop will be used to check if the username is already taken.
+        //Have to check if this loop is working or not.
+
+        while (players.contains(UserName)) {
+            UserName = "";
+            // Handle the case when the UserName is already taken
+            System.out.println("Username is already taken");
+            System.out.println("Please enter a new username");
+            System.out.print("Username: ");
+
+            UserName = sc.nextLine();
+        }
+
+        players.add(UserName);
+        this.setUserName(UserName);
+
+        //Didn't add for equipments. Will be added later.
+    }
+
     // Getters ----------------------------------------------------------------------------------------
     public String getName() { return name;}
 
     public String getUserName() { return userName; }
 
     public int getUserId() { return userId; }
-    
+
     public int getGold() { return goldCoins; }
-        
+
     public float getXp() { return xp; }
-    
+
     public HomeGround getHomeGround() { return homeGround; }
-  
+
     public ArrayList<Character> getArmy() { return army; }
     // End of Getters ---------------------------------------------------------------------------------
-    
-    
+
+
     // Setters ----------------------------------------------------------------------------------------
     public void setName(String name) { this.name = name; }
-    
+
     public void setUserName(String userName) { this.userName = userName; }
-    
+
     public void setUserId(int userId) { this.userId = userId; }
 
     public void setGold(int goldCoins) { this.goldCoins = goldCoins; }
@@ -100,13 +127,13 @@ public class Player implements Serializable {
                 System.out.println("Invalid input. Please enter a valid number."); //This will never be executed. I guess
         }
     }
-    
-    //Since army attribute is public, this method is not necessary. 
+
+    //Since army attribute is public, this method is not necessary.
     //In the market, the characters are added to the army directly.
-    public void setArmy(ArrayList<Character> army) { this.army = army; }   
+    public void setArmy(ArrayList<Character> army) { this.army = army; }
     // End of Setters ---------------------------------------------------------------------------------
 
-    
+
     // Other Methods ----------------------------------------------------------------------------------
     public void displayCurrentStatus() {
         System.out.println("Here's your profile status :");
