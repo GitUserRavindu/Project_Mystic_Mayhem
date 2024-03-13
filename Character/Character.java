@@ -35,6 +35,7 @@ public abstract class Character implements MakeClone {
             this.health = other.health;
             this.speed = other.speed;
             this.tribe = other.tribe;
+            this.type = other.type;
         }
     }
 
@@ -123,14 +124,14 @@ public abstract class Character implements MakeClone {
     }
 
     public void displayStats() {
-        System.out.println("Name: " + this.name);
-        System.out.println("Health: " + this.health);
-        System.out.println("Attack: " + this.attack);
-        System.out.println("Defense: " + this.defense);
-        System.out.println("Speed: " + this.speed);
-        System.out.println("Tribe: " + this.tribe);
-        System.out.println("Prize: " + this.prize);
-        System.out.println("Type: " + this.type);
+        System.out.println("Name: " + this.getName());
+        System.out.println("Health: " + this.getHealth());
+        System.out.println("Attack: " + this.getAttack());
+        System.out.println("Defense: " + this.getDefense());
+        System.out.println("Speed: " + this.getSpeed());
+        System.out.println("Tribe: " + this.getTribe());
+        System.out.println("Prize: " + this.getPrize());
+        System.out.println("Type: " + this.getType());
     }
 
     // abstract methods

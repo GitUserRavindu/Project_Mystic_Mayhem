@@ -150,7 +150,7 @@ public class Registry {
         addCharacter("Zing", zing);
         addCharacter("Sunfire", sunfire);
         addCharacter("Ranger", ranger);
-        addCharacter("Archer", shooter);
+        addCharacter("Shooter", shooter);
         addCharacter("Saggitarius", saggitarius);
 
         // Healers

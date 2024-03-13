@@ -31,7 +31,7 @@ public class Battle {
     //Following should be added in player class
     public void setOrderSpeed(ArrayList<Character> army){
         Character temp;
-        ArrayList<Character> order = new ArrayList<Character>();
+        //ArrayList<Character> order = new ArrayList<Character>();
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5 - i - 1; j++) {
                 if (army.get(j).getSpeed() < army.get(j + 1).getSpeed()) { // Modified condition

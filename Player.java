@@ -113,7 +113,7 @@ public class Player {
             return;
         }*/
 
-        army.add(character);
+        this.army.add(character);
     }
 
     public String getName() {
