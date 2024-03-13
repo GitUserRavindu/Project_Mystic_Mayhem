@@ -99,13 +99,6 @@ public class Player implements Serializable {
         }
     }
     
-    // public void setHomeGroundBonus() {
-    //     //Set the bonus of the home ground.
-    //     //Most of them just increase the stats of the characters.
-    //     //But Hillcrest can give highlanders a bonus turn with 20% attack power.
-    //     homeGround.setBonus(army,bonusTurns);
-    // }
-
     //Since army attribute is public, this method is not necessary. 
     //In the market, the characters are added to the army directly.
     public void setArmy(ArrayList<Character> army) { this.army = army; }   
