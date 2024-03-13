@@ -1,5 +1,6 @@
 package Character;
 
+import Equipment.Armor;
 import Equipment.Equipment;
 import Interfaces.MakeClone;
 import java.io.Serializable;
@@ -131,12 +132,27 @@ public abstract class Character implements MakeClone, Serializable {
         return equipments;
     }
 
-    public Equipment getArmour() {
+    public Equipment getArmor() {
         return equipments[0];
     }
 
     public Equipment getArtefact() {
         return equipments[1];
+    }
+
+    public void setArmor(Equipment armor) {
+        this.equipments[0] = armor;
+    }
+
+    public void setArtefact(Equipment artefact) {
+        this.equipments[1] = artefact;
+    }
+
+    public void removeEquipment(Equipment equipment){
+        this.setAttack(this.getAttack() - equipment.getAttack());
+        this.setDefense(this.getDefense() - equipment.getDefense());
+        this.setHealth(this.getHealth() - equipment.getHealth());
+        this.setSpeed(this.getSpeed() - equipment.getSpeed());
     }
 
     public void displayStats() {
@@ -151,6 +167,30 @@ public abstract class Character implements MakeClone, Serializable {
     }
 
     // Buying Equipment
+    public void equipEquipment(Equipment equipment) {
+
+        String parentClassName = equipment.getClass().getSuperclass().getName();
+
+        Equipment current = null;
+
+        if (equipment instanceof Armor) {
+            current = this.getArmor();
+            this.setArmor(equipment);
+
+        } else if(parentClassName.equals("Artefact")) {
+            current = this.getArtefact();
+            this.setArtefact(equipment);
+        }
+
+        if (current != null) {
+            this.removeEquipment(current);
+        }
+
+        setAttack(this.getAttack() + equipment.getAttack());
+        setDefense(this.getDefense() + equipment.getDefense());
+        setHealth(this.getHealth() + equipment.getHealth());
+        setSpeed(this.getSpeed() + equipment.getSpeed());
+    }
 
 
     // abstract methods
