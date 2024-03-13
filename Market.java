@@ -18,12 +18,12 @@ public class Market {
     private int existingGoldCoins;
     private int neededGoldCoins;
 
-    
+
     ////////////////////Market Constructor///////////////////////////////////////////////////////////////////////////////
-    
-    //Singleton Design Pattern is used. Only one Market object can be created.  
+
+    //Singleton Design Pattern is used. Only one Market object can be created.
     private static Market instance = null;
-    
+
     private Market() {
     }
 
@@ -35,9 +35,9 @@ public class Market {
         return instance;
     }
 
-    
+
     //////////////////// Market Menu /////////////////////////////////////////////////////////////////////////////////////
-    
+
     //Displays the options for the player to choose. Market Menu is the main menu of the Market Place.
     public void marketMenu(Player player) {
         this.player = player;
@@ -83,14 +83,14 @@ public class Market {
         }
 
         while (choice != 4) {
-            marketMenu(player);  
+            marketMenu(player);
             return;
         }
     }
 
-    
+
     //////////////////// Buy Menu /////////////////////////////////////////////////////////////////////////////////////
-    
+
     //Displays the options for the player to choose what to buy.
     private void buyMenu() {
         System.out.println("You have selected to buy Army or Equipment.");
@@ -130,16 +130,16 @@ public class Market {
                 System.out.println();
                 break;
         }
-        
+
         while (choice != 4) {
-            buyMenu();  
+            buyMenu();
             return;
         }
     }
 
-    
+
     /////////////////////////// Show Room - Display Items //////////////////////////////////////////////////////////////////////
-    
+
     //Display items - Header of the table
     private void tableHeader(String type) {
         if (type == "character") {
@@ -162,12 +162,12 @@ public class Market {
             System.out.format("%20s %20s %20s %20s %20s %20s", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------\n");
         }
     }
-    
+
     //Display items - Rows of the table
     private void dispalyItems(String type, String name, int k) { //type: character/equipment; k: index of the item to display
         if (type == "character") {
             Character displayItem = Registry.returnCharacter(name);
-            System.out.format("%20s %20s %20s %20s %20s %20s", k + ". " + displayItem.getName(), displayItem.getPrize(), displayItem.getAttack(), displayItem.getDefense(), displayItem.getHealth(), displayItem.getSpeed()+"\n");            
+            System.out.format("%20s %20s %20s %20s %20s %20s", k + ". " + displayItem.getName(), displayItem.getPrize(), displayItem.getAttack(), displayItem.getDefense(), displayItem.getHealth(), displayItem.getSpeed()+"\n");
         }
 
         else if (type == "equipment") {
@@ -270,7 +270,7 @@ public class Market {
                 }
                 System.out.println("Please select the corresponding number: (1/2/3/4/5)");
                 System.out.println();
-                
+
                 characterChoice = scanner.nextInt();
                 System.out.println("You have selected " + characterChoice);
 
@@ -316,7 +316,7 @@ public class Market {
                 }
                 System.out.println("Please select the corresponding number: (1/2/3/4/5)");
                 System.out.println();
-                
+
                 characterChoice = scanner.nextInt();
                 System.out.println("You have selected " + characterChoice);
 
@@ -442,7 +442,7 @@ public class Market {
     }
 
 
-    /////////////////////////// Buy Transaction //////////////////////////////////////////////////////////////////////////////////////  
+    /////////////////////////// Buy Transaction //////////////////////////////////////////////////////////////////////////////////////
 
     //Performs the transaction of buying a character. Setting player attributes with updated gold coins and adding the character to the army.
     private void buyTransaction(String boughtCharacter) {
@@ -483,17 +483,17 @@ public class Market {
         }
     }
 
-    
+
     /////////////////////////// Buy Equipment //////////////////////////////////////////////////////////////////////////////////////
-    
+
     //Displays the equipment that can be bought.
     private void buyEquipment(){
         System.out.println("You have selected to buy an equipment.");
-        
+
         System.out.println("-------------------------------------------------------------");
         System.out.println("Please select which character you want to buy equipment for: ");
         System.out.println("-------------------------------------------------------------");
-        
+
         int i = 1;
         for (Character character : player.army) {
             System.out.println("      " + i + ". " + character.getName());
@@ -507,18 +507,19 @@ public class Market {
 
         try {
             if (characterChoice < 1 || characterChoice > player.army.size()) {
-                throw new Exception("Invalid choice. Please enter a valid number.");              
+                //scanner.close();
+                throw new Exception("Invalid choice. Please enter a valid number.");
             }
         } catch (Exception e) {
             System.out.println(e);
-            System.out.println("Going back to the Buy menu...");  
-            System.out.println();         
+            System.out.println("Going back to the Buy menu...");
+            System.out.println();
             return;
         }
 
         Character selectedCharacter = player.army.get(characterChoice-1);
         System.out.println("You have selected to buy an equipment for : " + selectedCharacter.getName());
-        
+
         System.out.println("---------------------------------------------");
         System.out.println("Please select the equipment you want to buy: ");
         System.out.println("---------------------------------------------");
@@ -550,13 +551,20 @@ public class Market {
                         if (equipment instanceof Armor) {
                             System.out.println("You already have an armour equipped by " + selectedCharacter.getName());
                             System.out.println();
-                            System.out.println("Going back to the Buy menu...");
-                            //scanner.close();
-                            return;
+                            System.out.println("Do you want to replace " + selectedCharacter.getArmor().getName() + "? (y/n)");
+
+                            char c = scanner.next().charAt(0);
+
+                            if(c == 'N' || c == 'n')
+                            {
+                                System.out.println("Going back to the Buy menu...");
+                                return;
+                            }
+
                         }
                     }
                 }
-                
+
                 String[] armours = { "Chainmail", "Regalia", "Fleece" };
 
                 tableHeader("equipment");
@@ -577,7 +585,7 @@ public class Market {
                     case 2:
                         buyEquipmentTransaction(selectedCharacter, "Regalia");
                         break;
-                    case 3: 
+                    case 3:
                         buyEquipmentTransaction(selectedCharacter, "Fleece");
                         break;
                     default:
@@ -623,7 +631,7 @@ public class Market {
                     case 2:
                         buyEquipmentTransaction(selectedCharacter, "Amulet");
                         break;
-                    case 3: 
+                    case 3:
                         buyEquipmentTransaction(selectedCharacter, "Crystal");
                         break;
                     default:
@@ -641,9 +649,9 @@ public class Market {
         }
     }
 
-    
+
     /////////////////////////// Buy Transaction - Equipment ///////////////////////////////////////////////////////////////////////
-    
+
     //Performs the transaction of buying an equipment. Setting player attributes with updated gold coins and adding the equipment to the character.
     private void buyEquipmentTransaction(Character selectedCharacter, String boughtEquipment) {
         Equipment equipment = Registry.returnEquipment(boughtEquipment);
@@ -656,17 +664,17 @@ public class Market {
             player.setGold(existingGoldCoins);
 
             //add the equipment to the character ///////////////////Make array list
-            //selectedCharacter.getEquipments().add(equipment);
+            selectedCharacter.equipEquipment(equipment);;
 
             //set the new price of character
             int valueIncrease = Math.round(neededGoldCoins * 20/100);
             selectedCharacter.setPrize(selectedCharacter.getPrize() + valueIncrease);
 
             //set the new attack, defense, health and speed of character
-            selectedCharacter.setAttack(selectedCharacter.getAttack() + equipment.getAttack());
-            selectedCharacter.setDefense(selectedCharacter.getDefense() + equipment.getDefense());
-            selectedCharacter.setHealth(selectedCharacter.getHealth() + equipment.getHealth());
-            selectedCharacter.setSpeed(selectedCharacter.getSpeed() + equipment.getSpeed());
+            // selectedCharacter.setAttack(selectedCharacter.getAttack() + equipment.getAttack());
+            // selectedCharacter.setDefense(selectedCharacter.getDefense() + equipment.getDefense());
+            // selectedCharacter.setHealth(selectedCharacter.getHealth() + equipment.getHealth());
+            // selectedCharacter.setSpeed(selectedCharacter.getSpeed() + equipment.getSpeed());
 
             //display the new character attributes
             System.out.println("---------------------------");
@@ -702,9 +710,9 @@ public class Market {
         }
     }
 
-    
+
     ////////////////////////////// Sell Army //////////////////////////////////////////////////////////////////////////////////////
-    
+
     //Displays the characters that can be sold.
     private void sellArmy(){
         System.out.println("You have selected to sell an army character");
@@ -733,7 +741,7 @@ public class Market {
             System.out.println();
             return;
         }
-        
+
         Character selectedCharacter = player.army.get(characterChoice-1);
         System.out.println("You have selected " + selectedCharacter.getName());
         System.out.println("Are you sure you want to sell " + selectedCharacter.getName() + "? (y/n)");
@@ -771,7 +779,7 @@ public class Market {
             System.out.println();
             return;
         }
-        
+
     }
 
 }
