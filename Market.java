@@ -549,7 +549,7 @@ public class Market {
                             System.out.println();
                             System.out.println("Do you want to replace " + selectedCharacter.getArmor().getName() + "? (y/n)");
 
-                            char c = scanner.next().charAt(0);
+                            char c = ScannerUtil.scanner.next().charAt(0);
 
                             if(c == 'N' || c == 'n')
                             {
