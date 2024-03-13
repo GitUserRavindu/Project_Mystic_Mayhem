@@ -44,3 +44,5 @@ Sample : Main menu
 
 Maybe add some static variables to gamesvamanager. Then in the main function we can call gamesavemanager class.
 inside class, new object will create to save????
+
+scanner.nextline problem? we can set while(choice.isEmpty()) { choice = scanner.nextLine()} ---> should do.
