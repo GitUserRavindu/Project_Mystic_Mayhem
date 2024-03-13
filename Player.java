@@ -1,8 +1,9 @@
 import java.io.IOException;
 import java.io.Serializable;
 
-import java.util.Scanner;
 import java.util.ArrayList;
+
+import Utils.ScannerUtil;
 
 import Character.Character;
 
@@ -70,8 +71,7 @@ public class Player implements Serializable {
 
         while (true) {
             try {
-                Scanner scanner = new Scanner(System.in);
-                choice = scanner.nextInt();
+                choice = ScannerUtil.scanner.nextInt();
                 if(choice < 1 || choice > 4) {
                     throw new IOException();
                 }

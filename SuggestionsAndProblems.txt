@@ -29,3 +29,5 @@ e.g.    "You have.... bla bla
 userId and xp changed to not static
 
 Characters already equipped items should be displayed
+
+one scanner for whole program! Should I try it?
