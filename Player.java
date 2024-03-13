@@ -67,6 +67,7 @@ public class Player implements Serializable {
         System.out.println("4. Arcane");
         System.out.println("Enter the number of the home ground: \n");
 
+
         int choice;
 
         while (true) {
@@ -80,6 +81,7 @@ public class Player implements Serializable {
                 System.out.println("Invalid input. Please enter a valid number.");
             }
         }
+
 
 		switch (choice) {
             case 1:

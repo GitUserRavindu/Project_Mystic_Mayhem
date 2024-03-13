@@ -1,9 +1,11 @@
 import java.io.*;
 
+
 import java.util.Scanner;
 
 // import Character.Character;
 // import Equipment.Equipment;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -48,18 +50,17 @@ public class Main {
         Registry.characterCache(); // Making game character configurations
         Registry.equipmentCache(); // Making game equipment configurations
 
-        // We use Registry as a library to store the different configurations
-        // of Characters, and we use name to return certain character
-        // Equipment a = Registry.returnEquipment("Crystal");
-        // Equipment b = Registry.returnEquipment("Crystal");
-        // Character c = Registry.returnCharacter("Hydra");
 
-        // System.out.println(a);
-        // System.out.println(b);
+        Player player1 = new Player("himala", "Himala"); // Creating a player
+        player1.homeGround = new Hillcrest();// Setting the home ground
+        player1.army = army1;
 
-        // a.setAttack(0);
+        Player player2 = new Player("yutharsan", "Yutharsan");
+        player2.homeGround = new Marshland();
+        player2.army = army2;
 
-        // System.out.println(a.getAttack() + " " + b.getAttack());
+        Battle new_battle = new Battle(player1, player2);
+        new_battle.fight();
 
         // System.out.println(c.getName());
         Player playerP = Profile.createProfile();
