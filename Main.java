@@ -18,15 +18,18 @@ public class Main {
         Character e = Registry.returnCharacter("Dragon");
 
         Player p = new Player("himala", "Himala");
-        p.setHomeGround();
+        Player p1= new Player("himala","Himala");
+        // p.setHomeGround();
+        System.out.println(p.getName()+" "+p.getUserName());
+        System.out.println(p1.getName()+" "+p1.getUserName());
 
-        p.addCharacter(c, 0);
-        p.addCharacter(b, 0);
-        p.addCharacter(a, 0);
-        p.addCharacter(d, 0);
-        p.addCharacter(e, 0);
-        ArrayList<Character> army = p.getArmy();
-        Battle ba=new Battle(p,p);
+        // p.addCharacter(c, 0);
+        // p.addCharacter(b, 0);
+        // p.addCharacter(a, 0);
+        // p.addCharacter(d, 0);
+        // p.addCharacter(e, 0);
+        // ArrayList<Character> army = p.getArmy();
+        // Battle ba=new Battle(p,p);
         // ba.setOrderSpeed(army);
         // ba.setOrderToEqualStats(army,new String[]{"Archer","Knight","Mythical Creature","Mage","Healer"} );
         // // // HomeGround hg = p.getHomeGround();
@@ -48,11 +51,11 @@ public class Main {
 
         // System.out.println(a.getAttack() + " " + b.getAttack());
 
-        System.out.println(a.getName());
-        System.out.println(b.getName());
-        System.out.println(c.getName());
-        System.out.println(d.getName());
-        System.out.println(e.getName());
+        // System.out.println(a.getName());
+        // System.out.println(b.getName());
+        // System.out.println(c.getName());
+        // System.out.println(d.getName());
+        // System.out.println(e.getName());
 
         // Player playerP = new Player();
         // Market market = Market.getInstance();

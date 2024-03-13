@@ -84,19 +84,11 @@ public class Battle {
         Boolean w1=false,w2=false;
 
         String attackOrder[]={"Archer","Knight","Mythical Creature","Mage","Healer"};
-        String defenseOrder[]={"Healer","Mythical Creature","Archer","Knight","Mage"};
-
-        //ArrayList<Character> offencer1=new ArrayList<>(army1),defender1=new ArrayList<>(army1),offencer2=new ArrayList<>(army2),defender2=new ArrayList<>(army2);
+        String defenseOrder[]={"Healer","Mythical Creature","Archer","Knight","Mage"};        
         
-        // setOrderSpeed(offencer1);setOrderDefence(defender1);
-        // setOrderToEqualStats(army1, attackOrder);setOrderToEqualStats(defender1, defenseOrder);
-        
-        // setOrderSpeed(offencer2);setOrderDefence(defender2);
-        // setOrderToEqualStats(offencer2, attackOrder);setOrderToEqualStats(defender2, defenseOrder);
-
     for(int j=0;j<10;j++){
         System.out.println("\nTurn "+j+1+":"+name1+"\n");
-        //w1=false;
+        
 
         //Offencer1 attack Defender2
 
@@ -105,20 +97,18 @@ public class Battle {
     for(int k=j%10;k<10;k++){
         if(army1.get(k).getStatus()){
             O1=army1.get(k);
-            //w1=true;
             break;
         }
         if(k==9){
             break;
         }
     }
-        //w2=false;
+
         //Defender2 character choosing
         setOrderDefence(army2);setOrderToEqualStats(army2, defenseOrder);
     for(int k=j%10;k<10;k++){
         if(army2.get(k).getStatus()){
             D2=army2.get(k);
-            //w2=true;
             break;
         }
         if(k==9){
@@ -151,7 +141,6 @@ public class Battle {
             }
         }if(!w2){break;}
     }
-    //w2=false;
 
     //Offencer2 attack Defender1
 
@@ -163,21 +152,18 @@ public class Battle {
     for(int k=j%10;k<10;k++){
         if(army2.get(k).getStatus()){
             O2=army2.get(k);
-            //w2=true;
             break;
         }
         if(k==9){
             break;
         }
     }
-    //w1=false;
     //Defender1 character choosing
     setOrderDefence(army1);setOrderToEqualStats(army1, defenseOrder);
 
     for(int k=j%10;k<10;k++){
         if(army1.get(k).getStatus()){
             D1=army1.get(k);
-            //w1=true;
             break;
         }
         if(k==9){
@@ -223,7 +209,7 @@ public class Battle {
         resetHealth(army2);
     }
 
-private void checkVictory(Boolean w1, Boolean w2) {
+private void checkVictory(Boolean w1, Boolean w2,Boolean draw) {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'checkVictory'");
 }
