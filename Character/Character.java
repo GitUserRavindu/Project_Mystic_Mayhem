@@ -2,8 +2,10 @@ package Character;
 
 import Equipment.Equipment;
 import Interfaces.MakeClone;
+import java.io.Serializable;
 
-public abstract class Character implements MakeClone {
+
+public abstract class Character implements MakeClone, Serializable {
     protected float maxHealth;
     protected String name;
     protected float health;

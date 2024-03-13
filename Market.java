@@ -13,14 +13,17 @@ import Equipment.Armor;
 import Equipment.Artefact;
 
 public class Market {
+
     private Player player;
     private int existingGoldCoins;
     private int neededGoldCoins;
 
-    //Singleton Design Pattern is used. Only one Market object can be created.
+    
+    ////////////////////Market Constructor///////////////////////////////////////////////////////////////////////////////
+    
+    //Singleton Design Pattern is used. Only one Market object can be created.  
     private static Market instance = null;
-
-    //Constructor is private to prevent creating new Market objects.
+    
     private Market() {
     }
 
@@ -32,10 +35,13 @@ public class Market {
         return instance;
     }
 
-    //Displays the options for the player to choose.
-    public void marketMenu(Player player, int goldCoins) {
+    
+    //////////////////// Market Menu /////////////////////////////////////////////////////////////////////////////////////
+    
+    //Displays the options for the player to choose. Market Menu is the main menu of the Market Place.
+    public void marketMenu(Player player) {
         this.player = player;
-        this.existingGoldCoins = goldCoins;
+        this.existingGoldCoins = player.getGold();
 
         System.out.println("----------------------------");
         System.out.println("Welcome to the Market Place!");
@@ -43,12 +49,14 @@ public class Market {
         System.out.println("What you want to do today? Please select an option: ");
         System.out.println("    1. Buy Army or Equipment");
         System.out.println("    2. Sell Army");
-        System.out.println("    3. Exit");
+        System.out.println("    3. Check the balance of your gold coins");
+        System.out.println("    4. Exit");
+        System.out.println("Please enter the corresponding number: (1/2/3/4)");
+        System.out.println();
 
         Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
         //scanner.close();
-        System.out.println("You have selected " + choice);
 
         switch (choice) {
             case 1:
@@ -58,43 +66,48 @@ public class Market {
                 sellArmy();
                 break;
             case 3:
+                System.out.println("You have selected to check the balance of your gold coins. Here is your balance details: ");
+                System.out.println("You have " + player.getGold() + " gold coins.");
+                System.out.println();
+                break;
+            case 4:
                 System.out.println("You have selected to exit.");
+                System.out.println("---------------------------------------------------------------");
+                System.out.println("Thank you for visiting the Market Place! Goodbye! See you soon!");
+                System.out.println("---------------------------------------------------------------");
+                System.out.println();
                 return;
-                //break;
             default:
-                System.out.println("Invalid choice.");
+                System.out.println("Invalid choice. Please enter a valid number.");
+                System.out.println();
                 break;
         }
 
-        System.out.println(choice);
-
-        for(Character cha : player.army) {
-            System.out.println(cha.getName());
-        }
-
-        // if (choice == 3) {
-        //     return;
-        // }
-
-        while (choice != 3) {
-            marketMenu(player, existingGoldCoins);
-            //scanner.close();
+        while (choice != 4) {
+            marketMenu(player);  
             return;
         }
     }
 
+    
+    //////////////////// Buy Menu /////////////////////////////////////////////////////////////////////////////////////
+    
     //Displays the options for the player to choose what to buy.
     private void buyMenu() {
+        System.out.println("You have selected to buy Army or Equipment.");
         System.out.println("-----------------------------------------------");
         System.out.println("What you want to buy? Please select an option: ");
         System.out.println("-----------------------------------------------");
         System.out.println("    1. Army");
         System.out.println("    2. Equipment");
+        System.out.println("    3. Check the balance of your gold coins");
+        System.out.println("    4. Go back to the Market Menu");
+        System.out.println("Please enter the corresponding number: (1/2/3/4)");
+        System.out.println();
 
         Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
-        //scanner.close();
-        System.out.println("You have selected " + choice);
+        ////scanner.close();
 
         switch (choice) {
             case 1:
@@ -103,37 +116,59 @@ public class Market {
             case 2:
                 buyEquipment();
                 break;
-            default:
-                System.out.println("Invalid choice.");
+            case 3:
+                System.out.println("You have selected to check the balance of your gold coins. Here is your balance details: ");
+                System.out.println("You have " + player.getGold() + " gold coins.");
+                System.out.println();
                 break;
+            case 4:
+                System.out.println("You have selected to go back to the Market Menu. Going back to the Market Menu...");
+                System.out.println("---------------------------------------------------------------------------------");
+                System.out.println();
+                return;
+            default:
+                System.out.println("Invalid choice. Please enter a valid number.");
+                System.out.println();
+                break;
+        }
+        
+        while (choice != 4) {
+            buyMenu();  
+            return;
         }
     }
 
-    //Display items
+    
+    /////////////////////////// Show Room - Display Items //////////////////////////////////////////////////////////////////////
+    
+    //Display items - Header of the table
     private void tableHeader(String type) {
         if (type == "character") {
             System.out.println("---------------------------------------------");
             System.out.println("Please select the character you want to buy: ");
             System.out.println("---------------------------------------------");
-            System.out.format("%18s %18s %18s %18s %18s %18s", "------------------", "------------------", "------------------", "------------------", "------------------", "------------------\n");
-            System.out.format("%18s %18s %18s %18s %18s %18s", "Character |", "Price (gc) |", "Attack |", "Defence |", "Health |", "Speed |\n");
-            System.out.format("%18s %18s %18s %18s %18s %18s", "------------------", "------------------", "------------------", "------------------", "------------------", "------------------\n");
+            System.out.println();
+            System.out.format("%20s %20s %20s %20s %20s %20s", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------\n");
+            System.out.format("%20s %20s %20s %20s %20s %20s", "Character |", "Price (gc) |", "Attack |", "Defence |", "Health |", "Speed |\n");
+            System.out.format("%20s %20s %20s %20s %20s %20s", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------\n");
         }
 
         else {
-            System.out.println("------------------------------------------");
+            System.out.println("---------------------------------------------");
             System.out.println("Please select the equipment you want to buy: ");
-            System.out.println("------------------------------------------");
+            System.out.println("---------------------------------------------");
+            System.out.println();
             System.out.format("%20s %20s %20s %20s %20s %20s", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------\n");
-            System.out.format("%20s %20s %20s %20s %20s %20s", "Type", "Price (gc)", "Attack", "Defence", "Health", "Speed\n");
+            System.out.format("%20s %20s %20s %20s %20s %20s", "Type |", "Price (gc) |", "Attack |", "Defence |", "Health |", "Speed |\n");
             System.out.format("%20s %20s %20s %20s %20s %20s", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------", "--------------------\n");
         }
     }
     
-    private void dispalyItems(String type, String name, int k) { //type: character or equipment
+    //Display items - Rows of the table
+    private void dispalyItems(String type, String name, int k) { //type: character/equipment; k: index of the item to display
         if (type == "character") {
             Character displayItem = Registry.returnCharacter(name);
-            System.out.format("%18s %18s %18s %18s %18s %18s", k + ". " + displayItem.getName(), displayItem.getPrize(), displayItem.getAttack(), displayItem.getDefense(), displayItem.getHealth(), displayItem.getSpeed()+"\n");            
+            System.out.format("%20s %20s %20s %20s %20s %20s", k + ". " + displayItem.getName(), displayItem.getPrize(), displayItem.getAttack(), displayItem.getDefense(), displayItem.getHealth(), displayItem.getSpeed()+"\n");            
         }
 
         else if (type == "equipment") {
@@ -142,9 +177,12 @@ public class Market {
         }
 
         else {
-            System.out.println("Invalid type.");
+            System.out.println("Invalid type."); //Testing purposes
         }
     }
+
+
+    /////////////////////////// Buy Army //////////////////////////////////////////////////////////////////////////////////////
 
     //Displays the characters that can be bought.
     private void buyArmy(){
@@ -157,14 +195,13 @@ public class Market {
         System.out.println("    3. Mage");
         System.out.println("    4. Healer");
         System.out.println("    5. Mythical Creature");
+        System.out.println("Please enter the corresponding number: (1/2/3/4/5)");
+        System.out.println();
 
         Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
 
         int characterChoice;
-        String boughtCharacter;
-        //scanner.close();
-        System.out.println("You have selected " + choice);
 
         switch (choice) {
             case 1:
@@ -173,63 +210,46 @@ public class Market {
                 //Check whether an archer is already in the army.
                 for (Character character : player.army) {
                     if (character instanceof Archer) {
-                        System.out.println("You already have an Archer in your army.");
+                        System.out.println("You already have an Archer in your army. Going back to the Buy menu...");
+                        System.out.println();
+                        //scanner.close();
                         return;
                     }
                 }
 
-                // System.out.println("---------------------------------------------");
-                // System.out.println("Please select the character you want to buy: ");
-                // System.out.println("---------------------------------------------");
-                // System.out.format("%18s %18s %18s %18s %18s %18s", "------------------", "------------------", "------------------", "------------------", "------------------", "------------------\n");
-                // System.out.format("%18s %18s %18s %18s %18s %18s", "Character |", "Price (gc) |", "Attack |", "Defence |", "Health |", "Speed |\n");
-                // System.out.format("%18s %18s %18s %18s %18s %18s", "------------------", "------------------", "------------------", "------------------", "------------------", "------------------\n");
-
                 String[] archer = {"Shooter", "Ranger", "Sunfire", "Zing", "Saggitarius"};
 
                 tableHeader("character");
-                for (int i=0; i<archer.length; i++) {
+                for (int i = 0; i < archer.length; i++) {
                     dispalyItems("character", archer[i], i+1);
                 }
-                
-                
-                // Character displayShooter = Registry.returnCharacter("Shooter");
-                // System.out.format("%18s %18s %18s %18s %18s %18s", "1. "+displayShooter.getName(), displayShooter.getPrize(), displayShooter.getAttack(), displayShooter.getDefense(), displayShooter.getHealth(), displayShooter.getSpeed()+"\n");
-                // Character dispalyRanger = Registry.returnCharacter("Ranger");
-                // System.out.format("%18s %18s %18s %18s %18s %18s", "2. "+dispalyRanger.getName(), dispalyRanger.getPrize(), dispalyRanger.getAttack(), dispalyRanger.getDefense(), dispalyRanger.getHealth(), dispalyRanger.getSpeed()+"\n");
-                // Character displaySunfire = Registry.returnCharacter("Sunfire");
-                // System.out.format("%18s %18s %18s %18s %18s %18s", "3. "+displaySunfire.getName(), displaySunfire.getPrize(), displaySunfire.getAttack(), displaySunfire.getDefense(), displaySunfire.getHealth(), displaySunfire.getSpeed()+"\n");
-                // Character displayZing = Registry.returnCharacter("Zing");
-                // System.out.format("%18s %18s %18s %18s %18s %18s", "4. "+displayZing.getName(), displayZing.getPrize(), displayZing.getAttack(), displayZing.getDefense(), displayZing.getHealth(), displayZing.getSpeed()+"\n");
-                // Character displaySaggitarius = Registry.returnCharacter("Saggitarius");
-                // System.out.format("%18s %18s %18s %18s %18s %18s", "5. "+displaySaggitarius.getName(), displaySaggitarius.getPrize(), displaySaggitarius.getAttack(), displaySaggitarius.getDefense(), displaySaggitarius.getHealth(), displaySaggitarius.getSpeed()+"\n");
+                System.out.println();
+                System.out.println("Please select the corresponding number: (1/2/3/4/5)");
+                System.out.println();
 
                 characterChoice = scanner.nextInt();
-                System.out.println("You have selected " + characterChoice);
+                System.out.println("You have selected" + characterChoice);
+                //scanner.close();
 
                 switch (characterChoice) {
                     case 1:
-                        boughtCharacter = "Shooter";
-                        buyTransaction(boughtCharacter);
+                        buyTransaction("Shooter");
                         break;
                     case 2:
-                        boughtCharacter = "Ranger";
-                        buyTransaction(boughtCharacter);
+                        buyTransaction("Ranger");
                         break;
                     case 3:
-                        boughtCharacter = "Sunfire";
-                        buyTransaction(boughtCharacter);
+                        buyTransaction("Sunfire");
                         break;
                     case 4:
-                        boughtCharacter = "Zing";
-                        buyTransaction(boughtCharacter);
+                        buyTransaction("Zing");
                         break;
                     case 5:
-                        boughtCharacter = "Saggitarius";
-                        buyTransaction(boughtCharacter);
+                        buyTransaction("Saggitarius");
                         break;
                     default:
-                        System.out.println("Invalid choice.");
+                        System.out.println("Invalid choice. Please enter a valid number. Going back to the Buy menu...");
+                        System.out.println();
                         break;
                 }
                 break;
@@ -239,7 +259,9 @@ public class Market {
                 //Check whether a knight is already in the army.
                 for (Character character : player.army) {
                     if (character instanceof Knight) {
-                        System.out.println("You already have a Knight in your army.");
+                        System.out.println("You already have a Knight in your army. Going back to the Buy menu...");
+                        System.out.println();
+                        //scanner.close();
                         return;
                     }
                 }
@@ -250,33 +272,32 @@ public class Market {
                 for (int i=0; i<knights.length; i++) {
                     dispalyItems("character", knights[i], i+1);
                 }
+                System.out.println("Please select the corresponding number: (1/2/3/4/5)");
+                System.out.println();
                 
                 characterChoice = scanner.nextInt();
                 System.out.println("You have selected " + characterChoice);
+                //scanner.close();
 
                 switch (characterChoice) {
                     case 1:
-                        boughtCharacter = "Squire";
-                        buyTransaction(boughtCharacter);
+                        buyTransaction("Squire");
                         break;
                     case 2:
-                        boughtCharacter = "Cavalier";
-                        buyTransaction(boughtCharacter);
+                        buyTransaction("Cavalier");
                         break;
                     case 3:
-                        boughtCharacter = "Templar";
-                        buyTransaction(boughtCharacter);
+                        buyTransaction("Templar");
                         break;
                     case 4:
-                        boughtCharacter = "Zoro";
-                        buyTransaction(boughtCharacter);
+                        buyTransaction("Zoro");
                         break;
                     case 5:
-                        boughtCharacter = "Swiftblade";
-                        buyTransaction(boughtCharacter);
+                        buyTransaction("Swiftblade");
                         break;
                     default:
-                        System.out.println("Invalid choice.");
+                        System.out.println("Invalid choice. Please enter a valid number. Going back to the Buy menu...");
+                        System.out.println();
                         break;
                 }
                 break;
@@ -286,7 +307,9 @@ public class Market {
                 //Check whether a mage is already in the army.
                 for (Character character : player.army) {
                     if (character instanceof Mage) {
-                        System.out.println("You already have a Mage in your army.");
+                        System.out.println("You already have a Mage in your army. Going back to the Buy menu...");
+                        System.out.println();
+                        //scanner.close();
                         return;
                     }
                 }
@@ -297,33 +320,31 @@ public class Market {
                 for (int i=0; i<mages.length; i++) {
                     dispalyItems("character", mages[i], i+1);
                 }
+                System.out.println("Please select the corresponding number: (1/2/3/4/5)");
+                System.out.println();
                 
                 characterChoice = scanner.nextInt();
                 System.out.println("You have selected " + characterChoice);
+                //scanner.close();
 
                 switch (characterChoice) {
                     case 1:
-                        boughtCharacter = "Warlock";
-                        buyTransaction(boughtCharacter);
+                        buyTransaction("Warlock");
                         break;
                     case 2:
-                        boughtCharacter = "Illusionist";
-                        buyTransaction(boughtCharacter);
+                        buyTransaction("Illusionist");
                         break;
                     case 3:
-                        boughtCharacter = "Enchanter";
-                        buyTransaction(boughtCharacter);
+                        buyTransaction("Enchanter");
                         break;
                     case 4:
-                        boughtCharacter = "Conjurer";
-                        buyTransaction(boughtCharacter);
+                        buyTransaction("Conjurer");
                         break;
                     case 5:
-                        boughtCharacter = "Eldritch";
-                        buyTransaction(boughtCharacter);
+                        buyTransaction("Eldritch");
                         break;
                     default:
-                        System.out.println("Invalid choice.");
+                        System.out.println("Invalid choice. Please enter a valid number. Going back to the Buy menu...");
                         break;
                 }
                 break;
@@ -334,6 +355,8 @@ public class Market {
                 for (Character character : player.army) {
                     if (character instanceof Healer) {
                         System.out.println("You already have a Healer in your army.");
+                        System.out.println();
+                        //scanner.close();
                         return;
                     }
                 }
@@ -344,33 +367,32 @@ public class Market {
                 for (int i=0; i<healers.length; i++) {
                     dispalyItems("character", healers[i], i+1);
                 }
+                System.out.println("Please select the corresponding number: (1/2/3/4/5)");
+                System.out.println();
 
                 characterChoice = scanner.nextInt();
                 System.out.println("You have selected " + characterChoice);
+                //scanner.close();
 
                 switch (characterChoice) {
                     case 1:
-                        boughtCharacter = "Soother";
-                        buyTransaction(boughtCharacter);
+                        buyTransaction("Soother");
                         break;
                     case 2:
-                        boughtCharacter = "Medic";
-                        buyTransaction(boughtCharacter);
+                        buyTransaction("Medic");
                         break;
                     case 3:
-                        boughtCharacter = "Alchemist";
-                        buyTransaction(boughtCharacter);
+                        buyTransaction("Alchemist");
                         break;
                     case 4:
-                        boughtCharacter = "Saint";
-                        buyTransaction(boughtCharacter);
+                        buyTransaction("Saint");
                         break;
                     case 5:
-                        boughtCharacter = "Lightbringer";
-                        buyTransaction(boughtCharacter);
+                        buyTransaction("Lightbringer");
                         break;
                     default:
-                        System.out.println("Invalid choice.");
+                        System.out.println("Invalid choice. Please enter a valid number. Going back to the Buy menu...");
+                        System.out.println();
                         break;
                 }
                 break;
@@ -380,7 +402,9 @@ public class Market {
                 //Check whether a mythical creature is already in the army.
                 for (Character character : player.army) {
                     if (character instanceof MythicalCreature) {
-                        System.out.println("You already have a Mythical Creature in your army.");
+                        System.out.println("You already have a Mythical Creature in your army. Going back to the Buy menu...");
+                        System.out.println();
+                        //scanner.close();
                         return;
                     }
                 }
@@ -391,43 +415,47 @@ public class Market {
                 for (int i=0; i<mythicalCreatures.length; i++) {
                     dispalyItems("character", mythicalCreatures[i], i+1);
                 }
+                System.out.println("Please select the corresponding number: (1/2/3/4/5)");
+                System.out.println();
 
                 characterChoice = scanner.nextInt();
                 System.out.println("You have selected " + characterChoice);
+                //scanner.close();
 
                 switch (characterChoice) {
                     case 1:
-                        boughtCharacter = "Dragon";
-                        buyTransaction(boughtCharacter);
+                        buyTransaction("Dragon");
                         break;
                     case 2:
-                        boughtCharacter = "Basilisk";
-                        buyTransaction(boughtCharacter);
+                        buyTransaction("Basilisk");
                         break;
                     case 3:
-                        boughtCharacter = "Hydra";
-                        buyTransaction(boughtCharacter);
+                        buyTransaction("Hydra");
                         break;
                     case 4:
-                        boughtCharacter = "Phoenix";
-                        buyTransaction(boughtCharacter);
+                        buyTransaction("Phoenix");
                         break;
                     case 5:
-                        boughtCharacter = "Pegasus";
-                        buyTransaction(boughtCharacter);
+                        buyTransaction("Pegasus");
                         break;
                     default:
-                        System.out.println("Invalid choice.");
+                        System.out.println("Invalid choice. Please enter a valid number. Going back to the Buy menu...");
+                        System.out.println();
                         break;
                 }
                 break;
             default:
-                System.out.println("Invalid choice.");
+                System.out.println("Invalid choice. Please enter a valid number. Going back to the Buy menu...");
+                System.out.println();
+                //scanner.close();
                 break;
         }
-
         //scanner.close();
+   
     }
+
+
+    /////////////////////////// Buy Transaction //////////////////////////////////////////////////////////////////////////////////////  
 
     //Performs the transaction of buying a character. Setting player attributes with updated gold coins and adding the character to the army.
     private void buyTransaction(String boughtCharacter) {
@@ -436,71 +464,109 @@ public class Market {
 
         if (existingGoldCoins >= neededGoldCoins) {
             existingGoldCoins -= neededGoldCoins;
-            //player.setGoldCoins(existingGoldCoins);
+            player.setGold(existingGoldCoins);
             player.army.add(character);
+            System.out.println("--------------------------");
+            System.out.println("Transcation is Successful!");
+            System.out.println("--------------------------");
+            System.out.println();
             System.out.println("You have bought " + boughtCharacter + " for " + neededGoldCoins + " gold coins.");
+            System.out.println("Your available gold coins are: " + existingGoldCoins + " gold coins.");
+            System.out.println();
+            System.out.println("Your army is now consisting of: ");
+            for (Character c : player.army) {
+                System.out.println(c.getName());
+            }
+            System.out.println();
+            System.out.println("Please come back later. Going back to the Buy menu...");
+            System.out.println();
+            return;
         } else {
+            System.out.println("----------------------------");
+            System.out.println("Transcation is Unsuccessful!");
+            System.out.println("----------------------------");
+            System.out.println();
             System.out.println("You don't have enough gold!");
+            System.out.println("Available gold coins: " + existingGoldCoins + " gold coins.");
+            System.out.println("Needed gold coins: " + neededGoldCoins + " gold coins.");
+            System.out.println();
+            System.out.println("Please come back later. Going back to the Buy menu...");
+            System.out.println();
+            return;
         }
     }
 
+    
+    /////////////////////////// Buy Equipment //////////////////////////////////////////////////////////////////////////////////////
+    
     //Displays the equipment that can be bought.
     private void buyEquipment(){
-        System.out.println("-----------------------------------");
-        System.out.println("You have selected to buy equipment.");
-        System.out.println("-----------------------------------");
-
+        System.out.println("You have selected to buy an equipment.");
+        
+        System.out.println("-------------------------------------------------------------");
         System.out.println("Please select which character you want to buy equipment for: ");
         System.out.println("-------------------------------------------------------------");
         
         int i = 1;
         for (Character character : player.army) {
-            System.out.println("      " + i + " " +character.getName());
+            System.out.println("      " + i + ". " + character.getName());
             i++;
         }
+        System.out.println("Please enter the corresponding number: ");
+        System.out.println();
 
         Scanner scanner = new Scanner(System.in);
         int characterChoice = scanner.nextInt();
 
         try {
-            if (characterChoice < 0 || characterChoice >= player.army.size()) {
-                throw new Exception("Invalid choice.");
+            if (characterChoice < 1 || characterChoice > player.army.size()) {
+                //scanner.close();
+                throw new Exception("Invalid choice. Please enter a valid number.");              
             }
         } catch (Exception e) {
             System.out.println(e);
+            System.out.println("Going back to the Buy menu...");  
+            System.out.println();         
+            return;
         }
 
         Character selectedCharacter = player.army.get(characterChoice-1);
-        System.out.println("You have selected " + characterChoice);
-        System.out.println("You have selected " + selectedCharacter.getName());
-        //scanner.close();
+        System.out.println("You have selected to buy an equipment for : " + selectedCharacter.getName());
         
+        System.out.println("---------------------------------------------");
         System.out.println("Please select the equipment you want to buy: ");
         System.out.println("---------------------------------------------");
         System.out.println("    1. Armour");
         System.out.println("    2. Artefact");
+        System.out.println("Please enter the corresponding number: (1/2)");
+        System.out.println();
 
         int choice = scanner.nextInt();
 
         try {
             if (choice < 1 || choice > 2) {
-                throw new Exception("Invalid choice.");
+                //scanner.close();
+                throw new Exception("Invalid choice. Please enter a valid number.");
             }
         } catch (Exception e) {
             System.out.println(e);
+            System.out.println("Going back to the Buy menu...");
+            System.out.println();
+            return;
         }
-        //scanner.close();
-        System.out.println("You have selected " + choice);
 
         switch (choice) {
             case 1:
-                System.out.println("You have selected to buy armour for " + selectedCharacter.getName());
+                System.out.println("You have selected to buy an armour for " + selectedCharacter.getName());
 
                 //Check whether an armour is equipped by the selectedCharacter.
                 if (selectedCharacter.getEquipments() != null) {
                     for (Equipment equipment : selectedCharacter.getEquipments()) {
                         if (equipment instanceof Armor) {
                             System.out.println("You already have an armour equipped by " + selectedCharacter.getName());
+                            System.out.println();
+                            System.out.println("Going back to the Buy menu...");
+                            //scanner.close();
                             return;
                         }
                     }
@@ -512,9 +578,13 @@ public class Market {
                 for (int j=0; j<armours.length; j++) {
                     dispalyItems("equipment", armours[j], j+1);
                 }
+                System.out.println("Please select the corresponding number: (1/2/3)");
+                System.out.println();
 
                 int armourChoice = scanner.nextInt();
                 System.out.println("You have selected " + armourChoice);
+                System.out.println();
+                //scanner.close();
 
                 switch (armourChoice) {
                     case 1:
@@ -527,8 +597,10 @@ public class Market {
                         buyEquipmentTransaction(selectedCharacter, "Fleece");
                         break;
                     default:
-                        System.out.println("Invalid choice.");
-                        break;
+                        System.out.println("Invalid choice. Please enter a valid number.");
+                        System.out.println("Going back to the Buy menu...");
+                        System.out.println();
+                        return;
                 }
 
                 break;
@@ -540,6 +612,9 @@ public class Market {
                     for (Equipment equipment : selectedCharacter.getEquipments()) {
                         if (equipment instanceof Artefact) {
                             System.out.println("You already have an artefact equipped by " + selectedCharacter.getName());
+                            System.out.println();
+                            System.out.println("Going back to the Buy menu...");
+                            //scanner.close();
                             return;
                         }
                     }
@@ -551,9 +626,13 @@ public class Market {
                 for (int j=0; j<artefacts.length; j++) {
                     dispalyItems("equipment", artefacts[j], j+1);
                 }
+                System.out.println("Please select the corresponding number: (1/2/3)");
+                System.out.println();
 
                 int artefactChoice = scanner.nextInt();
                 System.out.println("You have selected " + artefactChoice);
+                System.out.println();
+                //scanner.close();
 
                 switch (artefactChoice) {
                     case 1:
@@ -566,16 +645,24 @@ public class Market {
                         buyEquipmentTransaction(selectedCharacter, "Crystal");
                         break;
                     default:
-                        System.out.println("Invalid choice.");
-                        break;
+                        System.out.println("Invalid choice. Please enter a valid number.");
+                        System.out.println("Going back to the Buy menu...");
+                        System.out.println();
+                        return;
                 }
                 break;
             default:
-                System.out.println("Invalid choice.");
-                break;
+                System.out.println("Invalid choice. Please enter a valid number.");
+                System.out.println("Going back to the Buy menu...");
+                System.out.println();
+                //scanner.close();
+                return;
         }
     }
 
+    
+    /////////////////////////// Buy Transaction - Equipment ///////////////////////////////////////////////////////////////////////
+    
     //Performs the transaction of buying an equipment. Setting player attributes with updated gold coins and adding the equipment to the character.
     private void buyEquipmentTransaction(Character selectedCharacter, String boughtEquipment) {
         Equipment equipment = Registry.returnEquipment(boughtEquipment);
@@ -601,18 +688,42 @@ public class Market {
             selectedCharacter.setSpeed(selectedCharacter.getSpeed() + equipment.getSpeed());
 
             //display the new character attributes
-            // System.out.println("New attributes of " + selectedCharacter.getName() + " are: ");
-            // System.out.println("Attack: " + selectedCharacter.getAttack());
-            // System.out.println("Defense: " + selectedCharacter.getDefense());
-            // System.out.println("Health: " + selectedCharacter.getHealth());
-            // System.out.println("Speed: " + selectedCharacter.getSpeed());
-
+            System.out.println("---------------------------");
+            System.out.println("Transacation is Successful!");
+            System.out.println("---------------------------");
+            System.out.println();
             System.out.println("You have bought " + boughtEquipment + " for " + selectedCharacter.getName() + " for " + neededGoldCoins + " gold coins.");
+            System.out.println("Your available gold coins are: " + existingGoldCoins + " gold coins.");
+            System.out.println();
+
+            System.out.println("New attributes of " + selectedCharacter.getName() + " are: ");
+            System.out.println("    Attack  : " + selectedCharacter.getAttack());
+            System.out.println("    Defense : " + selectedCharacter.getDefense());
+            System.out.println("    Health  : " + selectedCharacter.getHealth());
+            System.out.println("    Speed   : " + selectedCharacter.getSpeed());
+            System.out.println();
+
+            System.out.println("Please come back later. Going back to the Buy menu...");
+            System.out.println();
+            return;
         } else {
+            System.out.println("----------------------------");
+            System.out.println("Transcation is Unsuccessful!");
+            System.out.println("----------------------------");
+            System.out.println();
             System.out.println("You don't have enough gold!");
+            System.out.println("Available gold coins: " + existingGoldCoins + " gold coins.");
+            System.out.println("Needed gold coins: " + neededGoldCoins + " gold coins.");
+            System.out.println();
+            System.out.println("Please come back later. Going back to the Buy menu...");
+            System.out.println();
+            return;
         }
     }
 
+    
+    ////////////////////////////// Sell Army //////////////////////////////////////////////////////////////////////////////////////
+    
     //Displays the characters that can be sold.
     private void sellArmy(){
         System.out.println("You have selected to sell an army character");
@@ -622,33 +733,67 @@ public class Market {
 
         int i = 1;
         for (Character character : player.army) {
-            System.out.println("      " + i + " " +character.getName());
+            System.out.println("      " + i + ". " +character.getName());
             i++;
         }
+        System.out.println("Please enter the corresponding number: ");
+        System.out.println();
 
         Scanner scanner = new Scanner(System.in);
-        int characterChoice = scanner.nextInt(); //Need to handle invalid inputs
+        int characterChoice = scanner.nextInt();
 
         try {
-            if (characterChoice < 0 || characterChoice >= player.army.size()) {
-                throw new Exception("Invalid choice.");
+            if (characterChoice < 1 || characterChoice > player.army.size()) {
+                //scanner.close();
+                throw new Exception("Invalid choice. Please enter a valid number.");
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            System.out.println("Going back to the Market Menu...");
+            System.out.println();
             return;
         }
         
         Character selectedCharacter = player.army.get(characterChoice-1);
         System.out.println("You have selected " + selectedCharacter.getName());
+        System.out.println("Are you sure you want to sell " + selectedCharacter.getName() + "? (y/n)");
+        System.out.println();
 
-        int sellPrice = Math.round(selectedCharacter.getPrize() * 90/100);
-        existingGoldCoins += sellPrice;
+        char c = scanner.next().charAt(0);
+        if(c == 'Y' || c == 'y') {
+            int sellPrice = Math.round(selectedCharacter.getPrize() * 90/100);
+            existingGoldCoins += sellPrice;
 
-        player.setGold(existingGoldCoins);
-        player.army.remove(selectedCharacter);
+            System.out.println("--------------------------");
+            System.out.println("Transcation is Successful!");
+            System.out.println("--------------------------");
+            System.out.println();
 
-        System.out.println("You have sold " + selectedCharacter.getName() + " for " + sellPrice + " gold coins.");
-        //scanner.close();
+            player.setGold(existingGoldCoins);
+            player.army.remove(selectedCharacter);
+
+            System.out.println("You have sold " + selectedCharacter.getName() + " for " + sellPrice + " gold coins.");
+            System.out.println("Your available gold coins are: " + existingGoldCoins + " gold coins.");
+            System.out.println();
+
+            System.out.println("Your army is now consisting of: ");
+            for (Character character : player.army) {
+                System.out.println(character.getName());
+            }
+            System.out.println();
+
+            System.out.println("Please come back later. Going back to the Market Menu...");
+            System.out.println();
+            //scanner.close();
+        }
+        else {
+            System.out.println("You have selected not to sell " + selectedCharacter.getName() + ".");
+            System.out.println("Please come back later. Going back to the Market Menu...");
+            System.out.println();
+            //scanner.close();
+            return;
+        }
+        
     }
 
 }
