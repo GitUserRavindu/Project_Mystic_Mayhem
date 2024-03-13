@@ -41,3 +41,6 @@ Sample : Main menu
             Select player (There are many players. Users can select a player.)
             Battle
             Exit
+
+Maybe add some static variables to gamesvamanager. Then in the main function we can call gamesavemanager class.
+inside class, new object will create to save????
