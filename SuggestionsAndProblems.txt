@@ -24,3 +24,8 @@ Add character type (Archer, Knight, etc) attribute. Then We can print it (after 
 e.g.    "You have.... bla bla  
             Archer : Shooter
             Knight : Squire ..."
+
+
+userId and xp changed to not static
+
+Characters already equipped items should be displayed

@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.Scanner;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -7,9 +8,9 @@ import Character.Character;
 public class Player implements Serializable {
     public String name;//Can be change after creation
     public int gold;
-    public static float xp;
+    public float xp;
     public String UserName;//Can not be change after creation. Like a email.
-    public static int UserId = 0; // A unique id for each user. Can be generated using number of users.
+    public int UserId = 0; // A unique id for each user. Can be generated using number of users.
     public ArrayList<Character> army = new ArrayList<Character>();
 
     
@@ -123,14 +124,18 @@ public class Player implements Serializable {
         System.out.println("1. Hillcrest");
         System.out.println("2. Marshland");
         System.out.println("3. Desert");
-        System.out.println("4. Arcane\n\n");
-        System.out.println("Enter the number of the home ground: ");
+        System.out.println("4. Arcane");
+        System.out.println("Enter the number of the home ground: \n");
 
         //Did not implement for invalid integer input.
         int n=0;
         while (true) {
             try {
-                n = (int) System.in.read();
+                Scanner scanner = new Scanner(System.in);
+                n = scanner.nextInt();
+                if(n < 1 || n > 4) {
+                    throw new IOException();
+                }
                 break;
             } catch (IOException e) {
                 System.out.println("Invalid input. Please enter a valid number.");
@@ -151,7 +156,7 @@ public class Player implements Serializable {
                 homeGround = "Arcane";
                 break;
             default:
-                System.out.println("Invalid input. Please enter a valid number.");
+                System.out.println("Invalid input. Please enter a valid number."); //This will never be executed. I guess
         }
     }
     
@@ -191,7 +196,30 @@ public class Player implements Serializable {
         this.army = army;
     }
     
-    public static int getUserId() {
+    public int getUserId() {
         return UserId;
+    }
+
+    public void setUserId(int userId) {
+        UserId = userId;
+    }
+
+    public void displayCurrentStatus() {
+        System.out.println("Here's your profile status :");
+        System.out.println("------------------------------------");
+        System.out.println("---------- Profile Status ----------");
+        System.out.format("%12s %3s %20s", "UserName", " : " , UserName + "\n");
+        System.out.format("%12s %3s %20s", "UserId", " : " , UserId + "\n");
+        System.out.format("%12s %3s %20s", "Name", " : " , name + "\n");
+        System.out.format("%12s %3s %20s", "GoldCoins", " : " , gold + "\n");
+        System.out.format("%12s %3s %20s", "XP", " : " , xp + "\n");
+        System.out.format("%12s %3s %20s", "HomeGround", " : " , homeGround + "\n");
+        System.out.print("        Army  : ");
+        for (Character character : army) {
+            System.out.print(character.getName() + ", ");
+        }
+        System.out.println("\n");
+        System.out.println("------ End of Profile Status -------");
+        System.out.println("------------------------------------");
     }
 }
