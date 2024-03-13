@@ -56,7 +56,6 @@ public class Market {
 
         Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
-        //scanner.close();
 
         switch (choice) {
             case 1:
@@ -212,7 +211,6 @@ public class Market {
                     if (character instanceof Archer) {
                         System.out.println("You already have an Archer in your army. Going back to the Buy menu...");
                         System.out.println();
-                        //scanner.close();
                         return;
                     }
                 }
@@ -228,8 +226,7 @@ public class Market {
                 System.out.println();
 
                 characterChoice = scanner.nextInt();
-                System.out.println("You have selected" + characterChoice);
-                //scanner.close();
+                System.out.println("You have selected " + characterChoice);
 
                 switch (characterChoice) {
                     case 1:
@@ -261,7 +258,6 @@ public class Market {
                     if (character instanceof Knight) {
                         System.out.println("You already have a Knight in your army. Going back to the Buy menu...");
                         System.out.println();
-                        //scanner.close();
                         return;
                     }
                 }
@@ -277,7 +273,6 @@ public class Market {
 
                 characterChoice = scanner.nextInt();
                 System.out.println("You have selected " + characterChoice);
-                //scanner.close();
 
                 switch (characterChoice) {
                     case 1:
@@ -309,7 +304,6 @@ public class Market {
                     if (character instanceof Mage) {
                         System.out.println("You already have a Mage in your army. Going back to the Buy menu...");
                         System.out.println();
-                        //scanner.close();
                         return;
                     }
                 }
@@ -325,7 +319,6 @@ public class Market {
 
                 characterChoice = scanner.nextInt();
                 System.out.println("You have selected " + characterChoice);
-                //scanner.close();
 
                 switch (characterChoice) {
                     case 1:
@@ -356,7 +349,6 @@ public class Market {
                     if (character instanceof Healer) {
                         System.out.println("You already have a Healer in your army.");
                         System.out.println();
-                        //scanner.close();
                         return;
                     }
                 }
@@ -372,7 +364,6 @@ public class Market {
 
                 characterChoice = scanner.nextInt();
                 System.out.println("You have selected " + characterChoice);
-                //scanner.close();
 
                 switch (characterChoice) {
                     case 1:
@@ -404,7 +395,6 @@ public class Market {
                     if (character instanceof MythicalCreature) {
                         System.out.println("You already have a Mythical Creature in your army. Going back to the Buy menu...");
                         System.out.println();
-                        //scanner.close();
                         return;
                     }
                 }
@@ -420,7 +410,6 @@ public class Market {
 
                 characterChoice = scanner.nextInt();
                 System.out.println("You have selected " + characterChoice);
-                //scanner.close();
 
                 switch (characterChoice) {
                     case 1:
@@ -447,11 +436,9 @@ public class Market {
             default:
                 System.out.println("Invalid choice. Please enter a valid number. Going back to the Buy menu...");
                 System.out.println();
-                //scanner.close();
                 break;
         }
-        //scanner.close();
-
+   
     }
 
 
@@ -545,7 +532,6 @@ public class Market {
 
         try {
             if (choice < 1 || choice > 2) {
-                //scanner.close();
                 throw new Exception("Invalid choice. Please enter a valid number.");
             }
         } catch (Exception e) {
@@ -591,7 +577,6 @@ public class Market {
                 int armourChoice = scanner.nextInt();
                 System.out.println("You have selected " + armourChoice);
                 System.out.println();
-                //scanner.close();
 
                 switch (armourChoice) {
                     case 1:
@@ -621,7 +606,6 @@ public class Market {
                             System.out.println("You already have an artefact equipped by " + selectedCharacter.getName());
                             System.out.println();
                             System.out.println("Going back to the Buy menu...");
-                            //scanner.close();
                             return;
                         }
                     }
@@ -639,7 +623,6 @@ public class Market {
                 int artefactChoice = scanner.nextInt();
                 System.out.println("You have selected " + artefactChoice);
                 System.out.println();
-                //scanner.close();
 
                 switch (artefactChoice) {
                     case 1:
@@ -662,7 +645,6 @@ public class Market {
                 System.out.println("Invalid choice. Please enter a valid number.");
                 System.out.println("Going back to the Buy menu...");
                 System.out.println();
-                //scanner.close();
                 return;
         }
     }
@@ -751,7 +733,6 @@ public class Market {
 
         try {
             if (characterChoice < 1 || characterChoice > player.army.size()) {
-                //scanner.close();
                 throw new Exception("Invalid choice. Please enter a valid number.");
             }
         } catch (Exception e) {
@@ -791,13 +772,11 @@ public class Market {
 
             System.out.println("Please come back later. Going back to the Market Menu...");
             System.out.println();
-            //scanner.close();
         }
         else {
             System.out.println("You have selected not to sell " + selectedCharacter.getName() + ".");
             System.out.println("Please come back later. Going back to the Market Menu...");
             System.out.println();
-            //scanner.close();
             return;
         }
 

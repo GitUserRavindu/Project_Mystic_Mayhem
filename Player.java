@@ -22,7 +22,7 @@ public class Player implements Serializable {
     private int userId; // A unique id for each user. Can be generated using number of users.
     private int goldCoins;
     private float xp;
-    public HomeGround homeGround; //HomeGround is a class that contains the home ground of the player.
+    transient public HomeGround homeGround; //HomeGround is a class that contains the home ground of the player.
     public ArrayList<Character> army = new ArrayList<Character>(); //////!!!!!Public, Check with market
     // End of Player Attributes -----------------------------------------------------------------------
     private static ArrayList<String> players = new ArrayList<String>();

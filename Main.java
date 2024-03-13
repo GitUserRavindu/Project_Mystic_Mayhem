@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Scanner;
 import HomeGround.*;
@@ -10,42 +11,14 @@ import Character.Character;
 public class Main {
     public static void main(String[] args) {
 
-        //At start we will be here
-        //Ask for load save file as player
         System.out.println("------------------------------");
         System.out.println("Welcome to the Mystic Mayhem! ");
         System.out.println("------------------------------");
 
         Scanner scanner = new Scanner(System.in);
 
-        //////////////Start of load game//////////////////////////////////////
-        // System.out.println("Do you want to load a save file? (y/n)");
-        // System.out.println("--------------------------------------");
-        // String load = scanner.nextLine();
-
-        // if (load.equals("y")) {
-        //     try {
-        //         FileInputStream savedfile = new FileInputStream("Player.ser");
-        //         ObjectInputStream in = new ObjectInputStream(savedfile);
-        //         playerP = (Player) in.readObject();
-        //         in.close();
-        //     } catch (IOException e) {
-        //         playerP = new Player();
-        //         System.out.println("Error occured. New player created: " + e);
-        //         e.printStackTrace();
-        //     } catch (ClassNotFoundException e) {
-        //         playerP = new Player();
-        //         System.out.println("Error: " + e);
-        //         e.printStackTrace();
-        //     }
-        // } else {
-        //     playerP = new Player();
-        // }
-
-        // System.out.println("Player Username : " + playerP.getUserName());
-        // System.out.println("Player Army : " + playerP.getArmy());
-        // System.out.println("Player Goldcoins : " + playerP.getGold());
-        //////////////End of Load game//////////////////////////////////////
+        GameSaveManager gameLoadManager = new GameSaveManager();
+        gameLoadManager.loadGameInstructions();
 
         Registry.characterCache(); // Making game character configurations
         Registry.equipmentCache(); // Making game equipment configurations
@@ -62,15 +35,43 @@ public class Main {
         // player1.homeGround = new Hillcrest();// Setting the home ground
         // player1.army = army1;
 
-        // Player player2 = new Player("yutharsan", "Yutharsan");1
-        // player2.homeGround = new Marshland();
-        // player2.army = army2;
+        // // Player player2 = new Player("yutharsan", "Yutharsan");1
+        // // player2.homeGround = new Marshland();
+        // // player2.army = army2;
 
-        // Battle new_battle = new Battle(player1, player2);
-        // new_battle.fight();
+        //// Battle new_battle = new Battle(player1, player2);
+        //// new_battle.fight();
 
         // System.out.println(c.getName());
-        Player playerP = Profile.createProfile();
+
+        System.out.println("Do you want to select an existing profile or create a new one? ");
+        System.out.println("1. Create a new profile");
+        System.out.println("2. Select an existing profile");
+
+        int choice = scanner.nextInt();
+        Player playerP;
+
+        if (choice == 1) {
+            playerP = Profile.createProfile();
+        }
+        else {
+            HashMap<Integer, Player> selectPlayerMap = new HashMap<Integer, Player>();
+            selectPlayerMap = Profile.getPlayerMap();
+
+            if (selectPlayerMap.size() == 0) {
+                System.out.println("No profiles found. Please create a new profile.");
+                playerP = Profile.createProfile();
+            }
+            else {
+                System.out.println("Select a player to play with: ");
+                for (Integer key : selectPlayerMap.keySet()) {
+                    System.out.println(key + ". " + selectPlayerMap.get(key).getName());
+                }
+                int playerChoice = scanner.nextInt();
+                playerP = selectPlayerMap.get(playerChoice);
+            }
+            
+        }   
 
         Market market = Market.getInstance();
         market.marketMenu(playerP);
@@ -92,6 +93,14 @@ public class Main {
         //         e.printStackTrace();
         //     }
         // }
+        
+        GameSaveManager gameSaveManager = new GameSaveManager();
+        gameSaveManager.saveGameInsructions();
+
+        System.out.println("-------------------------------");
+        System.out.println("Leaving Mystic Mayhem! Goodbye!");
+        System.out.println("-------------------------------");
+        System.out.println("-------------------------------");
 
         scanner.close();
 
