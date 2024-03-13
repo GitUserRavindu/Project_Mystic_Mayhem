@@ -1,19 +1,22 @@
 package HomeGround;
 
 import Character.Character;
+
+import java.io.Serializable;
+
 import java.util.ArrayList;
 
-public class HomeGround {
-    public String ground_name;
+public class HomeGround implements Serializable {
+    public String groundName;
 
-    public HomeGround(String ground_name)
+    public HomeGround(String groundName)
     {
-        this.ground_name = ground_name;
+        this.groundName = groundName;
     }
 
     public String getName()
     {
-        return this.ground_name;
+        return this.groundName;
     }
 
     public void buff(ArrayList<Character> army)
