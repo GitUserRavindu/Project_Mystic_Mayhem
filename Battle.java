@@ -39,18 +39,20 @@ public class Battle {
 //--------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------
 public void fight(){
+    Boolean bonusAttack=home.getName().equals("Hillcrest");
+    Boolean bonusHeal=home.getName().equals("Arcane");
     this.home.buff(army1);
     this.home.buff(army2);
 
     Character O1=null,O2=null,D1=null,D2=null;
     System.out.println(name1+" vs "+name2);
-    Boolean w1=false,w2=false;
+    Boolean w1=true,w2=true;
 
     String attackOrder[]={"Archer","Knight","Mythical Creature","Mage","Healer"};
     String defenseOrder[]={"Healer","Mythical Creature","Archer","Knight","Mage"};
 
-    for(int j=0;j<10;j++){
-        System.out.println("\nTurn "+(j+1)+":"+name1+"\n");
+    for(int j=0;j<5;j++){
+        System.out.println("\nTurn "+(2*j+1)+":"+name1+"\n");
 
 
         //Offencer1 attack Defender2
@@ -77,23 +79,40 @@ public void fight(){
             break;
         }
     }
-        if(O1.getType().equals("Healer")){
-            sub.setOrderHealth(army1);
-            for(Character H:army1){
-                if(H.getStatus()){
-                    if(H.getHealth()<H.getMaxHealth()){
-                    H.setHealth((H.getHealth()*0.1f+H.getHealth()));}
-                    System.out.println(O1.getName()+" heals "+H.getName());
-                    System.out.println(H.getName()+"'s health : "+H.getHealth());
-                    break;
-                }
-            }
-        }else{
+    
+    Boolean bonusAttack1=bonusAttack&&O1.getTribe().equals("Highlander");
+    Boolean bonusHeal1=bonusHeal&&O1.getTribe().equals("Mystics");
+        
+    if(O1.getType().equals("Healer")){
+        sub.setOrderHealth(army1);
+        for(Character H:army1){
+            if(H.getStatus()){
+                if(H.getHealth()<H.getMaxHealth()){
+                H.setHealth((H.getHealth()*0.1f+H.getHealth()));}
+
+                System.out.println(O1.getName()+" heals "+H.getName());
+
+                if(bonusAttack1){H.setHealth((0.2f*H.getHealth()*0.1f+H.getHealth()));}
+                System.out.println(O1.getName()+" heals again "+H.getName());
+                
+                if(bonusHeal1){O1.setHealth((O1.getHealth()*(1.1f)));
+                System.out.println(O1.getName()+" self heal");}
+                
+                System.out.println(H.getName()+"'s health : "+H.getHealth());
+                break;}
+            }   
+            
+        
+    }else{
 
         System.out.println(O1.getName()+" attacks "+D2.getName());
-
-        //Battle happens
         float damage1=0.5f*(O1.getAttack())-0.1f*(D2.getDefense());
+
+        if(bonusAttack1){System.out.println(O1.getName()+" attacks again "+D2.getName());
+        damage1=damage1+0.2f*0.5f*(O1.getAttack())-0.1f*(D2.getDefense());}
+
+        if(bonusHeal1){O1.setHealth((O1.getHealth()*(1.1f)));
+        System.out.println(O1.getName()+" self heal");}
 
         D2.setHealth(D2.getHealth()-damage1);
         
@@ -123,7 +142,7 @@ public void fight(){
 
         sub.setOrderSpeed(army2);sub.setOrderToEqualStats(army2, attackOrder);
 
-        System.out.println("\nTurn "+(j+1)+":"+name2+"\n");
+        System.out.println("\nTurn "+(2*j+2)+":"+name2+"\n");
 
     //Offencer2 character choosing
     for (int k = j % (int) army2.size(); k < 2 * (int) army2.size(); k++) {
@@ -143,22 +162,37 @@ public void fight(){
             break;
         }
     }
+    
+    Boolean bonusAttack2=bonusAttack&&O2.getTribe().equals("Highlander");
+    Boolean bonusHeal2=bonusHeal&&O2.getTribe().equals("Mystics");
+    
     if(O2.getType().equals("Healer")){
         sub.setOrderHealth(army2);
         for(Character H1:army2){
             if(H1.getStatus()){
                 if(H1.getHealth()<H1.getMaxHealth()){
                 H1.setHealth(H1.getHealth()*0.1f+H1.getHealth());}
+
                 System.out.println(O2.getName()+" heals "+H1.getName());
+                
+                if(bonusAttack2){H1.setHealth((0.2f*H1.getHealth()*0.1f+H1.getHealth()));}
+                System.out.println(O2.getName()+" heals again "+H1.getName());
+                
+                if(bonusHeal2){O2.setHealth((O2.getHealth()*(1.1f)));
+                System.out.println(O2.getName()+" self heal");}
+
                 System.out.println(H1.getName()+"'s health : "+H1.getHealth());
-                break;
+                break;}
             }
-        }
     }else{
         System.out.println(O2.getName()+" attacks "+D1.getName());
-
-        //Battle happens
         float damage2=0.5f*(O2.getAttack())-0.1f*(D1.getDefense());
+
+        if(bonusAttack2){System.out.println(O2.getName()+" attacks again "+D1.getName());
+        damage2=damage2+0.2f*0.5f*(O2.getAttack())-0.1f*(D1.getDefense());}
+
+        if(bonusHeal2){O2.setHealth((O2.getHealth()*(1.1f)));
+        System.out.println(O2.getName()+" self heal");}
 
         D1.setHealth(D1.getHealth()-damage2);
         
@@ -178,10 +212,9 @@ public void fight(){
         for(Character c2:army1){
             if(c2.getStatus()){
                 w1=true;
-                //System.out.println(c2.getName()+" "+w1);
                 break;
-            }
-        }if(!w1){break;}
+            }}
+        if(!w1){break;}
 
     }}
     boolean draw,win1,win2;
