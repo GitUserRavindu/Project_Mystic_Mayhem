@@ -44,7 +44,7 @@ public class Player {
     //If the game is off, this must be saved to a file and loaded when the game starts.
     public static ArrayList<String> players = new ArrayList<String>();
 
-    public Player(String name, /* byte[]*/ String UserName)/*throws IOException*/ {
+    public Player(String name, String UserName){
 
         UserId++;
         gold = 500;
@@ -53,22 +53,17 @@ public class Player {
 
         //Check if the username is already taken. While loop will be used to check if the username is already taken.
         //Have to check if this loop is working or not.
-        Scanner sc=new Scanner(System.in);
-        InputStreamReader in=new InputStreamReader(System.in);
-        BufferedReader bf=new BufferedReader(in);
-        while(players.contains(UserName)) {
-            UserName="";
+
+        while (players.contains(UserName)) {
+            UserName = "";
             // Handle the case when the UserName is already taken
             System.out.println("Username is already taken");
             System.out.println("Please enter a new username");
             System.out.print("Username: ");
-            try {
-                UserName=sc.nextLine();
-            } catch (Exception e) {
-            } finally {
-                sc.close();
-            }
+
+            UserName = sc.nextLine();
         }
+
         players.add(UserName);
         this.setUserName(UserName);
 

@@ -17,11 +17,14 @@ public class Main {
         Character d= Registry.returnCharacter("Soother");
         Character e = Registry.returnCharacter("Dragon");
 
-        Player p = new Player("himala", "Himala");
-        Player p1= new Player("himala","Himala");
+        Player p0 = new Player("himala", "Himala");
+        Player p2= new Player("yutharsan","Ravindu");
+        Player p1 = new Player("himala", "Himala");
+
         // p.setHomeGround();
-        System.out.println(p.getName()+" "+p.getUserName());
+        System.out.println(p0.getName()+" "+p0.getUserName());
         System.out.println(p1.getName()+" "+p1.getUserName());
+        System.out.println(p2.getName()+" "+p2.getUserName());
 
         // p.addCharacter(c, 0);
         // p.addCharacter(b, 0);
