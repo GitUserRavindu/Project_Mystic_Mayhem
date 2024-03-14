@@ -51,7 +51,14 @@ This is the kind of the interface of the Market menu.
 4. Exist
 	- Exits out of the market and goes to the [Game Menu](#game-menu).
 ### Battle Menu
-
+System.out.println("___  ___          _   _         ___  ___            _                    ");
+System.out.println("|  \\/  |         | | (_)        |  \\/  |           | |                   ");
+System.out.println("| .  . |_   _ ___| |_ _  ___    | .  . | __ _ _   _| |__   ___ _ __ ___  ");
+System.out.println("| |\\/| | | | / __| __| |/ __|   | |\\/| |/ _` | | | | '_ \\ / _ \\ '_ ` _ \\ ");
+System.out.println("| |  | | |_| \\__ \\ |_| | (__    | |  | | (_| | |_| | | | |  __/ | | | | |");
+System.out.println("\\_|  |_/\\__, |___/\\__|_|\\___|   \\_|  |_/\\__,_|\\__, |_| |_|\\___|_| |_| |_|");
+System.out.println("         __/ |                                 __/ |                     ");
+System.out.println("        |___/                                 |___/                      ");
 ### <a name="game-menu"></a>Game Menu
 
 ## Game Flow
