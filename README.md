@@ -9,7 +9,46 @@ ___  ___          _   _         ___  ___            _
         |___/                                 |___/
 ```
 
-A CLI, turn based fantasy battle game.
+A CLI, turn based fantasy battle game. Created as a project under **CS1040**
+
+## Installation
 
 
 ## How to Play
+
+- You have to access the menus of your game in sequential manner
+- In each menu, you can enter the respective number of operation that you want to do.
+
+>[!warning]
+>Make sure to give the proper **integer value** as the input for the apt situation.
+
+### Start Menu
+
+### Market Menu
+
+```
+----------------------------
+Welcome to the Market Place!
+----------------------------
+What you want to do today? Please select an option: 
+    1. Buy Army or Equipment
+    2. Sell Army
+    3. Check the balance of your gold coins
+    4. Exit
+Please enter the corresponding number: (1/2/3/4)
+```
+
+This is the kind of the interface of the Market menu.
+1. For buying related operations
+	- Re-directs the user to the market menu if the user is not eligible to buy the respective army or the equipment.
+	- When buying new equipment for character, the already present equipment will be discarded(**no refunding**).
+2. Selling Army
+	- We can choose the  character that we already have, to sell. And the **refunding** happens when we replace the character.
+3. Checking  the balance
+	- Prints out the current gold coins of the player.
+4. Exist
+	- Exits out of the market and goes to the [[#Game Menu]].
+### Battle Menu
+
+### Game Menu
+
