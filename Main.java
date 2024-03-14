@@ -2,14 +2,6 @@ import Core.*;
 
 import Utils.MainMenu;
 import Utils.ScannerUtil;
-// import java.util.ArrayList;
-
-// import Character.Character;
-// import Equipment.Equipment;
-// import HomeGround.HomeGround;
-// import HomeGround.Arcane;
-// import HomeGround.Hillcrest;
-// import HomeGround.Marshland;
 
 public class Main {
     public static void main(String[] args) {

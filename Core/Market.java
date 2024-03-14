@@ -196,6 +196,7 @@ public class Market {
             System.out.println("You army is already complete with at least one character from each category.");
             System.out.println("If you want to buy advanced characters, you can always sell your army characters first.");
             System.out.println("However, check the balance of your gold coins first before proceeding to buy advanced characters.\n");
+            return;
         }
 
 
