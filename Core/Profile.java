@@ -7,6 +7,7 @@ import java.util.Random;
 import Utils.ScannerUtil;
 
 import Character.Character;
+import Equipment.Equipment;
 
 public class Profile {
 
@@ -263,6 +264,34 @@ public class Profile {
                     continue;
                 }
             }
+        }
+    }
+    
+    public static void firstP(){
+        if(!userNameList.contains("whitewolf")){
+        Player pl = new Player();
+        pl.setName("GeraltofRivia");
+        pl.setUserName("whitewolf");
+        pl.setGold(215);
+        pl.setXp(32.0f);
+        pl.setUserId(-1);
+        pl.setHomeGroundName("Marshland");
+        pl.setHomeGroundInGameLoad("Marshland");
+        pl.army.add(Registry.returnCharacter("Ranger"));
+        pl.army.add(Registry.returnCharacter("Squire"));
+        pl.army.add(Registry.returnCharacter("Warlock"));
+        pl.army.add(Registry.returnCharacter("Medic"));
+        pl.army.add(Registry.returnCharacter("Dragon"));
+        
+        Equipment[] eq1 = new Equipment[2];
+        eq1[0] = Registry.returnEquipment("Chainmail");
+        eq1[1] = null;
+        pl.getArmy().get(0).setEquipments(eq1);
+        Equipment[] eq2 = new Equipment[2];
+        eq2[0]=null;
+        eq2[1]=Registry.returnEquipment("Amulet");
+        pl.getArmy().get(3).setEquipments(eq2);
+        playerMap.put(-1,pl);
         }
     }
     // End of Other Profile Methods ------------------------------------------------------------------------------------

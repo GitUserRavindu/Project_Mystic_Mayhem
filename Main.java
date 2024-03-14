@@ -2,14 +2,14 @@ import Core.*;
 
 import Utils.MainMenu;
 import Utils.ScannerUtil;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
-import Character.Character;
-import Equipment.Equipment;
-import HomeGround.HomeGround;
-import HomeGround.Arcane;
-import HomeGround.Hillcrest;
-import HomeGround.Marshland;
+// import Character.Character;
+// import Equipment.Equipment;
+// import HomeGround.HomeGround;
+// import HomeGround.Arcane;
+// import HomeGround.Hillcrest;
+// import HomeGround.Marshland;
 
 public class Main {
     public static void main(String[] args) {
@@ -25,6 +25,8 @@ public class Main {
         Registry.equipmentCache(); // Making game equipment configurations
         Market market = Market.getInstance();
 
+        Profile.firstP(); // Geralt Of Rivia
+        
         Player currentPlayer = null;
 
         // Main Menu
@@ -103,25 +105,5 @@ public class Main {
 
         // Close Scanner
         ScannerUtil.scanner.close();
-
-        // Not Needed below, can be deleted after testing
-        // ArrayList<Character> army1 = new ArrayList<>();
-        // army1.add(Registry.returnCharacter("Alchemist"));
-        // army1.add(Registry.returnCharacter("Warlock"));
-
-        // ArrayList<Character> army2 = new ArrayList<>();
-        // army2.add(Registry.returnCharacter("Ranger"));
-        // army2.add(Registry.returnCharacter("Squire"));
-
-        // Player player1 = new Player("himala", "Himala"); // Creating a player
-        // player1.homeGround = new Hillcrest();// Setting the home ground
-        // player1.army = army1;
-
-        // // Player player2 = new Player("yutharsan", "Yutharsan");1
-        // // player2.homeGround = new Marshland();
-        // // player2.army = army2;
-
-        //// Battle new_battle = new Battle(player1, player2);
-        //// new_battle.fight();
     }
 }
