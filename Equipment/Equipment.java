@@ -1,7 +1,10 @@
 package Equipment;
+
+import java.io.Serializable;
+
 import Interfaces.MakeClone;
 
-public abstract class Equipment implements MakeClone {
+public abstract class Equipment implements MakeClone, Serializable {
     protected String name;
     protected float health;
     protected float attack;

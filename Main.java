@@ -1,28 +1,101 @@
-import Character.Character;
-import Equipment.Equipment;
+import Core.*;
+
+import Utils.MainMenu;
+import Utils.ScannerUtil;
 
 public class Main {
     public static void main(String[] args) {
+
+        MainMenu.displayGameStart();
+
+        // Load a saved Game
+        GameSaveManager gameLoadManager = new GameSaveManager();
+        gameLoadManager.loadGameInstructions();
+
+        // Initializations
         Registry.characterCache(); // Making game character configurations
         Registry.equipmentCache(); // Making game equipment configurations
+        Market market = Market.getInstance();
 
-        // We use Registry as a library to store the different configurations
-        // of Characters, and we use name to return certain character
-        Equipment a = Registry.returnEquipment("Crystal");
-        Equipment b = Registry.returnEquipment("Crystal");
-        Character c = Registry.returnCharacter("Hydra");
+        Profile.firstP(); // Geralt Of Rivia
+        
+        Player currentPlayer = null;
 
-        System.out.println(a);
-        System.out.println(b);
+        // Main Menu
+        while (true) {
+            int choice = MainMenu.displayMainMenu();
 
-        a.setAttack(0);
+            if (choice == 1) {
+                currentPlayer = Profile.selectProfile(); // Select a Profile
+            }
 
-        System.out.println(a.getAttack() + " " + b.getAttack());
+            else if (choice == 2) {
+                currentPlayer = Profile.createProfile(); // Create a New Profile
+            }
 
-        System.out.println(c.getName());
+            else if (choice == 3) {
+                if (currentPlayer == null) {
+                    System.out.println("No profile selected. Please select a profile or create a new one.\n");
+                    continue;
+                }
+                currentPlayer.displayCurrentStatus(); // See your current Profile
+            }
 
-        // Player playerP = new Player();
-        // Market market = Market.getInstance();
-        // market.marketMenu(playerP, 800);
+            else if (choice == 4) {
+                if (currentPlayer == null) {
+                    System.out.println("No profile selected. Please select a profile or create a new one.\n");
+                    continue;
+                }
+                currentPlayer.seeArmyDetails(); // See your Army Details
+            }
+
+            else if (choice == 5) {
+                if (currentPlayer == null) {
+                    System.out.println("No profile selected. Please select a profile or create a new one.\n");
+                    continue;
+                }
+                Profile.changeName(currentPlayer); // Change your Name
+            }
+
+            else if (choice == 6) {
+                if (currentPlayer == null) {
+                    System.out.println("No profile selected. Please select a profile or create a new one.\n");
+                    continue;
+                }
+                market.marketMenu(currentPlayer); // Visit Market Place
+            }
+
+            else if (choice == 7) {
+                if (currentPlayer == null) {
+                    System.out.println("No profile selected. Please select a profile or create a new one.\n");
+                    continue;
+                }
+
+                // Select Opponent
+                Player opponentPlayer = Profile.selectOpponent(currentPlayer);
+
+                if (opponentPlayer == null) {
+                    System.out.println("No opponent selected. Please select an opponent.\n");
+                    continue;
+                }
+
+                Battle new_battle = new Battle(currentPlayer, opponentPlayer); // Start a New Battle
+                new_battle.fight();
+            }
+
+            else if (choice == 8) {
+                break;
+            }
+        }
+
+        // Save Game
+        GameSaveManager gameSaveManager = new GameSaveManager();
+        gameSaveManager.saveGameInsructions();
+
+        // Quit Game
+        MainMenu.displayGameEnd();
+
+        // Close Scanner
+        ScannerUtil.scanner.close();
     }
 }

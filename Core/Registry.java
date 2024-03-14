@@ -1,3 +1,5 @@
+package Core;
+
 import java.util.HashMap;
 
 import Character.Archer;
@@ -50,7 +52,7 @@ public class Registry {
         regalia.setAttack(0f);
         regalia.setDefense(1f);
         regalia.setHealth(0f);
-        regalia.setSpeed(-0f);
+        regalia.setSpeed(0f);
 
         Armor fleece = new Armor();
         fleece.setName("Fleece");
@@ -103,6 +105,8 @@ public class Registry {
         shooter.setDefense(4f);
         shooter.setHealth(6f);
         shooter.setSpeed(9f);
+        shooter.setTribe("Highlander");
+        shooter.setType("Archer");
 
         Archer ranger = new Archer();
         ranger.setName("Ranger");
@@ -112,6 +116,7 @@ public class Registry {
         ranger.setHealth(8f);
         ranger.setSpeed(10f);
         ranger.setTribe("Highlander");
+        ranger.setType("Archer");
 
         Archer sunfire = new Archer();
         sunfire.setName("Sunfire");
@@ -121,6 +126,7 @@ public class Registry {
         sunfire.setHealth(7f);
         sunfire.setSpeed(14f);
         sunfire.setTribe("Sunchild");
+        sunfire.setType("Archer");
 
         Archer zing = new Archer();
         zing.setName("Zing");
@@ -130,6 +136,7 @@ public class Registry {
         zing.setHealth(11f);
         zing.setSpeed(14f);
         zing.setTribe("Sunchild");
+        zing.setType("Archer");
 
         Archer saggitarius = new Archer();
         saggitarius.setName("Saggitarius");
@@ -139,12 +146,13 @@ public class Registry {
         saggitarius.setHealth(12f);
         saggitarius.setSpeed(17f);
         saggitarius.setTribe("Mystic");
+        saggitarius.setType("Archer");
 
         // adding everything to the hashmap
         addCharacter("Zing", zing);
         addCharacter("Sunfire", sunfire);
         addCharacter("Ranger", ranger);
-        addCharacter("Archer", shooter);
+        addCharacter("Shooter", shooter);
         addCharacter("Saggitarius", saggitarius);
 
         // Healers
@@ -156,6 +164,7 @@ public class Registry {
         alchemist.setHealth(13f);
         alchemist.setSpeed(13f);
         alchemist.setTribe("Marshlander");
+        alchemist.setType("Healer");
 
         Healer lightbringer = new Healer();
         lightbringer.setName("Lightbringer");
@@ -165,6 +174,7 @@ public class Registry {
         lightbringer.setHealth(19f);
         lightbringer.setSpeed(12f);
         lightbringer.setTribe("Sunchild");
+        lightbringer.setType("Healer");
 
         Healer medic = new Healer();
         medic.setName("Medic");
@@ -174,6 +184,7 @@ public class Registry {
         medic.setHealth(10f);
         medic.setSpeed(7f);
         medic.setTribe("Highlander");
+        medic.setType("Healer");
 
         Healer saint = new Healer();
         saint.setName("Saint");
@@ -183,6 +194,7 @@ public class Registry {
         saint.setHealth(17f);
         saint.setSpeed(9f);
         saint.setTribe("Mystic");
+        saint.setType("Healer");
 
         Healer soother = new Healer();
         soother.setName("Soother");
@@ -192,6 +204,7 @@ public class Registry {
         soother.setHealth(9f);
         soother.setSpeed(6f);
         soother.setTribe("Sunchild");
+        soother.setType("Healer");
 
         // adding everything to the hashmap
         addCharacter("Alchemist", alchemist);
@@ -208,6 +221,8 @@ public class Registry {
         cavelier.setDefense(12f);
         cavelier.setHealth(7f);
         cavelier.setSpeed(10f);
+        cavelier.setTribe("Highlander");
+        cavelier.setType("Knight");
 
         Knight squire = new Knight();
         squire.setName("Squire");
@@ -217,6 +232,7 @@ public class Registry {
         squire.setHealth(7f);
         squire.setSpeed(8f);
         squire.setTribe("Marshlander");
+        squire.setType("Knight");
 
         Knight swiftblade = new Knight();
         swiftblade.setName("Swiftblade");
@@ -226,6 +242,7 @@ public class Registry {
         swiftblade.setHealth(17f);
         swiftblade.setSpeed(13f);
         swiftblade.setTribe("Marshlander");
+        swiftblade.setType("Knight");
 
         Knight templar = new Knight();
         templar.setName("Templar");
@@ -235,15 +252,17 @@ public class Registry {
         templar.setHealth(12f);
         templar.setSpeed(12f);
         templar.setTribe("Sunchild");
+        templar.setType("Knight");
 
         Knight zoro = new Knight();
-        zoro.setName("Templar");
-        zoro.setPrize(155);
-        zoro.setAttack(14f);
+        zoro.setName("Zoro");
+        zoro.setPrize(180);
+        zoro.setAttack(17f);
         zoro.setDefense(16f);
-        zoro.setHealth(12f);
-        zoro.setSpeed(12f);
-        zoro.setTribe("Sunchild");
+        zoro.setHealth(13f);
+        zoro.setSpeed(14f);
+        zoro.setTribe("Highlander");
+        zoro.setType("Knight");
 
         // adding everything to the hashmap
         addCharacter("Cavalier", cavelier);
@@ -261,6 +280,7 @@ public class Registry {
         conjurer.setHealth(14f);
         conjurer.setSpeed(12f);
         conjurer.setTribe("Highlander");
+        conjurer.setType("Mage");
 
         Mage eldritch = new Mage();
         eldritch.setName("Eldritch");
@@ -270,6 +290,7 @@ public class Registry {
         eldritch.setHealth(18f);
         eldritch.setSpeed(14f);
         eldritch.setTribe("Mystic");
+        eldritch.setType("Mage");
 
         Mage enchanter = new Mage();
         enchanter.setName("Enchanter");
@@ -279,6 +300,7 @@ public class Registry {
         enchanter.setHealth(13f);
         enchanter.setSpeed(16f);
         enchanter.setTribe("Highlander");
+        enchanter.setType("Mage");
 
         Mage illusionist = new Mage();
         illusionist.setName("Illusionist");
@@ -288,6 +310,7 @@ public class Registry {
         illusionist.setHealth(12f);
         illusionist.setSpeed(14f);
         illusionist.setTribe("Mystic");
+        illusionist.setType("Mage");
 
         Mage warlock = new Mage();
         warlock.setName("Warlock");
@@ -297,6 +320,7 @@ public class Registry {
         warlock.setHealth(10f);
         warlock.setSpeed(12f);
         warlock.setTribe("Marshlander");
+        warlock.setType("Mage");
 
         // adding everything to the hashmap
         addCharacter("Conjurer", conjurer);
@@ -314,6 +338,7 @@ public class Registry {
         basilisk.setHealth(10f);
         basilisk.setSpeed(12f);
         basilisk.setTribe("Marshlander");
+        basilisk.setType("Mythical Creature");
 
         MythicalCreature dragon = new MythicalCreature();
         dragon.setName("Dragon");
@@ -323,6 +348,7 @@ public class Registry {
         dragon.setHealth(15f);
         dragon.setSpeed(8f);
         dragon.setTribe("Sunchild");
+        dragon.setType("Mythical Creature");
 
         MythicalCreature hydra = new MythicalCreature();
         hydra.setName("Hydra");
@@ -332,6 +358,7 @@ public class Registry {
         hydra.setHealth(15f);
         hydra.setSpeed(11f);
         hydra.setTribe("Marshlander");
+        hydra.setType("Mythical Creature");
 
         MythicalCreature pegasus = new MythicalCreature();
         pegasus.setName("Pegasus");
@@ -341,6 +368,7 @@ public class Registry {
         pegasus.setHealth(20f);
         pegasus.setSpeed(20f);
         pegasus.setTribe("Mystic");
+        pegasus.setType("Mythical Creature");
 
         MythicalCreature phoenix = new MythicalCreature();
         phoenix.setName("Phoenix");
@@ -350,6 +378,7 @@ public class Registry {
         phoenix.setHealth(17f);
         phoenix.setSpeed(19f);
         phoenix.setTribe("Sunchild");
+        phoenix.setType("Mythical Creature");
 
         // adding everything to the hashmap
         addCharacter("Basilisk", basilisk);

@@ -1,9 +1,14 @@
 package Character;
 
+import Equipment.Armor;
+import Equipment.Artefact;
 import Equipment.Equipment;
 import Interfaces.MakeClone;
+import java.io.Serializable;
 
-public abstract class Character implements MakeClone {
+
+public abstract class Character implements MakeClone, Serializable {
+    protected float maxHealth;
     protected String name;
     protected float health;
     protected float attack;
@@ -12,8 +17,10 @@ public abstract class Character implements MakeClone {
     protected String tribe;
     protected int prize;
     protected String type;
-    protected Equipment[] equipments;
-    protected Boolean status;
+    // index 0 - Armor
+    // Index 1 - Artefact
+    protected Equipment[] equipments = new Equipment[2];
+    protected Boolean status=true;
 
     // Constructors
 
@@ -31,9 +38,11 @@ public abstract class Character implements MakeClone {
             this.prize = other.prize;
             this.attack = other.attack;
             this.defense = other.defense;
-            this.health = other.defense;
+            this.health = other.health;
             this.speed = other.speed;
             this.tribe = other.tribe;
+            this.type = other.type;
+            this.maxHealth = this.health;
         }
     }
 
@@ -112,6 +121,78 @@ public abstract class Character implements MakeClone {
     public void setStatus(Boolean status) {
         this.status = status;
     }
+
+    public void setMaxHealth(float addHealth) {
+        this.maxHealth = addHealth;
+    }
+
+    public float getMaxHealth() {
+        return maxHealth;
+    }
+
+    public Equipment[] getEquipment() {
+        return equipments;
+    }
+
+    public Equipment getArmor() {
+        return equipments[0];
+    }
+
+    public Equipment getArtefact() {
+        return equipments[1];
+    }
+
+    public void setArmor(Equipment armor) {
+        this.equipments[0] = armor;
+    }
+
+    public void setArtefact(Equipment artefact) {
+        this.equipments[1] = artefact;
+    }
+
+    public void removeEquipment(Equipment equipment){
+        this.setAttack(this.getAttack() - equipment.getAttack());
+        this.setDefense(this.getDefense() - equipment.getDefense());
+        this.setHealth(this.getHealth() - equipment.getHealth());
+        this.setSpeed(this.getSpeed() - equipment.getSpeed());
+        this.setMaxHealth(this.getMaxHealth() - equipment.getHealth());
+    }
+
+    public void displayStats() {
+        System.out.println("Name: " + this.getName());
+        System.out.println("Health: " + this.getHealth());
+        System.out.println("Attack: " + this.getAttack());
+        System.out.println("Defense: " + this.getDefense());
+        System.out.println("Speed: " + this.getSpeed());
+        System.out.println("Tribe: " + this.getTribe());
+        System.out.println("Prize: " + this.getPrize());
+        System.out.println("Type: " + this.getType());
+    }
+
+    // Buying Equipment
+    public void equipEquipment(Equipment equipment) {
+
+        Equipment current = null;
+
+        if (equipment instanceof Armor) {
+            current = this.getArmor();
+            this.setArmor(equipment);
+
+        } else if(equipment instanceof Artefact) {
+            current = this.getArtefact();
+            this.setArtefact(equipment);
+        }
+
+        if (current != null) {
+            this.removeEquipment(current);
+        }
+
+        setAttack(this.getAttack() + equipment.getAttack());
+        setDefense(this.getDefense() + equipment.getDefense());
+        setHealth(this.getHealth() + equipment.getHealth());
+        setSpeed(this.getSpeed() + equipment.getSpeed());
+    }
+
 
     // abstract methods
     public abstract Character makeClone();
