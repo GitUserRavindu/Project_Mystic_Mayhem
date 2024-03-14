@@ -10,7 +10,7 @@ public final class Console {
 
     // For General Use
 
-    public static void newPlayer(Player player, PlayerManager PM) {
+    public static Player newPlayer(Player player, PlayerManager PM) {
         do {
             System.out.println("Select Action");
             System.out.println("1: New Player");
@@ -27,6 +27,8 @@ public final class Console {
                     break;
             }
         } while (player == null);
+
+        return player;
     }
 
     public static int nextAction(Player player) {
@@ -38,7 +40,7 @@ public final class Console {
         System.out.println("2: Enter Marketplace");
         System.out.println("3: Inspect Army");
         System.out.println("4: Change Home Ground");
-        System.out.println("5: Exit");
+        System.out.println("5: Exit Game");
         //System.out.println("7: Help");
         System.out.println();
         System.out.println("0: Change Player");

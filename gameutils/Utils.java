@@ -27,19 +27,22 @@ public final class Utils {
     public static int readInt(String prompt) {
         int input;
         do{
-            System.out.println(prompt);
+            System.out.print(prompt);
             try{    
                 input = Integer.parseInt(scanner.next());
             }
             catch(InputMismatchException e) {
-                System.out.println("Please enter an number: ");
+                System.out.println();
+                System.out.print("Please enter an number: ");
                 input = -1;
             }
             catch(Exception e) {
-                System.out.println("An unexpected error occured, please try again: ");
+                System.out.println();
+                System.out.print("An unexpected error occured, please try again: ");
                 input = -1;
             }
         } while (input == -1);
+        System.out.println();
         return input;
     }
 

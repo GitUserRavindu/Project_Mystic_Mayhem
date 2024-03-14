@@ -1,10 +1,12 @@
 package core;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
 import characters.Character;
+import characters.CharacterRegistry;
 
 public class Army implements Cloneable, Serializable {
     
@@ -35,15 +37,64 @@ public class Army implements Cloneable, Serializable {
         return false;
     }
 
+
+    // Setters
+    
     public void addCharacter(Character character) {
         armyCharacters.put(character.getCategory(), character);
+    }
+
+    
+    public void deleteCharacter(String category) {
+        armyCharacters.remove(category);
+    }
+
+
+
+    // Getters
+
+    public ArrayList<Character> getCharacters() {
+
+        ArrayList<Character> characters = new ArrayList<>();
+        for (String category : CharacterRegistry.getCharacterOrder()) {
+            if (armyCharacters.containsKey(category)) {
+                characters.add(getCharacter(category));
+            }
+        }
+        return characters;
+    }
+
+    public Character getCharacter(String category) {
+        return armyCharacters.get(category);
+    }
+
+    public String getCharacterbyIndex(int index) {
+        int i = 0;
+        for (String category : CharacterRegistry.getCharacterOrder()) {
+            if (armyCharacters.containsKey(category)) {
+                ++i;
+                if (i == index) {
+                    return category;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public String getCharacterName(String category) {
+        return getCharacter(category).getName();
+    }
+
+    public int getSize() {
+        return armyCharacters.size();
     }
 
 
     // Print Methods
 
     public void printSimpleInfo() {
-        for (String category : Character.getCharacterOrder()) {
+        for (String category : CharacterRegistry.getCharacterOrder()) {
             if (armyCharacters.containsKey(category)) {
                 System.out.println(category + ": " + getCharacterName(category));
             }
@@ -51,7 +102,7 @@ public class Army implements Cloneable, Serializable {
     }
     
     public void printInfo() {
-        for (String category : Character.getCharacterOrder()) {
+        for (String category : CharacterRegistry.getCharacterOrder()) {
             if (armyCharacters.containsKey(category)) {
                 getCharacter(category).printInfo();
                 System.out.println("");
@@ -59,23 +110,10 @@ public class Army implements Cloneable, Serializable {
         }
     }
 
-    // Getters
-
-    public Collection<Character> getCharacters() {
-        return armyCharacters.values();
-    }
-
-    public Character getCharacter(String category) {
-        return armyCharacters.get(category);
-    }
-
-    public String getCharacterName(String category) {
-        return getCharacter(category).getName();
-    }
 
     public String getInfoString() {
         String info = "";
-        for (String category : Character.getCharacterOrder()) {
+        for (String category : CharacterRegistry.getCharacterOrder()) {
             if (armyCharacters.containsKey(category)) {
                 info += category + ": " + getCharacterName(category) + "  ";
             }

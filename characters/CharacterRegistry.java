@@ -6,6 +6,8 @@ import java.util.Map;
 public final class CharacterRegistry {    // Prototype design pattern
 
     private static Map<String, Character> characters = new HashMap<>();
+    private static Map<String, String> names = new HashMap<>();
+    private static final String[] characterOrder = {"Archer", "Knight", "Mage", "Healer", "Mythical Creature"};   // Army is printed in this order
 
     private CharacterRegistry() {}  // Cannot be Instantiated
 
@@ -50,19 +52,24 @@ public final class CharacterRegistry {    // Prototype design pattern
     private static void addCharacter(String category, int tier, String name, int price, int hp,  int atk, int def, int spd) {
         switch (category) {
             case "Archer":
-                characters.put(category + tier, new Archer(tier, name, price, hp, atk, def, spd));
+                characters.put(name, new Archer(tier, name, price, hp, atk, def, spd));
+                names.put(category + tier, name);
                 break;
             case "Knight":
-                characters.put(category + tier, new Knight(tier, name, price, hp, atk, def, spd));
+                characters.put(name, new Knight(tier, name, price, hp, atk, def, spd));
+                names.put(category + tier, name);
                 break;
             case "Healer":
-                characters.put(category + tier, new Healer(tier, name, price, hp, atk, def, spd));
+                characters.put(name, new Healer(tier, name, price, hp, atk, def, spd));
+                names.put(category + tier, name);
                 break;
             case "Mage":
-                characters.put(category + tier, new Mage(tier, name, price, hp, atk, def, spd));
+                characters.put(name, new Mage(tier, name, price, hp, atk, def, spd));
+                names.put(category + tier, name);
                 break;
             case "Mythical Creature":
-                characters.put(category + tier, new MythicalCreature(tier, name, price, hp, atk, def, spd));
+                characters.put(name, new MythicalCreature(tier, name, price, hp, atk, def, spd));
+                names.put(category + tier, name);
                 break;
             default:
                 throw new IllegalArgumentException("Invalid Category");
@@ -71,9 +78,28 @@ public final class CharacterRegistry {    // Prototype design pattern
 
     public static Character newCharacter(String category, int tier) {
 
-        Character prototype = characters.get(category + tier);
+        Character prototype = characters.get(names.get(category + tier));
         return (Character) prototype.clone();
 
+    }
+
+    public static Character newCharacterbyName(String name) {
+
+        Character prototype = characters.get(name);
+        return (Character) prototype.clone();
+
+    }
+
+    public static String[] getNames(String category) {
+        String[] CharNames = new String[5];
+        for(int i = 1; i<= 5; ++i) {
+            CharNames[i-1] = names.get(category + i);
+        }
+        return CharNames;
+    }
+
+    public static String[] getCharacterOrder() {
+        return characterOrder;
     }
 
 }

@@ -72,6 +72,8 @@ public class PlayerManager implements Serializable {
     }
 
 
+
+
     public void battleSomeone(Player player) {
 
         if (playerList.size() < 2) {
@@ -86,12 +88,28 @@ public class PlayerManager implements Serializable {
             opponent = getRandomOpponent (player);
             Utils.waitSeconds(1);
             Console.printInfo(opponent);
-            playerChoice = Utils.readString("Enter 'F' to battle, 'N' to look for another opponent, or anything else to exit: ");
+            playerChoice = Utils.readString("Enter 'Y' to battle, 'N' to look for another opponent, or anything else to exit: ");
             Utils.waitSeconds(1);
         } while (playerChoice.toUpperCase().equals("N"));
 
-        if (playerChoice.toUpperCase().equals("F")) {
-            Combat.battle(player, opponent);
+        if (playerChoice.toUpperCase().equals("Y")) {
+            char result = Combat.battle(player, opponent);
+            System.out.println();
+            switch (result) {
+                case 'W':
+                    System.out.println("You win!");
+                    player.addXP(1);
+                    break;
+                case 'L':
+                    opponent.addXP(1);
+                    break;
+                case 'D':
+                    
+                    break;
+            
+                default:
+                    break;
+            }
             return;
         }
         return;

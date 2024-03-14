@@ -13,7 +13,7 @@ public final class Combat {
     
     private Combat() {}  // Cannot be Instantiated
     
-    public static String battle(Player challenger, Player opponent) {
+    public static char battle(Player challenger, Player opponent) {
         // Manage Order of HP and speed of both sides
 
         boolean battleContinue = true;
@@ -79,9 +79,9 @@ public final class Combat {
         refreshSpeedQueue(challengerSPD, tempChallengerSPD);
         refreshSpeedQueue(opponentSPD, tempOpponentSPD);
 
-        if (opponentSPD.isEmpty()) return "Win!";  /// Add Xp and Gold change
-        if (challengerSPD.isEmpty()) return "Loss!";
-        return "Draw";
+        if (opponentSPD.isEmpty()) return 'W';  /// Add Xp and Gold change
+        if (challengerSPD.isEmpty()) return 'L';
+        return 'D';
     }
 
     public static void battleMove(PriorityQueue<Character> attackerSPD, PriorityQueue<Character> attackerHP, Character attacker, PriorityQueue<Character> defenderSPD, PriorityQueue<Character> defenderHP) {

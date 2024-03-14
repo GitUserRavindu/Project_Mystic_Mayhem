@@ -25,7 +25,7 @@ public class Market {
         System.out.println("    1. Buy Character");
         System.out.println("    2. Buy Equipment");
         System.out.println("    3. Sell Character");
-        System.out.println("    4. Exit");
+        System.out.println("    4. Exit the Market");
         System.out.println();
         int choice = Utils.readInt(">>>", 1, 4);
         System.out.println();
@@ -113,10 +113,9 @@ public class Market {
         }
         System.out.println();
 
-        int tier = Utils.readInt("Please select a number", 1, 5);
+        int tier = Utils.readInt("Please select a number: ", 1, 5);
 
         Character character = CharacterRegistry.newCharacter(category, tier);
-
         boolean boughtCharacter = player.buyCharacter(character);  // Returns false if the player doesn't have enough gold
 
         if (boughtCharacter) {
@@ -132,19 +131,19 @@ public class Market {
             System.out.println("Please come agin. Going back to the Buy menu...");
             System.out.println();
             return;
-        } else {
-            System.out.println("----------------------------");
-            System.out.println("Transcation is Unsuccessful!");
-            System.out.println("----------------------------");
-            System.out.println();
-            System.out.println("You don't have enough gold!");
-            System.out.println("You have " + player.getGold() + " gold.");
-            System.out.println("You need " + (character.getPrice() - player.getGold()) + " more gold.");
-            System.out.println();
-            System.out.println("Please come back later. Going back to the Buy menu...");
-            System.out.println();
-            return;
-        }
+        } 
+    
+        System.out.println("----------------------------");
+        System.out.println("Transcation is Unsuccessful!");
+        System.out.println("----------------------------");
+        System.out.println();
+        System.out.println("You don't have enough gold!");
+        System.out.println("You have " + player.getGold() + " gold.");
+        System.out.println("You need " + (character.getPrice() - player.getGold()) + " more gold.");
+        System.out.println();
+        System.out.println("Please come back later. Going back to the Buy menu...");
+        System.out.println();
+        return;
 
     }
 
@@ -202,7 +201,7 @@ public class Market {
     
     //Displays the equipment that can be bought.
 
-    private void buyEquipment(Player player){
+    private static void buyEquipment(Player player){
         System.out.println("-------------------------------------------------------------");
         System.out.println("Please select which character you want to buy equipment for: ");
         System.out.println("-------------------------------------------------------------");
@@ -230,179 +229,117 @@ public class Market {
 
         int choice2 = Utils.readInt(">>>",1,2);
 
-        switch (choice) {
+        switch (choice2) {
             case 1:
-                System.out.println("You have selected to buy an armour for " + selectedCharacter.getName());
-
-                //Check whether an armour is equipped by the selectedCharacter.
-                if (selectedCharacter.getEquipments() != null) {
-                    for (Equipment equipment : selectedCharacter.getEquipments()) {
-                        if (equipment instanceof Armor) {
-                            System.out.println("You already have an armour equipped by " + selectedCharacter.getName());
-                            System.out.println();
-                            System.out.println("Going back to the Buy menu...");
-                            //scanner.close();
-                            return;
-                        }
-                    }
-                }
-                
-                String[] armours = { "Chainmail", "Regalia", "Fleece" };
-
-                tableHeader("equipment");
-                for (int j=0; j<armours.length; j++) {
-                    dispalyItems("equipment", armours[j], j+1);
-                }
-                System.out.println("Please select the corresponding number: (1/2/3)");
-                System.out.println();
-
-                int armourChoice = scanner.nextInt();
-                System.out.println("You have selected " + armourChoice);
-                System.out.println();
-                //scanner.close();
-
-                switch (armourChoice) {
-                    case 1:
-                        buyEquipmentTransaction(selectedCharacter, "Chainmail");
-                        break;
-                    case 2:
-                        buyEquipmentTransaction(selectedCharacter, "Regalia");
-                        break;
-                    case 3: 
-                        buyEquipmentTransaction(selectedCharacter, "Fleece");
-                        break;
-                    default:
-                        System.out.println("Invalid choice. Please enter a valid number.");
-                        System.out.println("Going back to the Buy menu...");
-                        System.out.println();
-                        return;
-                }
-
+                buyEquipmentCategory(player, character, "Armor");
                 break;
             case 2:
-                System.out.println("You have selected to buy artefact for " + selectedCharacter.getName());
-
-                //Check whether an artefact is equipped by the selectedCharacter.
-                if (selectedCharacter.getEquipments() != null) {
-                    for (Equipment equipment : selectedCharacter.getEquipments()) {
-                        if (equipment instanceof Artefact) {
-                            System.out.println("You already have an artefact equipped by " + selectedCharacter.getName());
-                            System.out.println();
-                            System.out.println("Going back to the Buy menu...");
-                            //scanner.close();
-                            return;
-                        }
-                    }
-                }
-
-                String[] artefacts = { "Excalibur", "Amulet", "Crystal" };
-
-                tableHeader("equipment");
-                for (int j=0; j<artefacts.length; j++) {
-                    dispalyItems("equipment", artefacts[j], j+1);
-                }
-                System.out.println("Please select the corresponding number: (1/2/3)");
-                System.out.println();
-
-                int artefactChoice = scanner.nextInt();
-                System.out.println("You have selected " + artefactChoice);
-                System.out.println();
-                //scanner.close();
-
-                switch (artefactChoice) {
-                    case 1:
-                        buyEquipmentTransaction(selectedCharacter, "Excalibur");
-                        break;
-                    case 2:
-                        buyEquipmentTransaction(selectedCharacter, "Amulet");
-                        break;
-                    case 3: 
-                        buyEquipmentTransaction(selectedCharacter, "Crystal");
-                        break;
-                    default:
-                        System.out.println("Invalid choice. Please enter a valid number.");
-                        System.out.println("Going back to the Buy menu...");
-                        System.out.println();
-                        return;
-                }
+                buyEquipmentCategory(player, character, "Artifact");
                 break;
             default:
-                System.out.println("Invalid choice. Please enter a valid number.");
-                System.out.println("Going back to the Buy menu...");
-                System.out.println();
-                //scanner.close();
-                return;
+                break;
         }
     }
 
-    
-    /////////////////////////// Buy Transaction - Equipment ///////////////////////////////////////////////////////////////////////
-    
-    //Performs the transaction of buying an equipment. Setting player attributes with updated gold coins and adding the equipment to the character.
-    private void buyEquipmentTransaction(Character selectedCharacter, String boughtEquipment) {
-        Equipment equipment = Registry.returnEquipment(boughtEquipment);
-        neededGoldCoins = equipment.getPrize();
 
-        if (existingGoldCoins >= neededGoldCoins) {
-            existingGoldCoins -= neededGoldCoins;
 
-            //set the new gold coins of player
-            player.setGold(existingGoldCoins);
+    private static void buyEquipmentCategory(Player player, Character character, String category) {
+        System.out.println("You have selected to buy " + category + " for " + character.getName());
 
-            //add the equipment to the character ///////////////////Make array list
-            //selectedCharacter.getEquipments().add(equipment);
+        boolean hasItem = false;
 
-            //set the new price of character
-            int valueIncrease = Math.round(neededGoldCoins * 20/100);
-            selectedCharacter.setPrize(selectedCharacter.getPrize() + valueIncrease);
+        switch (category) {
+            case "Armor":
+                if (character.getArmor() != null) {
+                    System.out.println("Armor " + character.getArmor().getName() + " is already equipped by " + character.getName());
+                    hasItem = true;
+                }
+                break;
+            case "Artifact":
+                if (character.getArtifact() != null) {
+                    System.out.println("Artifact " + character.getArtifact().getName() + " is already equipped by " + character.getName());
+                    hasItem = true;
+                }
+                break;
+        
+            default:
+                break;
+        }
 
-            //set the new attack, defense, health and speed of character
-            selectedCharacter.setAttack(selectedCharacter.getAttack() + equipment.getAttack());
-            selectedCharacter.setDefense(selectedCharacter.getDefense() + equipment.getDefense());
-            selectedCharacter.setHealth(selectedCharacter.getHealth() + equipment.getHealth());
-            selectedCharacter.setSpeed(selectedCharacter.getSpeed() + equipment.getSpeed());
+        if (hasItem) {
+            String choice = Utils.readString("Buying a new" + category + " will replace the old one. Are you sure you want to contrinue? Y/N");  
+            if  (!choice.toUpperCase().equals("Y")) {
+                return;
+            }      
+            
+        }
+        
+        String[] categories = EquipmentCache.getNames(category);
 
-            //display the new character attributes
+        tableHeader("equipment");
+        for (int j = 0; j < categories.length; j++) {
+            dispalyItems("equipment", categories[j], j+1);
+        }
+
+        System.out.println();
+        int tier = Utils.readInt("Please select a number: ", 1, 3);
+        
+        Equipment equipment = EquipmentCache.getEquipment(category, tier);
+
+        if (hasItem) {
+            switch (category) {
+                case "Armor":
+                    if (character.getArmor() == equipment) {  // because Flyweight
+                        System.out.println(character.getName() + " already has this item.");
+                        System.out.println("Going back to Market menu...");
+                        return;
+                    }
+                    break;
+                case "Artifact":
+                    if (character.getArtifact() == equipment) {  // because Flyweight
+                        System.out.println(character.getName() + " already has this item.");
+                        System.out.println("Going back to Market menu...");
+                        return;
+                    }
+                    break;    
+                default:
+                    break;
+            }
+        }
+
+        boolean affordable = (player.getGold() >= equipment.getPrice());  // Returns false if the player doesn't have enough gold
+
+        if (affordable) {
+            character.giveEquip(equipment);
             System.out.println("---------------------------");
             System.out.println("Transacation is Successful!");
             System.out.println("---------------------------");
             System.out.println();
-            System.out.println("You have bought " + boughtEquipment + " for " + selectedCharacter.getName() + " for " + neededGoldCoins + " gold coins.");
-            System.out.println("Your available gold coins are: " + existingGoldCoins + " gold coins.");
+            System.out.println("You have bought " + equipment.getName() + " for " + character.getName() + " for " + equipment.getPrice() + " gold.");
+            System.out.println("You now have " + player.getGold() + " gold.");
             System.out.println();
 
-            System.out.println("New attributes of " + selectedCharacter.getName() + " are: ");
-            System.out.println("    Attack  : " + selectedCharacter.getAttack());
-            System.out.println("    Defense : " + selectedCharacter.getDefense());
-            System.out.println("    Health  : " + selectedCharacter.getHealth());
-            System.out.println("    Speed   : " + selectedCharacter.getSpeed());
+            System.out.println("New attributes of " + character.getName() + ": ");
+            character.printStats();
+
+            System.out.println("Please come back later. Going back to the Market menu...");
             System.out.println();
 
-            System.out.println("Please come back later. Going back to the Buy menu...");
-            System.out.println();
-            return;
-        } else {
-            System.out.println("----------------------------");
-            System.out.println("Transcation is Unsuccessful!");
-            System.out.println("----------------------------");
-            System.out.println();
-            System.out.println("You don't have enough gold!");
-            System.out.println("Available gold coins: " + existingGoldCoins + " gold coins.");
-            System.out.println("Needed gold coins: " + neededGoldCoins + " gold coins.");
-            System.out.println();
-            System.out.println("Please come back later. Going back to the Buy menu...");
-            System.out.println();
             return;
         }
+        
+        System.out.println("----------------------------");
+        System.out.println("Transcation is Unsuccessful!");
+        System.out.println("----------------------------");
+        System.out.println();
+        System.out.println("You don't have enough gold!");
+        System.out.println("Available gold: " + player.getGold());
+        System.out.println("Needed gold: " + (equipment.getPrice() - player.getGold()));
+        System.out.println();
+        System.out.println("Please come back later. Going back to the Market menu...");
+        System.out.println();
+        return;
     }
-
-    
-    ////////////////////////////// Sell Army //////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
 
 
 
@@ -442,7 +379,7 @@ public class Market {
         }
 
         else if (type == "equipment") {
-            Equipment displayItem = Registry.returnEquipment(name);
+            Equipment displayItem = EquipmentCache.getEquipmentbyName(name);
             System.out.format("%20s %20s %20s %20s %20s %20s", k + ". " + displayItem.getName(), displayItem.getPrice(), displayItem.getAttack(), displayItem.getDefense(), displayItem.getHealth(), displayItem.getSpeed()+"\n");
         }
 

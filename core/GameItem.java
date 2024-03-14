@@ -60,6 +60,10 @@ public abstract class GameItem implements Serializable {
     public void printInfo() {
         System.out.println("Name    : " + getName());
         System.out.println("Category: " + getCategory());
+        printStats();
+    }
+
+    public void printStats() {
         System.out.println("Health  : " + getHealth());
         System.out.println("Attack  : " + getAttack());
         System.out.println("Defense : " + getDefense());

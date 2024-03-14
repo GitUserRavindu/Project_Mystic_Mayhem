@@ -1,9 +1,11 @@
 package equipment;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public final class EquipmentCache {
     private static final HashMap<String, Equipment> equipment = new HashMap<>();
+    private static Map<String, String> names = new HashMap<>();
 
     // Flyweight design pattern
     // Every character has the same armor / artifact objects
@@ -23,13 +25,37 @@ public final class EquipmentCache {
     private static void addEquipment(String category, int tier, String name, int price, int hp,  int atk, int def, int spd) {
         switch (category) {
             case "Armor":
-                equipment.put(category + tier, new Armor(tier, name, price, hp, atk, def, spd));
+                equipment.put(name, new Armor(tier, name, price, hp, atk, def, spd));
+                names.put(category + tier, name);
                 break;
             case "Artifact":
-                equipment.put(category + tier, new Artifact(tier, name, price, hp, atk, def, spd));
+                equipment.put(name, new Artifact(tier, name, price, hp, atk, def, spd));
+                names.put(category + tier, name);
                 break;
             default:
                 throw new IllegalArgumentException("Invalid Category");
         }
+    }
+
+    public static Equipment getEquipment(String category, int tier) {
+        if (names.containsKey(category + tier)) {
+            return equipment.get(names.get(category + tier));
+        }
+        return null;
+    }
+
+    public static Equipment getEquipmentbyName(String name) {
+        if (equipment.containsKey(name)) {
+            return equipment.get(name);
+        }
+        return null;
+    }
+
+    public static String[] getNames(String category) {
+        String[] CharNames = new String[3];
+        for(int i = 1; i<= 3; ++i) {
+            CharNames[i-1] = names.get(category + i);
+        }
+        return CharNames;
     }
 }

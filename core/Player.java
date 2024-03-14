@@ -3,14 +3,13 @@ package core;
 import java.io.Serializable;
 
 import characters.Character;
-import characters.CharacterRegistry;
 import core.HomeGrounds.HomeGround;
 
 public class Player implements Serializable {
     private final String username;
     private String name;
     private float gold;
-    private byte XP;
+    private short XP;
     private Army army;
     private HomeGround homeGround;
 
@@ -34,7 +33,7 @@ public class Player implements Serializable {
     public float getGold() {
         return gold;
     }
-    public byte getXP() {
+    public short getXP() {
         return XP;
     }
     public Army getArmy() {
@@ -55,31 +54,53 @@ public class Player implements Serializable {
     }
 
 
-    public void battleSomeone() {
-        PlayerManager.getInstance().battleSomeone(this);
+    // Setters
+    
+    public void addGold (double change) {
+        gold += (float) change;
+        gold = Math.round(gold * 10.0f) / 10.0f;
     }
 
     public void setHomeGround(HomeGround homeGround) {
         this.homeGround = homeGround;
     }
 
-    public void buyCharacter(String category, int tier) {
-        // Check if player already has someone of the category
-        if (army.hasCharacter(category)) {
-            System.out.println("You already have a " + category + " (" + army.getCharacterName(category) + ") in your army");
-            return;
-        }
+    public void addXP(int change) {
+        XP += (short) change;
+    }
+
+    /*
+    public boolean buyCharacter(String category, int tier) {
 
         Character character = CharacterRegistry.newCharacter(category, tier);
 
-        // Check if player has enough gold
         if (character.getPrice() > gold) {
-            System.out.println("You don't have enough Gold");
-            return;
+            return false;
         }
+
         // Remove gold and add character to army
         army.addCharacter(character);
         addGold(-character.getPrice());
+        return true;
+    }
+    */
+
+    public void sellCharacter(String category) {
+        Character character = army.getCharacter(category);
+        addGold(character.getPrice()*0.9f);
+        army.deleteCharacter(category);
+    }
+
+    public boolean buyCharacter(Character character) {
+
+        if (character.getPrice() > gold) {
+            return false;
+        }
+
+        // Remove gold and add character to army
+        army.addCharacter(character);
+        addGold(-character.getPrice());
+        return true;
     }
 
     public void printArmySimpleInfo() {
@@ -93,25 +114,5 @@ public class Player implements Serializable {
         return army.getInfoString();
     }
 
-    public void addGold (float amount) {
-        gold += amount;
-    }
-
-
-/*
-    public boolean addCharacter(Character character) {
-        if (army.containsKey(character.getCategory())) {
-            System.out.println("You already have " + character.getCategory() + " " + character.getName() + " in your Army");
-            return false; // Indicate failure
-        } else {
-            army.put(character.getCategory(), character);
-            return true; // Indicate success
-        }
-    }
-    
-    public void buyCharacter(String category, String name) {
-
-    }
-*/
 
 }

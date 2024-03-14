@@ -12,12 +12,6 @@ public abstract class Character extends GameItem implements Cloneable {
     protected Armor armor;
     protected Artifact artifact;
 
-    private static final String[] characterOrder = {"Archer", "Knight", "Mage", "Healer", "Mythical Creature"};   // Army is printed in this order
-
-    public static String[] getCharacterOrder() {
-        return characterOrder;
-    }
-
     public Character(int tier, String name, int price, int hp, int atk, int def, int spd) {
         super(tier, name, price, hp, atk, def, spd);
         maxHP = hp;
@@ -47,6 +41,8 @@ public abstract class Character extends GameItem implements Cloneable {
         } else System.out.println();
     }
 
+
+
     public void giveEquip(Equipment item) {
         switch (item.getCategory()) {
             case "Armor":
@@ -72,6 +68,17 @@ public abstract class Character extends GameItem implements Cloneable {
         hp += item.getHealth();
         spd += item.getSpeed();
     }
+
+    public Armor getArmor() {
+        return armor;
+    }
+
+    public Artifact getArtifact() {
+        return artifact;
+    }
+
+
+    // HP
 
     public float getMaxHP() {
         return maxHP;
@@ -100,6 +107,26 @@ public abstract class Character extends GameItem implements Cloneable {
     public void addHealth(double change) {
         super.addHealth(change);
         if (hp > maxHP) hp = maxHP;
+    }
+
+
+
+    // Other getters
+
+    public String getEquipNameString() {
+        String string = "";
+        if (armor != null) {
+            string += "Armor: " + armor.getName() + "  ";
+        } else {
+            string += "Armor: None  ";
+        }
+        
+        if (artifact != null) {
+            string += "Artifact: " + artifact.getName() + "  ";
+        } else {
+            string += "Artifact: None  ";
+        }
+        return string;
     }
 
     public boolean isAlive() {
