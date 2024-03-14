@@ -2,6 +2,8 @@ package Core;
 
 import java.util.ArrayList;
 import Character.Character;
+import java.lang.Math;
+
 public class fight {
     public static Boolean CharacterVsCharacter(Character O,Character D,Boolean bonusAttack,Boolean bonusHeal,ArrayList<Character> army1,ArrayList<Character> army2,Boolean w){
     if(O.getType().equals("Healer")){
@@ -19,7 +21,7 @@ public class fight {
                 if(bonusHeal){O.setHealth((O.getHealth()*(1.1f)));
                 System.out.println(O.getName()+" self heal");}
 
-                System.out.println(H.getName()+"'s health : "+H.getHealth());
+                System.out.println(H.getName()+"'s health : "+ Math.round(H.getHealth() * 10.0) / 10.0);
                 break;}
             }
     }else{
@@ -39,8 +41,8 @@ public class fight {
             }
 
             //Result of second attack
-            System.out.println(D.getName()+"'s health : "+D.getHealth());
-            System.out.println(O.getName()+"'s health : "+O.getHealth());
+            System.out.println(D.getName()+"'s health : "+Math.round(D.getHealth() * 10.0) / 10.0);
+            System.out.println(O.getName()+"'s health : "+Math.round(O.getHealth() * 10.0) / 10.0);
     }
 
     if(D.getHealth()==0){
