@@ -47,8 +47,8 @@ This is the kind of the interface of the Market menu.
 3. Checking  the balance
 	- Prints out the current gold coins of the player.
 4. Exist
-	- Exits out of the market and goes to the [[#Game Menu]].
+	- Exits out of the market and goes to the [Game Menu](#game-menu).
 ### Battle Menu
 
-### Game Menu
+### <a name="game-menu"></a>Game Menu
 
