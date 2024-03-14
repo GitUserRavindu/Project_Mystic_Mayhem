@@ -72,12 +72,16 @@ public class PlayerManager implements Serializable {
     }
 
 
-
+    public void printPlayerList() {
+        for (String username : usernameList) {
+            System.out.print(playerList.get(username) + " (" + username + ")  ");
+        }
+    }
 
     public void battleSomeone(Player player) {
 
         if (!player.battleCompatible()) {
-            
+
         }
 
         if (playerList.size() < 2) {

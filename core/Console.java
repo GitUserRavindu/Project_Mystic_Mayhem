@@ -15,6 +15,7 @@ public final class Console {
             System.out.println("Select Action");
             System.out.println("1: New Player");
             System.out.println("2: Log in");
+            System.out.println("3: List All Players");
             int choice = Utils.readInt(">>>",1,2);
             switch (choice) {
                 case 1:
@@ -22,6 +23,9 @@ public final class Console {
                     break;
                 case 2:
                     player = PM.getPlayer(); // Returns null if exited
+                    break;   
+                case 3:
+                    PM.getPlayer(); // Returns null if exited
                     break;        
                 default:
                     break;
@@ -40,7 +44,7 @@ public final class Console {
         System.out.println("2: Enter Marketplace");
         System.out.println("3: Inspect Army");
         System.out.println("4: Change Home Ground");
-        System.out.println("5: Exit Game");
+        System.out.println("5: Save and Exit");
         //System.out.println("7: Help");
         System.out.println();
         System.out.println("0: Change Player");

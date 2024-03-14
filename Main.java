@@ -1,10 +1,17 @@
 import core.*;
 
 public class Main {
-    @SuppressWarnings("null")
+    
     public static void main (String[] args) {
 
-        PlayerManager PM = PlayerManager.getInstance();
+        PlayerManager PM;
+
+        if(SaveGame.checkSave()) {
+            PM = SaveGame.loadGame();
+        } else {
+            PM = PlayerManager.getInstance();
+        }
+
 
         System.out.println("-------------------------------");
         System.out.println("         Mystic Mayhem!        ");
@@ -42,12 +49,10 @@ public class Main {
 
         } while (choice != 5);
 
-        
-        //GameSaveManager gameSaveManager = new GameSaveManager();
-        //gameSaveManager.saveGameInsructions();
-
         System.out.println("-------------------------------");
         System.out.println("Leaving Mystic Mayhem! Goodbye!");
         System.out.println("-------------------------------");
+
+        SaveGame.saveGame(PM);
     }
 }
