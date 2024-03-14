@@ -11,13 +11,11 @@ ___  ___          _   _         ___  ___            _
 
 A CLI, turn based fantasy battle game. Created as a project under **CS1040**
 
-## Installation
-
-
 ## How to Play
 
-- You have to access the menus of your game in sequential manner
+- You have to access the menus of your game in sequential manner.
 - In each menu, you can enter the respective number of operation that you want to do.
+- During the start of game, you many choose whether to continue your progress or just to start a new game.
 
 >[!warning]
 >Make sure to give the proper **integer value** as the input for the apt situation.
