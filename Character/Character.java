@@ -1,6 +1,7 @@
 package Character;
 
 import Equipment.Armor;
+import Equipment.Artefact;
 import Equipment.Equipment;
 import Interfaces.MakeClone;
 import java.io.Serializable;
@@ -41,6 +42,7 @@ public abstract class Character implements MakeClone, Serializable {
             this.speed = other.speed;
             this.tribe = other.tribe;
             this.type = other.type;
+            this.maxHealth = this.health;
         }
     }
 
@@ -153,6 +155,7 @@ public abstract class Character implements MakeClone, Serializable {
         this.setDefense(this.getDefense() - equipment.getDefense());
         this.setHealth(this.getHealth() - equipment.getHealth());
         this.setSpeed(this.getSpeed() - equipment.getSpeed());
+        this.setMaxHealth(this.getMaxHealth() - equipment.getHealth());
     }
 
     public void displayStats() {
@@ -169,15 +172,13 @@ public abstract class Character implements MakeClone, Serializable {
     // Buying Equipment
     public void equipEquipment(Equipment equipment) {
 
-        String parentClassName = equipment.getClass().getSuperclass().getName();
-
         Equipment current = null;
 
         if (equipment instanceof Armor) {
             current = this.getArmor();
             this.setArmor(equipment);
 
-        } else if(parentClassName.equals("Artefact")) {
+        } else if(equipment instanceof Artefact) {
             current = this.getArtefact();
             this.setArtefact(equipment);
         }
