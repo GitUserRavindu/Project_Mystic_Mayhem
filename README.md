@@ -11,10 +11,12 @@ ___  ___          _   _         ___  ___            _
 
 A CLI, turn based fantasy battle game. Created as a project under **CS1040**
 
-## Installation
+# Installation
 
 
-## How to Play
+# How to Play
+
+## Interfaces 
 
 - You have to access the menus of your game in sequential manner
 - In each menu, you can enter the respective number of operation that you want to do.
@@ -51,4 +53,10 @@ This is the kind of the interface of the Market menu.
 ### Battle Menu
 
 ### <a name="game-menu"></a>Game Menu
+
+## Game Flow
+
+# How the Project is strucutured
+
+
 
