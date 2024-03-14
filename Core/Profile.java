@@ -275,8 +275,9 @@ public class Profile {
         pl.setGold(215);
         pl.setXp(32.0f);
         pl.setUserId(-1);
-        pl.setHomeGroundName("Marshland");
         pl.setHomeGroundInGameLoad("Marshland");
+        pl.setHomeGroundName("Marshland");
+        
         pl.army.add(Registry.returnCharacter("Ranger"));
         pl.army.add(Registry.returnCharacter("Squire"));
         pl.army.add(Registry.returnCharacter("Warlock"));
