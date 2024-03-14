@@ -1,64 +1,34 @@
 package core;
+
 import java.util.Scanner;
-
-import characters.Archer;
-import characters.Character;
-import characters.Healer;
-import characters.Knight;
-import characters.Mage;
-import characters.MythicalCreature;
-
 import java.lang.Math;
+import java.rmi.registry.Registry;
 
-import equipment.Armor;
-import equipment.Artefact;
-import equipment.Equipment;
+import equipment.*;
+import gameutils.Utils;
+import characters.*;
 
 public class Market {
-
-    private Player player;
-    private float existingGoldCoins;
-    private float neededGoldCoins;
-
     
-    ////////////////////Market Constructor///////////////////////////////////////////////////////////////////////////////
-    
-    //Singleton Design Pattern is used. Only one Market object can be created.  
-    private static Market instance = null;
-    
-    private Market() {
-    }
+    private Market() {}
 
-    //If there is no Market object, it creates a new one. Otherwise, it returns the existing one.
-    public static Market getInstance() {
-        if (instance == null) {
-            instance = new Market();
-        }
-        return instance;
-    }
+    public static void displayMenu(Player player) {
 
-    
-    //////////////////// Market Menu /////////////////////////////////////////////////////////////////////////////////////
-    
-    //Displays the options for the player to choose. Market Menu is the main menu of the Market Place.
-    public void marketMenu(Player player) {
-        this.player = player;
-        this.existingGoldCoins = player.getGold();
-
-        System.out.println("----------------------------");
-        System.out.println("Welcome to the Market Place!");
-        System.out.println("----------------------------");
+        System.out.println("--------------------------------------");
+        System.out.println("Welcome to the Market, " + player.getName() + "!");
+        System.out.println("--------------------------------------");
+        System.out.println();
+        System.out.println("You have " + player.getGold() + " gold coins");
+        System.out.println();
         System.out.println("What you want to do today? Please select an option: ");
-        System.out.println("    1. Buy Army or Equipment");
-        System.out.println("    2. Sell Army");
-        System.out.println("    3. Check the balance of your gold coins");
+        System.out.println("    1. Buy Character");
+        System.out.println("    2. Buy Equipment");
+        System.out.println("    3. Sell Character");
         System.out.println("    4. Exit");
-        System.out.println("Please enter the corresponding number: (1/2/3/4)");
+
+        int choice = Utils.readInt(">>>", 1, 4);
         System.out.println();
 
-        Scanner scanner = new Scanner(System.in);
-        int choice = scanner.nextInt();
-        //scanner.close();
 
         switch (choice) {
             case 1:
@@ -80,8 +50,9 @@ public class Market {
                 System.out.println();
                 return;
             default:
-                System.out.println("Invalid choice. Please enter a valid number.");
-                System.out.println();
+                // This is handled by readInt
+                // System.out.println("Invalid choice. Please enter a valid number.");
+                // System.out.println();
                 break;
         }
 
