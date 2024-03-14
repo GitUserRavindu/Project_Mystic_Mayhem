@@ -1,118 +1,91 @@
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import Utils.ScannerUtil;
+
 import Character.Character;
+
+import HomeGround.HomeGround;
 import HomeGround.Arcane;
 import HomeGround.Desert;
 import HomeGround.Hillcrest;
-import HomeGround.HomeGround;
 import HomeGround.Marshland;
-
-import java.util.Scanner;
-
-
-
 
 public class Player implements Serializable {
 
-    Scanner sc = new Scanner(System.in);
+    // Player attributes ------------------------------------------------------------------------------
+    private String name;//Can be change after creation
+    private String userName;//Can not be change after creation. Unique for each user.
+    private int userId; // A unique id for each user. Can be generated using number of users.
+    private int goldCoins;
+    private float xp;
+    private String homeGroundName; //This is used to save the home ground name in the file.
+    transient private HomeGround homeGround; //HomeGround is a class that contains the home ground of the player. Not saved in the file.
+    public ArrayList<Character> army = new ArrayList<Character>(); //////!!!!!Public, Check with market
+    // End of Player Attributes -----------------------------------------------------------------------
 
-    public String name;//Can be change after creation
-    public int gold;
-    public float xp;
-    public String UserName;//Can not be change after creation. Like a email.
-    public static int UserId = 0; // A unique id for each user. Can be generated using number of users.
-    public ArrayList<Character> army = new ArrayList<Character>();
 
-    //HomeGround is a class that contains the home ground of the player.
-    //Will the Player can change the home ground after creation?
-    public HomeGround homeGround;
+    // Constructor ------------------------------------------------------------------------------------
+    public Player() {}
+    // End of Constructor -----------------------------------------------------------------------------
 
-    public HomeGround getHomeGround() {
-        return homeGround;
-    }
 
-    public Player() {
-        this.gold = 500;
-    }
+    // Getters ----------------------------------------------------------------------------------------
+    public String getName() { return name;}
 
-    //List of all players. Can be used to check if a username is already taken or not.
-    //If the game is off, this must be saved to a file and loaded when the game starts.
-    public static ArrayList<String> players = new ArrayList<String>();
+    public String getUserName() { return userName; }
 
-    public Player(String name, String UserName) {
+    public int getUserId() { return userId; }
 
-        UserId++;
-        gold = 500;
-        xp = 0;//Should we inclde a level system? If yes, we can use xp to calculate the level.
-        this.setName(name);
+    public int getGold() { return goldCoins; }
 
-        //Check if the username is already taken. While loop will be used to check if the username is already taken.
-        //Have to check if this loop is working or not.
+    public float getXp() { return xp; }
 
-        while (players.contains(UserName)) {
-            UserName = "";
-            // Handle the case when the UserName is already taken
-            System.out.println("Username is already taken");
-            System.out.println("Please enter a new username");
-            System.out.print("Username: ");
+    public String getHomeGroundName() { return homeGroundName; }
 
-            UserName = sc.nextLine();
-        }
-        players.add(UserName);
-        this.setUserName(UserName);
+    public HomeGround getHomeGround() { return homeGround; }
 
-    }
+    public ArrayList<Character> getArmy() { return army; }
+    // End of Getters ---------------------------------------------------------------------------------
 
-    public void setUserName(byte[] userName2) {
-        this.UserName = new String(userName2);
-    }
 
-    // public void addCharacter(Character character, int position) {
-    //     for (Character c : army) {
-    //         if (c.getName().equals(character.getName())) {
-    //             System.out.println("Character is already in the army");
-    //             return;
-    //         } else if (c.getType().equals(character.getType())) {
-    //             System.out.println("Character of this type is already in the army");
-    //             System.out.println("Do you want to sell the character in the position? (Y/N)");
-    //             char check = sc.next().charAt(0);
-    //             if (check == 'Y' || check == 'y') {
-    //                 //army.sell(c);
-    //                 //A selling method will be added later.
-    //                 army.remove(c);
-    //                 army.add(character);
-    //                 return;
-    //             } else {
-    //                 return;
-    //             }
-    //         }
-    //     }
-    //     this.army.add(character);
-    // }
+    // Setters ----------------------------------------------------------------------------------------
+    public void setName(String name) { this.name = name; }
 
-    public String getName() {
-        return name;
-    }
+    public void setUserName(String userName) { this.userName = userName; }
+
+    public void setUserId(int userId) { this.userId = userId; }
+
+    public void setGold(int goldCoins) { this.goldCoins = goldCoins; }
+
+    public void setXp(float xp) { this.xp = xp; }
+
+    public void setHomeGroundName(String homeGroundName) { this.homeGroundName = homeGroundName; }
 
     public void setHomeGround() {
         System.out.println("Choose a home ground\n");
         System.out.println("1. Hillcrest");
         System.out.println("2. Marshland");
         System.out.println("3. Desert");
-        System.out.println("4. Arcane\n\n");
-        System.out.print("Enter the number of the home ground: ");
+        System.out.println("4. Arcane");
+        System.out.println("Enter the number of the home ground: \n");
 
-        //Did not implement for invalid integer input.
-        int n = -1;
-        n = sc.nextInt();
-        //Prompt player input valid number
-        while (!(-1<n&&n<4)) {
-                n = sc.nextInt();
+        int choice;
+
+        while (true) {
+            try {
+                choice = ScannerUtil.scanner.nextInt();
+                if(choice < 1 || choice > 4) {
+                    throw new IOException();
+                }
+                break;
+            } catch (IOException e) {
                 System.out.println("Invalid input. Please enter a valid number.");
-                System.out.print("Enter the number of the home ground: ");
+            }
         }
-        
-        switch (n) {
+
+		switch (choice) {
             case 1:
                 homeGround = new Hillcrest();
                 break;
@@ -126,47 +99,86 @@ public class Player implements Serializable {
                 homeGround = new Arcane();
                 break;
             default:
-                System.out.println("Invalid input. Please enter a valid number.");
+                System.out.println("Invalid input. Please enter a valid number."); //This will never be executed. I guess
         }
     }
-    public void setName(String name) {
-        this.name = name;
+
+    //This method is used to set the home ground when the game is loaded from the file. Since homeGround object is not saving.
+    public void setHomeGroundInGameLoad(String homeGroundName) {
+        switch (homeGroundName) {
+            case "Hillcrest":
+                this.homeGround = new Hillcrest();
+                break;
+            case "Marshland":
+                this.homeGround = new Marshland();
+                break;
+            case "Desert":
+                this.homeGround = new Desert();
+                break;
+            case "Arcane":
+                this.homeGround = new Arcane();
+                break;
+            default:
+                System.out.println("Invalid input. Please enter a valid number."); //This will never be executed. I guess
+        }
     }
 
-    public int getGold() {
-        return gold;
+    //Since army attribute is public, this method is not necessary.
+    //In the market, the characters are added to the army directly.
+    public void setArmy(ArrayList<Character> army) { this.army = army; }
+    // End of Setters ---------------------------------------------------------------------------------
+
+
+    // Other Methods ----------------------------------------------------------------------------------
+    public void displayCurrentStatus() {
+        System.out.println("Here's your profile status :");
+        System.out.println("-----------------------------------------------------------------");
+        System.out.println("------------------ Profile Status -------------------------------");
+        System.out.println("    UserName    : " + userName);
+        System.out.println("    UserId      : " + userId);
+        System.out.println("    Name        : " + name);
+        System.out.println("    GoldCoins   : " + goldCoins);
+        System.out.println("    XP          : " + xp);
+        System.out.println("    HomeGround  : " + homeGroundName);
+        System.out.print("    Army        : ");
+        for (Character character : army) {
+            System.out.print(character.getName() + ", ");
+        }
+        System.out.println("\n");
+        System.out.println("------------------ End of Profile Status ------------------------");
+        System.out.println("-----------------------------------------------------------------");
     }
 
-    public void setGold(int gold) {
-        this.gold = gold;
-    }
+    public void seeArmyDetails() {
+        System.out.println("Here's your army details :");
+        System.out.println("----------------------------------------------------------------");
+        System.out.println("------------------ Army Details --------------------------------");
+        System.out.println("Your army consists of the following characters :\n");
+        for (Character character : army) {
+            System.out.println("--> " + character.getName());
+            System.out.println("        Type    : " + character.getType());
+            System.out.println("        Health  : " + character.getHealth());
+            System.out.println("        Attack  : " + character.getAttack());
+            System.out.println("        Defense : " + character.getDefense());
+            System.out.println("        Speed   : " + character.getSpeed());
+            System.out.println("        Tribe   : " + character.getTribe());
+            System.out.println("        Price   : " + character.getPrize());
 
-    public float getXp() {
-        return xp;
-    }
+            if (character.getArmor() == null) {
+                System.out.println("        Armor   : No Armor");
+            } else {
+                System.out.println("        Armor   : " + character.getArmor().getName());
+            }
 
-    public void setXp(float xp) {
-        this.xp = xp;
+            if (character.getArtefact() == null) {
+                System.out.println("        Artefact: No Artefact");
+            } else {
+            System.out.println("        Artefact: " + character.getArtefact().getName());
+            }
+            System.out.println("\n");
+        }
+        System.out.println("------------------ End of Army Details -------------------------");
+        System.out.println("---------------------------------------------------------------");
     }
-
-    public String getUserName() {
-        return UserName;
-    }
-
-    public void setUserName(String userName) {
-        UserName = userName;
-        players.add(userName);
-    }
-
-    public ArrayList<Character> getArmy() {
-        return army;
-    }
-
-    public void setArmy(ArrayList<Character> army) {
-        this.army = army;
-    }
-
-    public static int getUserId() {
-        return UserId;
-    }
+    // End of Other Methods ---------------------------------------------------------------------------
 }

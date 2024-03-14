@@ -1,16 +1,15 @@
 -----Ravindu------------------------------------
 prize ?? ---> price
 
-initialHealth and initialPrice --> affect Market buyArmy and buyEquipment
-make EquipmentRegistry
+//NO NEED. RESTORE THEIR HEALTH AFTER BATTLE. initialHealth and initialPrice --> affect Market buyArmy and buyEquipment
+// DONE. make EquipmentRegistry
 for health speed etc use +/- : eg: health = +2, speed = -2
 
-upon buying armour if it already existing, then the existing one will be discarded. 
-I haven't handle that case. I mentioned you already have one.
-In character buying if that kind of character already existing I do the same.
-Need to resolve.
+// SOLVED. upon buying armour if it already existing, then the existing one will be discarded. 
+// SOLVED. I haven't handle that case. I mentioned you already have one.
+// OK. SINCE SELL MENU DISPLAY AGAIN. In character buying if that kind of character already existing I do the same.
 
-Make equipment attribute of characters a arraylist.
+//SOLVED. Make equipment attribute of characters a arraylist.
 
 Is there a method to display the current status of player and characters? Dispaly their attributes etc. That will be good. 
 Then I can print that upon buying equipments and characters.
@@ -18,9 +17,37 @@ Then I can print that upon buying equipments and characters.
 be careful: file is "Armor" , not "Armour"
 also "Artefacts", not "Artefact"
 
-Maybe add a confirm before buying
+Maybe add a confirm before buying, for other methods also, save/load etc
 
 Add character type (Archer, Knight, etc) attribute. Then We can print it (after byuing character etc) 
 e.g.    "You have.... bla bla  
             Archer : Shooter
             Knight : Squire ..."
+
+
+// DONE. userId and xp changed to not static
+
+Characters already equipped items should be displayed
+
+one scanner for whole program! Should I try it?
+
+Sample : Main menu
+            1. Select Profile (There are many players user created. Users can select a player.) - done (separate function)
+            2. Create Profile (Make a new Player)                                               - done (separate function)
+            3. Own Status Check (Current attributes of player)                                  - done (separate function)
+            4. Own Army characters check (Their equipments and details)                         - done (separate function)
+            5. Change Name                                                                      - done (searate function)
+            6. Market (buy, sell)                                                               - done (separate function)          
+            7. Battle                                - done (separate function) - need opponent selection
+            8. Exit                                                                             - done
+
+// NO, THAT WILL AFFECT SAVE. Maybe add some static variables to gamesvamanager. Then in the main function we can call gamesavemanager class.
+inside class, new object will create to save????
+
+// DONE, I GUESS. scanner.nextline problem? we can set while(choice.isEmpty()) { choice = scanner.nextLine()} ---> should do.
+
+//DONE: need to create string homeground
+
+Update market menu messages chatgpt.
+
+in save and load, hide the error printing mesages after testing
