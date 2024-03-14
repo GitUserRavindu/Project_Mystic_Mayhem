@@ -158,7 +158,7 @@ public class Player implements Serializable {
         for (Character character : army) {
             System.out.println("--> " + character.getName());
             System.out.println("        Type    : " + character.getType());
-            System.out.println("        Health  : " + character.getMaxHealth());
+            System.out.println("        Health  : " + character.getHealth());
             System.out.println("        Attack  : " + character.getAttack());
             System.out.println("        Defense : " + character.getDefense());
             System.out.println("        Speed   : " + character.getSpeed());
