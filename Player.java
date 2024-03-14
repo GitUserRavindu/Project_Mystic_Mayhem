@@ -135,19 +135,51 @@ public class Player implements Serializable {
         System.out.println("Here's your profile status :");
         System.out.println("-----------------------------------------------------------------");
         System.out.println("------------------ Profile Status -------------------------------");
-        System.out.format("%12s %3s %-50s", "UserName", " : " , userName + "\n");
-        System.out.format("%12s %3s %-50s", "UserId", " : " , userId + "\n");
-        System.out.format("%12s %3s %-50s", "Name", " : " , name + "\n");
-        System.out.format("%12s %3s %-50s", "GoldCoins", " : " , goldCoins + "\n");
-        System.out.format("%12s %3s %-50s", "XP", " : " , xp + "\n");
-        System.out.format("%12s %3s %-50s", "HomeGround", " : " , homeGroundName + "\n");
-        System.out.print("        Army  : ");
+        System.out.println("    UserName    : " + userName);
+        System.out.println("    UserId      : " + userId);
+        System.out.println("    Name        : " + name);
+        System.out.println("    GoldCoins   : " + goldCoins);
+        System.out.println("    XP          : " + xp);
+        System.out.println("    HomeGround  : " + homeGroundName);
+        System.out.print("    Army        : ");
         for (Character character : army) {
             System.out.print(character.getName() + ", ");
         }
         System.out.println("\n");
         System.out.println("------------------ End of Profile Status ------------------------");
         System.out.println("-----------------------------------------------------------------");
+    }
+
+    public void seeArmyDetails() {
+        System.out.println("Here's your army details :");
+        System.out.println("----------------------------------------------------------------");
+        System.out.println("------------------ Army Details --------------------------------");
+        System.out.println("Your army consists of the following characters :\n");
+        for (Character character : army) {
+            System.out.println("--> " + character.getName());
+            System.out.println("        Type    : " + character.getType());
+            System.out.println("        Health  : " + character.getMaxHealth());
+            System.out.println("        Attack  : " + character.getAttack());
+            System.out.println("        Defense : " + character.getDefense());
+            System.out.println("        Speed   : " + character.getSpeed());
+            System.out.println("        Tribe   : " + character.getTribe());
+            System.out.println("        Price   : " + character.getPrize());
+            
+            if (character.getArmor() == null) {
+                System.out.println("        Armor   : No Armor");
+            } else {
+                System.out.println("        Armor   : " + character.getArmor().getName());
+            }
+            
+            if (character.getArtefact() == null) {
+                System.out.println("        Artefact: No Artefact");
+            } else {
+            System.out.println("        Artefact: " + character.getArtefact().getName());
+            }
+            System.out.println("\n");       
+        }
+        System.out.println("------------------ End of Army Details -------------------------");
+        System.out.println("---------------------------------------------------------------");
     }
     // End of Other Methods ---------------------------------------------------------------------------
 }
