@@ -18,7 +18,7 @@ public class Market {
         System.out.println("Welcome to the Market, " + player.getName() + "!");
         System.out.println("--------------------------------------");
         System.out.println();
-        System.out.println("You have " + player.getGold() + " gold coins");
+        System.out.println("You have " + player.getGold() + " gold");
         System.out.println();
         System.out.println("What you want to do today? Please select an option: ");
         System.out.println("    1. Buy Character");
@@ -43,7 +43,6 @@ public class Market {
                 System.out.println();
                 break;
             case 4:
-                System.out.println("You have selected to exit.");
                 System.out.println("---------------------------------------------------------------");
                 System.out.println("Thank you for visiting the Market Place! Goodbye! See you soon!");
                 System.out.println("---------------------------------------------------------------");
@@ -57,7 +56,7 @@ public class Market {
         }
 
         while (choice != 4) {
-            marketMenu(player);  
+            displayMenu(player);  
             return;
         }
     }

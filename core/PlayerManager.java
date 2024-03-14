@@ -1,13 +1,13 @@
 package core;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-import gameutils.Console;
 import gameutils.Utils;
 
-public class PlayerManager {
+public class PlayerManager implements Serializable {
     private static PlayerManager instance;        // Singleton design pattern
     private HashMap<String, Player> playerList;
     private ArrayList<String> usernameList;       // Maintained to efficiently find a random player to battle
@@ -47,9 +47,10 @@ public class PlayerManager {
 
     public Player getPlayer() {
         String username = Utils.readString("Enter Username: ");
-        while (!playerList.containsKey(username)) {
-            username = Utils.readString("Player does not Exist, Please Try Again: ");
+        while (!playerList.containsKey(username) && username != "0") {
+            username = Utils.readString("Player does not Exist, Please Try Again (Type 0 to Exit): ");
         }
+        if (username == "0") {return null;}
         return getPlayer(username);
     }
 
@@ -90,7 +91,7 @@ public class PlayerManager {
         } while (playerChoice.toUpperCase().equals("N"));
 
         if (playerChoice.toUpperCase().equals("F")) {
-            initiateBattle(player, opponent);
+            Combat.battle(player, opponent);
             return;
         }
         return;
@@ -103,10 +104,6 @@ public class PlayerManager {
             opponentUsername = usernameList.get(new Random().nextInt(usernameList.size()));
         } while (!opponentUsername.equals(player.getUsername()));
         return playerList.get(opponentUsername);
-    }
-
-    private void initiateBattle(Player player, Player opponent) {
-
     }
 
 }

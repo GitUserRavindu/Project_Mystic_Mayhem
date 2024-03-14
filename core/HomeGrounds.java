@@ -187,4 +187,12 @@ public class HomeGrounds {
         }
     }
 
+    public static void printHomeGroundCharacters(HomeGround homeGround) {
+        for (String name : characterHomegrounds.keySet()) {
+            if (characterHomegrounds.get(name) == homeGround) {
+                System.out.print(name);
+            }
+        }
+        System.out.println();
+    }
 }

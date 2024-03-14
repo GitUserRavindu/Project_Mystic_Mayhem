@@ -79,7 +79,7 @@ public final class Combat {
         refreshSpeedQueue(challengerSPD, tempChallengerSPD);
         refreshSpeedQueue(opponentSPD, tempOpponentSPD);
 
-        if (opponentSPD.isEmpty()) return "Win!";
+        if (opponentSPD.isEmpty()) return "Win!";  /// Add Xp and Gold change
         if (challengerSPD.isEmpty()) return "Loss!";
         return "Draw";
     }

@@ -7,7 +7,7 @@ public final class Utils {
 
     private Utils() {}  // Cannot be Instantiated
 
-    static Scanner scanner = new Scanner (System.in);
+    public static final Scanner scanner = new Scanner (System.in);
     
     public static String readString(String prompt) {
         String input;

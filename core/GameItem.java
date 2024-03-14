@@ -1,6 +1,8 @@
 package core;
 
-public abstract class GameItem {
+import java.io.Serializable;
+
+public abstract class GameItem implements Serializable {
 
     // Shared by Characters and Equipment
 

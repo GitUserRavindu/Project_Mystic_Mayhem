@@ -1,11 +1,12 @@
 package core;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 
 import characters.Character;
 
-public class Army implements Cloneable {
+public class Army implements Cloneable, Serializable {
     
     private HashMap<String, Character> armyCharacters;
 

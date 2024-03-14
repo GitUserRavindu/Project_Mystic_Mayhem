@@ -1,10 +1,12 @@
 package core;
 
+import java.io.Serializable;
+
 import characters.Character;
 import characters.CharacterRegistry;
 import core.HomeGrounds.HomeGround;
 
-public class Player {
+public class Player implements Serializable {
     private final String username;
     private String name;
     private float gold;
@@ -42,6 +44,9 @@ public class Player {
         return homeGround;
     }
     public String getHomeGroundName() {
+        if (homeGround == null) {
+            return "None";
+        }
         return homeGround.getName();
     }
 
