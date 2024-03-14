@@ -1,8 +1,5 @@
-import java.io.IOException;
 import java.io.Serializable;
-
 import java.util.ArrayList;
-
 import Character.Character;
 import HomeGround.Arcane;
 import HomeGround.Desert;
@@ -38,9 +35,6 @@ public class Player implements Serializable {
         this.gold = 500;
     }
 
-    //How the shop will work? Is it static?
-    //public static Shop shop = new Shop();
-
     //List of all players. Can be used to check if a username is already taken or not.
     //If the game is off, this must be saved to a file and loaded when the game starts.
     public static ArrayList<String> players = new ArrayList<String>();
@@ -64,11 +58,8 @@ public class Player implements Serializable {
 
             UserName = sc.nextLine();
         }
-
         players.add(UserName);
         this.setUserName(UserName);
-
-        //Didn't add for equipments. Will be added later.
 
     }
 
@@ -76,52 +67,51 @@ public class Player implements Serializable {
         this.UserName = new String(userName2);
     }
 
-    public void addCharacter(Character character, int position) {
-        for (Character c : army) {
-            if (c.getName().equals(character.getName())) {
-                System.out.println("Character is already in the army");
-                return;
-            } else if (c.getType().equals(character.getType())) {
-                System.out.println("Character of this type is already in the army");
-                System.out.println("Do you want to sell the character in the position? (Y/N)");
-                char check = sc.next().charAt(0);
-                if (check == 'Y' || check == 'y') {
-                    //army.sell(c);
-                    //A selling method will be added later.
-                    army.remove(c);
-                    army.add(character);
-                    return;
-                } else {
-                    return;
-                }
-            }
-        }
-        this.army.add(character);
-    }
+    // public void addCharacter(Character character, int position) {
+    //     for (Character c : army) {
+    //         if (c.getName().equals(character.getName())) {
+    //             System.out.println("Character is already in the army");
+    //             return;
+    //         } else if (c.getType().equals(character.getType())) {
+    //             System.out.println("Character of this type is already in the army");
+    //             System.out.println("Do you want to sell the character in the position? (Y/N)");
+    //             char check = sc.next().charAt(0);
+    //             if (check == 'Y' || check == 'y') {
+    //                 //army.sell(c);
+    //                 //A selling method will be added later.
+    //                 army.remove(c);
+    //                 army.add(character);
+    //                 return;
+    //             } else {
+    //                 return;
+    //             }
+    //         }
+    //     }
+    //     this.army.add(character);
+    // }
 
     public String getName() {
         return name;
     }
 
     public void setHomeGround() {
-        System.out.println("Choose a home ground");
+        System.out.println("Choose a home ground\n");
         System.out.println("1. Hillcrest");
         System.out.println("2. Marshland");
         System.out.println("3. Desert");
         System.out.println("4. Arcane\n\n");
-        System.out.println("Enter the number of the home ground: ");
+        System.out.print("Enter the number of the home ground: ");
 
         //Did not implement for invalid integer input.
-        int n = 0;
-        // while (true) {
-        // try {
+        int n = -1;
         n = sc.nextInt();
-        //         break;
-        //     // } catch (IOException e) {
-        //     //     System.out.println("Invalid input. Please enter a valid number.");
-        //     // }
-        // }
-
+        //Prompt player input valid number
+        while (!(-1<n&&n<4)) {
+                n = sc.nextInt();
+                System.out.println("Invalid input. Please enter a valid number.");
+                System.out.print("Enter the number of the home ground: ");
+        }
+        
         switch (n) {
             case 1:
                 homeGround = new Hillcrest();
@@ -139,14 +129,6 @@ public class Player implements Serializable {
                 System.out.println("Invalid input. Please enter a valid number.");
         }
     }
-
-    // public void setHomeGroundBonus() {
-    //     //Set the bonus of the home ground.
-    //     //Most of them just increase the stats of the characters.
-    //     //But Hillcrest can give highlanders a bonus turn with 20% attack power.
-    //     homeGround.setBonus(army,bonusTurns);
-    // }
-
     public void setName(String name) {
         this.name = name;
     }

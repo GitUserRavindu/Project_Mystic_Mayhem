@@ -2,19 +2,31 @@ import java.util.ArrayList;
 import Character.Character;
 public class battleSub {
   
-    public static int getPosition(String[] array, String element) {
-        for (int i = 0; i < array.length; i++) {
-            if (array[i].equals(element)) {
-                return i;
+public static int getPosition(String[] array, String element) {
+    for (int i = 0; i < array.length; i++) {
+        if (array[i].equals(element)) {
+            return i;
+        }
+    }
+    return -1; // return -1 if the element is not found in the array
+}
+public static void setOrderSpeed(ArrayList<Character> army){
+    Character temp;
+    for (int i = 0; i < army.size(); i++) {
+        for (int j = 0; j < army.size() - i - 1; j++) {
+            if (army.get(j).getSpeed() < army.get(j + 1).getSpeed()) { // Modified condition
+                temp = army.get(j);
+                army.set(j, army.get(j + 1));
+                army.set(j + 1, temp);
             }
         }
-        return -1; // return -1 if the element is not found in the array
     }
-    public static void setOrderSpeed(ArrayList<Character> army){
+    }
+public static void setOrderHealth(ArrayList<Character> army){
         Character temp;
         for (int i = 0; i < army.size(); i++) {
             for (int j = 0; j < army.size() - i - 1; j++) {
-                if (army.get(j).getSpeed() < army.get(j + 1).getSpeed()) { // Modified condition
+                if (army.get(j).getHealth() > army.get(j + 1).getHealth()) {
                     temp = army.get(j);
                     army.set(j, army.get(j + 1));
                     army.set(j + 1, temp);
@@ -22,32 +34,20 @@ public class battleSub {
             }
         }
         }
-        public void setOrderHealth(ArrayList<Character> army){
-            Character temp;
-            for (int i = 0; i < army.size(); i++) {
-                for (int j = 0; j < army.size() - i - 1; j++) {
-                    if (army.get(j).getHealth() > army.get(j + 1).getHealth()) {
-                        temp = army.get(j);
-                        army.set(j, army.get(j + 1));
-                        army.set(j + 1, temp);
-                    }
-                }
-            }
-            }
-        public void setOrderDefence(ArrayList<Character> army){
-            Character temp;
-            for (int i = 0; i < army.size(); i++) {
-                for (int j = 0; j < army.size() - i - 1; j++) {
-                    if (army.get(j).getDefense() > army.get(j + 1).getDefense()) {
-                        temp = army.get(j);
-                        army.set(j, army.get(j + 1));
-                        army.set(j + 1, temp);
-                    }
-                }
+public static void setOrderDefence(ArrayList<Character> army){
+    Character temp;
+    for (int i = 0; i < army.size(); i++) {
+        for (int j = 0; j < army.size() - i - 1; j++) {
+            if (army.get(j).getDefense() > army.get(j + 1).getDefense()) {
+                temp = army.get(j);
+                army.set(j, army.get(j + 1));
+                army.set(j + 1, temp);
             }
         }
+    }
+    }
 
-public void setOrderToEqualStats(ArrayList<Character> army,String[] Order){
+public static void setOrderToEqualStats(ArrayList<Character> army,String[] Order){
     int a=0,b=0;
 for(int i=0;i<army.size();i++){
     for(int j=0;j<army.size();j++){
