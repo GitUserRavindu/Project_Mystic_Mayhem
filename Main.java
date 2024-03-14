@@ -4,6 +4,7 @@ public class Main {
     
     public static void main (String[] args) {
 
+        /*
         PlayerManager PM;
 
         if(SaveGame.checkSave()) {
@@ -11,7 +12,9 @@ public class Main {
         } else {
             PM = PlayerManager.getInstance();
         }
+        */
 
+        PlayerManager PM = PlayerManager.getInstance();
 
         System.out.println("-------------------------------");
         System.out.println("         Mystic Mayhem!        ");

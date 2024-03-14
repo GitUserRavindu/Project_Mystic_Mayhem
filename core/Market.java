@@ -1,8 +1,8 @@
 package core;
 
 import equipment.*;
-import gameutils.Utils;
 import characters.*;
+import gameutils.Utils;
 import characters.Character;
 
 public class Market {
