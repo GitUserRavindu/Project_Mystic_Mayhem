@@ -1,5 +1,6 @@
-import java.util.Scanner;
 import java.lang.Math;
+
+import Utils.ScannerUtil;
 
 import Character.Character;
 import Character.Archer;
@@ -24,8 +25,7 @@ public class Market {
     //Singleton Design Pattern is used. Only one Market object can be created.
     private static Market instance = null;
 
-    private Market() {
-    }
+    private Market() {}
 
     //If there is no Market object, it creates a new one. Otherwise, it returns the existing one.
     public static Market getInstance() {
@@ -54,8 +54,7 @@ public class Market {
         System.out.println("Please enter the corresponding number: (1/2/3/4)");
         System.out.println();
 
-        Scanner scanner = new Scanner(System.in);
-        int choice = scanner.nextInt();
+        int choice = ScannerUtil.scanner.nextInt();
 
         switch (choice) {
             case 1:
@@ -104,9 +103,7 @@ public class Market {
         System.out.println("Please enter the corresponding number: (1/2/3/4)");
         System.out.println();
 
-        Scanner scanner = new Scanner(System.in);
-        int choice = scanner.nextInt();
-        ////scanner.close();
+        int choice = ScannerUtil.scanner.nextInt();
 
         switch (choice) {
             case 1:
@@ -185,10 +182,25 @@ public class Market {
 
     //Displays the characters that can be bought.
     private void buyArmy(){
-        System.out.println("You have selected to buy an army.");
+        System.out.println("You have selected to buy an army.\n");
+
+        if (!player.battleCompatibility()) {
+            System.out.println("Since your army is not consiting of at least one character from each category,");
+            System.out.println("we encourage you to buy one character from each category to make your army complete.");
+            System.out.println("You can buy the advanced characters as you win more battles and earn more golds.");
+            System.out.println("You can always sell your army characters in the sell menu and buy new ones here.\n");
+        }
+        else {
+            System.out.println("You army is already complete with at least one character from each category.");
+            System.out.println("If you want to buy advanced characters, you can always sell your army characters first.");
+            System.out.println("However, check the balance of your gold coins first before proceeding to buy advanced characters.\n");
+        }
+
+
         System.out.println("------------------------------------------------------");
         System.out.println("Please select the character category you want to buy: ");
         System.out.println("------------------------------------------------------");
+        System.out.println("NOTE: You need to have one character from each category in your army.");
         System.out.println("    1. Archer");
         System.out.println("    2. Knight");
         System.out.println("    3. Mage");
@@ -197,8 +209,7 @@ public class Market {
         System.out.println("Please enter the corresponding number: (1/2/3/4/5)");
         System.out.println();
 
-        Scanner scanner = new Scanner(System.in);
-        int choice = scanner.nextInt();
+        int choice = ScannerUtil.scanner.nextInt();
 
         int characterChoice;
 
@@ -225,9 +236,21 @@ public class Market {
                 System.out.println("Please select the corresponding number: (1/2/3/4/5)");
                 System.out.println();
 
-                characterChoice = scanner.nextInt();
+                characterChoice = ScannerUtil.scanner.nextInt();
                 System.out.println("You have selected " + characterChoice);
 
+                while(true) {
+                    if (characterChoice < 1 || characterChoice > 5) {
+                        System.out.println("Invalid choice. Please enter a valid number. Going back to the Buy menu...");
+                        System.out.println();
+                        return;
+                    }
+                    else {
+                        break;
+                    }
+                }
+                
+                
                 switch (characterChoice) {
                     case 1:
                         buyTransaction("Shooter");
@@ -270,8 +293,8 @@ public class Market {
                 }
                 System.out.println("Please select the corresponding number: (1/2/3/4/5)");
                 System.out.println();
-
-                characterChoice = scanner.nextInt();
+                
+                characterChoice = ScannerUtil.scanner.nextInt();
                 System.out.println("You have selected " + characterChoice);
 
                 switch (characterChoice) {
@@ -316,8 +339,8 @@ public class Market {
                 }
                 System.out.println("Please select the corresponding number: (1/2/3/4/5)");
                 System.out.println();
-
-                characterChoice = scanner.nextInt();
+                
+                characterChoice = ScannerUtil.scanner.nextInt();
                 System.out.println("You have selected " + characterChoice);
 
                 switch (characterChoice) {
@@ -362,7 +385,7 @@ public class Market {
                 System.out.println("Please select the corresponding number: (1/2/3/4/5)");
                 System.out.println();
 
-                characterChoice = scanner.nextInt();
+                characterChoice = ScannerUtil.scanner.nextInt();
                 System.out.println("You have selected " + characterChoice);
 
                 switch (characterChoice) {
@@ -408,7 +431,7 @@ public class Market {
                 System.out.println("Please select the corresponding number: (1/2/3/4/5)");
                 System.out.println();
 
-                characterChoice = scanner.nextInt();
+                characterChoice = ScannerUtil.scanner.nextInt();
                 System.out.println("You have selected " + characterChoice);
 
                 switch (characterChoice) {
@@ -490,6 +513,13 @@ public class Market {
     private void buyEquipment(){
         System.out.println("You have selected to buy an equipment.");
 
+        if (!player.battleCompatibility()) {
+            System.out.println("Since your army is not consiting of at least one character from each category,");
+            System.out.println("we encourage you to buy one character from each category to make your army complete.");
+            System.out.println("After that, you can buy the equipment for each character.");
+            return;
+        }
+
         System.out.println("-------------------------------------------------------------");
         System.out.println("Please select which character you want to buy equipment for: ");
         System.out.println("-------------------------------------------------------------");
@@ -502,8 +532,7 @@ public class Market {
         System.out.println("Please enter the corresponding number: ");
         System.out.println();
 
-        Scanner scanner = new Scanner(System.in);
-        int characterChoice = scanner.nextInt();
+        int characterChoice = ScannerUtil.scanner.nextInt();
 
         try {
             if (characterChoice < 1 || characterChoice > player.army.size()) {
@@ -528,7 +557,7 @@ public class Market {
         System.out.println("Please enter the corresponding number: (1/2)");
         System.out.println();
 
-        int choice = scanner.nextInt();
+        int choice = ScannerUtil.scanner.nextInt();
 
         try {
             if (choice < 1 || choice > 2) {
@@ -553,7 +582,7 @@ public class Market {
                             System.out.println();
                             System.out.println("Do you want to replace " + selectedCharacter.getArmor().getName() + "? (y/n)");
 
-                            char c = scanner.next().charAt(0);
+                            char c = ScannerUtil.scanner.next().charAt(0);
 
                             if(c == 'N' || c == 'n')
                             {
@@ -574,7 +603,7 @@ public class Market {
                 System.out.println("Please select the corresponding number: (1/2/3)");
                 System.out.println();
 
-                int armourChoice = scanner.nextInt();
+                int armourChoice = ScannerUtil.scanner.nextInt();
                 System.out.println("You have selected " + armourChoice);
                 System.out.println();
 
@@ -620,7 +649,7 @@ public class Market {
                 System.out.println("Please select the corresponding number: (1/2/3)");
                 System.out.println();
 
-                int artefactChoice = scanner.nextInt();
+                int artefactChoice = ScannerUtil.scanner.nextInt();
                 System.out.println("You have selected " + artefactChoice);
                 System.out.println();
 
@@ -670,13 +699,6 @@ public class Market {
             int valueIncrease = Math.round(neededGoldCoins * 20/100);
             selectedCharacter.setPrize(selectedCharacter.getPrize() + valueIncrease);
 
-            //set the new attack, defense, health and speed of character
-            // selectedCharacter.setAttack(selectedCharacter.getAttack() + equipment.getAttack());
-            // selectedCharacter.setDefense(selectedCharacter.getDefense() + equipment.getDefense());
-            // selectedCharacter.setHealth(selectedCharacter.getHealth() + equipment.getHealth());
-            // selectedCharacter.setSpeed(selectedCharacter.getSpeed() + equipment.getSpeed());
-
-            //display the new character attributes
             System.out.println("---------------------------");
             System.out.println("Transacation is Successful!");
             System.out.println("---------------------------");
@@ -685,27 +707,25 @@ public class Market {
             System.out.println("Your available gold coins are: " + existingGoldCoins + " gold coins.");
             System.out.println();
 
-            System.out.println("New attributes of " + selectedCharacter.getName() + " are: ");
+            //display the new character attributes
+            System.out.println("Updated attributes of " + selectedCharacter.getName() + " are: ");
             System.out.println("    Attack  : " + selectedCharacter.getAttack());
             System.out.println("    Defense : " + selectedCharacter.getDefense());
             System.out.println("    Health  : " + selectedCharacter.getHealth());
             System.out.println("    Speed   : " + selectedCharacter.getSpeed());
+            System.out.println("    Price   : " + selectedCharacter.getPrize());
             System.out.println();
 
-            System.out.println("Please come back later. Going back to the Buy menu...");
-            System.out.println();
+            System.out.println("Please come back later. Going back to the Buy menu...\n");
             return;
         } else {
             System.out.println("----------------------------");
             System.out.println("Transcation is Unsuccessful!");
-            System.out.println("----------------------------");
-            System.out.println();
+            System.out.println("----------------------------\n");
             System.out.println("You don't have enough gold!");
             System.out.println("Available gold coins: " + existingGoldCoins + " gold coins.");
-            System.out.println("Needed gold coins: " + neededGoldCoins + " gold coins.");
-            System.out.println();
-            System.out.println("Please come back later. Going back to the Buy menu...");
-            System.out.println();
+            System.out.println("Needed gold coins: " + neededGoldCoins + " gold coins.\n");
+            System.out.println("Please come back later. Going back to the Buy menu...\n");
             return;
         }
     }
@@ -728,8 +748,7 @@ public class Market {
         System.out.println("Please enter the corresponding number: ");
         System.out.println();
 
-        Scanner scanner = new Scanner(System.in);
-        int characterChoice = scanner.nextInt();
+        int characterChoice = ScannerUtil.scanner.nextInt();
 
         try {
             if (characterChoice < 1 || characterChoice > player.army.size()) {
@@ -747,7 +766,7 @@ public class Market {
         System.out.println("Are you sure you want to sell " + selectedCharacter.getName() + "? (y/n)");
         System.out.println();
 
-        char c = scanner.next().charAt(0);
+        char c = ScannerUtil.scanner.next().charAt(0);
         if(c == 'Y' || c == 'y') {
             int sellPrice = Math.round(selectedCharacter.getPrize() * 90/100);
             existingGoldCoins += sellPrice;

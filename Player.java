@@ -21,7 +21,8 @@ public class Player implements Serializable {
     private int userId; // A unique id for each user. Can be generated using number of users.
     private int goldCoins;
     private float xp;
-    transient private HomeGround homeGround; //HomeGround is a class that contains the home ground of the player.
+    private String homeGroundName; //This is used to save the home ground name in the file.
+    transient private HomeGround homeGround; //HomeGround is a class that contains the home ground of the player. Not saved in the file.
     public ArrayList<Character> army = new ArrayList<Character>(); //////!!!!!Public, Check with market    
     // End of Player Attributes -----------------------------------------------------------------------   
     
@@ -41,6 +42,8 @@ public class Player implements Serializable {
     public int getGold() { return goldCoins; }
         
     public float getXp() { return xp; }
+
+    public String getHomeGroundName() { return homeGroundName; }
     
     public HomeGround getHomeGround() { return homeGround; }
   
@@ -58,6 +61,8 @@ public class Player implements Serializable {
     public void setGold(int goldCoins) { this.goldCoins = goldCoins; }
 
     public void setXp(float xp) { this.xp = xp; }
+
+    public void setHomeGroundName(String homeGroundName) { this.homeGroundName = homeGroundName; }
 
     public void setHomeGround() {
         System.out.println("Choose a home ground");
@@ -98,6 +103,26 @@ public class Player implements Serializable {
                 System.out.println("Invalid input. Please enter a valid number."); //This will never be executed. I guess
         }
     }
+
+    //This method is used to set the home ground when the game is loaded from the file. Since homeGround object is not saving.
+    public void setHomeGroundInGameLoad(String homeGroundName) { 
+        switch (homeGroundName) {
+            case "Hillcrest":
+                this.homeGround = new Hillcrest();
+                break;
+            case "Marshland":
+                this.homeGround = new Marshland();
+                break;
+            case "Desert":
+                this.homeGround = new Desert();
+                break;
+            case "Arcane":
+                this.homeGround = new Arcane();
+                break;
+            default:
+                System.out.println("Invalid input. Please enter a valid number."); //This will never be executed. I guess
+        }
+    }
     
     //Since army attribute is public, this method is not necessary. 
     //In the market, the characters are added to the army directly.
@@ -108,21 +133,53 @@ public class Player implements Serializable {
     // Other Methods ----------------------------------------------------------------------------------
     public void displayCurrentStatus() {
         System.out.println("Here's your profile status :");
-        System.out.println("------------------------------------");
-        System.out.println("---------- Profile Status ----------");
-        System.out.format("%12s %3s %20s", "UserName", " : " , userName + "\n");
-        System.out.format("%12s %3s %20s", "UserId", " : " , userId + "\n");
-        System.out.format("%12s %3s %20s", "Name", " : " , name + "\n");
-        System.out.format("%12s %3s %20s", "GoldCoins", " : " , goldCoins + "\n");
-        System.out.format("%12s %3s %20s", "XP", " : " , xp + "\n");
-        System.out.format("%12s %3s %20s", "HomeGround", " : " , homeGround.getName() + "\n");
-        System.out.print("        Army  : ");
+        System.out.println("-----------------------------------------------------------------");
+        System.out.println("------------------ Profile Status -------------------------------");
+        System.out.println("    UserName    : " + userName);
+        System.out.println("    UserId      : " + userId);
+        System.out.println("    Name        : " + name);
+        System.out.println("    GoldCoins   : " + goldCoins);
+        System.out.println("    XP          : " + xp);
+        System.out.println("    HomeGround  : " + homeGroundName);
+        System.out.print("    Army        : ");
         for (Character character : army) {
             System.out.print(character.getName() + ", ");
         }
         System.out.println("\n");
-        System.out.println("------ End of Profile Status -------");
-        System.out.println("------------------------------------");
+        System.out.println("------------------ End of Profile Status ------------------------");
+        System.out.println("-----------------------------------------------------------------");
+    }
+
+    public void seeArmyDetails() {
+        System.out.println("Here's your army details :");
+        System.out.println("----------------------------------------------------------------");
+        System.out.println("------------------ Army Details --------------------------------");
+        System.out.println("Your army consists of the following characters :\n");
+        for (Character character : army) {
+            System.out.println("--> " + character.getName());
+            System.out.println("        Type    : " + character.getType());
+            System.out.println("        Health  : " + character.getHealth());
+            System.out.println("        Attack  : " + character.getAttack());
+            System.out.println("        Defense : " + character.getDefense());
+            System.out.println("        Speed   : " + character.getSpeed());
+            System.out.println("        Tribe   : " + character.getTribe());
+            System.out.println("        Price   : " + character.getPrize());
+            
+            if (character.getArmor() == null) {
+                System.out.println("        Armor   : No Armor");
+            } else {
+                System.out.println("        Armor   : " + character.getArmor().getName());
+            }
+            
+            if (character.getArtefact() == null) {
+                System.out.println("        Artefact: No Artefact");
+            } else {
+            System.out.println("        Artefact: " + character.getArtefact().getName());
+            }
+            System.out.println("\n");       
+        }
+        System.out.println("------------------ End of Army Details -------------------------");
+        System.out.println("---------------------------------------------------------------");
     }
     // End of Other Methods ---------------------------------------------------------------------------
 }

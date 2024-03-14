@@ -1,28 +1,100 @@
-import java.io.*;
-import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.Scanner;
-import HomeGround.*;
-
-import Character.Character;
-// import Equipment.Equipment;
-
+import Utils.MainMenu;
+import Utils.ScannerUtil;
 
 public class Main {
     public static void main(String[] args) {
 
-        System.out.println("------------------------------");
-        System.out.println("Welcome to the Mystic Mayhem! ");
-        System.out.println("------------------------------");
+        MainMenu.displayGameStart();
 
-        Scanner scanner = new Scanner(System.in);
-
+        // Load a saved Game
         GameSaveManager gameLoadManager = new GameSaveManager();
         gameLoadManager.loadGameInstructions();
 
+        // Initializations
         Registry.characterCache(); // Making game character configurations
         Registry.equipmentCache(); // Making game equipment configurations
+        Market market = Market.getInstance();
 
+        Player currentPlayer = null;
+        
+        // Main Menu
+        while (true) {
+            int choice = MainMenu.displayMainMenu();
+
+            if (choice == 1) {
+                currentPlayer = Profile.selectProfile(); // Select a Profile
+            } 
+            
+            else if (choice == 2) {
+                currentPlayer = Profile.createProfile(); // Create a New Profile
+            } 
+            
+            else if (choice == 3) {
+                if (currentPlayer == null) {
+                    System.out.println("No profile selected. Please select a profile or create a new one.\n");
+                    continue;
+                }
+                currentPlayer.displayCurrentStatus(); // See your current Profile
+            } 
+            
+            else if (choice == 4) {
+                if (currentPlayer == null) {
+                    System.out.println("No profile selected. Please select a profile or create a new one.\n");
+                    continue;
+                }
+                currentPlayer.seeArmyDetails(); // See your Army Details
+            } 
+            
+            else if (choice == 5) {
+                if (currentPlayer == null) {
+                    System.out.println("No profile selected. Please select a profile or create a new one.\n");
+                    continue;
+                }
+                Profile.changeName(currentPlayer); // Change your Name
+            } 
+            
+            else if (choice == 6) {
+                if (currentPlayer == null) {
+                    System.out.println("No profile selected. Please select a profile or create a new one.\n");
+                    continue;
+                }
+                market.marketMenu(currentPlayer); // Visit Market Place
+            } 
+            
+            else if (choice == 7) {
+                if (currentPlayer == null) {
+                    System.out.println("No profile selected. Please select a profile or create a new one.\n");
+                    continue;
+                }
+
+                // Select Opponent
+                Player opponentPlayer = Profile.selectOpponent(currentPlayer);
+
+                if (opponentPlayer == null) {
+                    System.out.println("No opponent selected. Please select an opponent.\n");
+                    continue;
+                }
+
+                Battle new_battle = new Battle(currentPlayer, opponentPlayer); // Start a New Battle
+                new_battle.fight();
+            } 
+            
+            else if (choice == 8) {
+                break;
+            }
+        }
+
+        // Save Game
+        GameSaveManager gameSaveManager = new GameSaveManager();
+        gameSaveManager.saveGameInsructions();
+        
+        // Quit Game
+        MainMenu.displayGameEnd();
+
+        // Close Scanner
+        ScannerUtil.scanner.close();
+        
+        // Not Needed below, can be deleted after testing
         // ArrayList<Character> army1 = new ArrayList<>();
         // army1.add(Registry.returnCharacter("Alchemist"));
         // army1.add(Registry.returnCharacter("Warlock"));
@@ -41,68 +113,5 @@ public class Main {
 
         //// Battle new_battle = new Battle(player1, player2);
         //// new_battle.fight();
-
-        // System.out.println(c.getName());
-
-        System.out.println("Do you want to select an existing profile or create a new one? ");
-        System.out.println("1. Create a new profile");
-        System.out.println("2. Select an existing profile");
-
-        int choice = scanner.nextInt();
-        Player playerP;
-
-        if (choice == 1) {
-            playerP = Profile.createProfile();
-        }
-        else {
-            HashMap<Integer, Player> selectPlayerMap = new HashMap<Integer, Player>();
-            selectPlayerMap = Profile.getPlayerMap();
-
-            if (selectPlayerMap.size() == 0) {
-                System.out.println("No profiles found. Please create a new profile.");
-                playerP = Profile.createProfile();
-            }
-            else {
-                System.out.println("Select a player to play with: ");
-                for (Integer key : selectPlayerMap.keySet()) {
-                    System.out.println(key + ". " + selectPlayerMap.get(key).getName());
-                }
-                int playerChoice = scanner.nextInt();
-                playerP = selectPlayerMap.get(playerChoice);
-            }
-            
-        }   
-
-        Market market = Market.getInstance();
-        market.marketMenu(playerP);
-
-        //Finally, we will be here
-        // System.out.println("-------------------------------------");
-        // System.out.println("Do you want to save the game? (y/n)");
-        // String save = scanner.nextLine();
-
-        // if (save.equals("y")) {
-        //     try {
-        //         FileOutputStream savefile = new FileOutputStream("Player.ser");
-        //         ObjectOutputStream out = new ObjectOutputStream(savefile);
-        //         out.writeObject(playerP);
-        //         out.close();
-        //         System.out.println("Game saved successfully.");
-        //     } catch (IOException e) {
-        //         System.out.println("Error: " + e);
-        //         e.printStackTrace();
-        //     }
-        // }
-        
-        GameSaveManager gameSaveManager = new GameSaveManager();
-        gameSaveManager.saveGameInsructions();
-
-        System.out.println("-------------------------------");
-        System.out.println("Leaving Mystic Mayhem! Goodbye!");
-        System.out.println("-------------------------------");
-        System.out.println("-------------------------------");
-
-        scanner.close();
-
     }
 }
