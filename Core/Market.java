@@ -92,50 +92,6 @@ public class Market {
 
     //////////////////// Buy Menu /////////////////////////////////////////////////////////////////////////////////////
 
-    //Displays the options for the player to choose what to buy.
-    // private void buyMenu() {
-    //     System.out.println("You have selected to buy Army or Equipment.");
-    //     System.out.println("-----------------------------------------------");
-    //     System.out.println("What you want to buy? Please select an option: ");
-    //     System.out.println("-----------------------------------------------");
-    //     System.out.println("    1. Army");
-    //     System.out.println("    2. Equipment");
-    //     System.out.println("    3. Check the balance of your gold coins");
-    //     System.out.println("    4. Go back to the Market Menu");
-    //     System.out.println("Please enter the corresponding number: (1/2/3/4)");
-    //     System.out.println();
-
-    //     int choice = ScannerUtil.scanner.nextInt();
-
-    //     switch (choice) {
-    //         case 1:
-    //             buyArmy();
-    //             break;
-    //         case 2:
-    //             buyEquipment();
-    //             break;
-    //         case 3:
-    //             System.out.println("You have selected to check the balance of your gold coins. Here is your balance details: ");
-    //             System.out.println("You have " + player.getGold() + " gold coins.");
-    //             System.out.println();
-    //             break;
-    //         case 4:
-    //             System.out.println("You have selected to go back to the Market Menu. Going back to the Market Menu...");
-    //             System.out.println("---------------------------------------------------------------------------------");
-    //             System.out.println();
-    //             return;
-    //         default:
-    //             System.out.println("Invalid choice. Please enter a valid number.");
-    //             System.out.println();
-    //             break;
-    //     }
-
-    //     while (choice != 4) {
-    //         buyMenu();
-    //         return;
-    //     }
-    // }
-
 
     /////////////////////////// Show Room - Display Items //////////////////////////////////////////////////////////////////////
 
