@@ -60,7 +60,7 @@ public class Battle {
             //Thse will be used to select next character----The previous character can be skipped
             int tmp1=0,tmp2=0;
 
-        for(int j=0;j<5;j++){
+        for(int j=0;j<10;j++){
             System.out.println("\nTurn "+(2*j+1)+":"+name1+"\n");
 
             //Attack order
