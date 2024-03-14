@@ -3,6 +3,15 @@ package Utils;
 public class MainMenu {
     
     public static void displayGameStart() {
+        System.out.println("___  ___          _   _         ___  ___            _                    ");
+        System.out.println("|  \\/  |         | | (_)        |  \\/  |           | |                   ");
+        System.out.println("| .  . |_   _ ___| |_ _  ___    | .  . | __ _ _   _| |__   ___ _ __ ___  ");
+        System.out.println("| |\\/| | | | / __| __| |/ __|   | |\\/| |/ _` | | | | '_ \\ / _ \\ '_ ` _ \\ ");
+        System.out.println("| |  | | |_| \\__ \\ |_| | (__    | |  | | (_| | |_| | | | |  __/ | | | | |");
+        System.out.println("\\_|  |_/\\__, |___/\\__|_|\\___|   \\_|  |_/\\__,_|\\__, |_| |_|\\___|_| |_| |_|");
+        System.out.println("         __/ |                                 __/ |                     ");
+        System.out.println("        |___/                                 |___/                      ");
+
         System.out.println("--------------------------------------------------------------------");
         System.out.println("|                  Welcome to the Mystic Mayhem!                   |");
         System.out.println("|  Dive into a realm where legends are born and destinies unfold.  |");
