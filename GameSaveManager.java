@@ -34,7 +34,7 @@ public class GameSaveManager implements Serializable {
             saveGame();
         }
         else {
-            System.out.println("Unsuccessful, Game not saved. Exiting...\n");
+            System.out.println("Game not saved. Exiting...\n");
         }
     }
 
@@ -76,7 +76,7 @@ public class GameSaveManager implements Serializable {
             loadGame();
         }
         else {
-            System.out.println("Unsuccessful, Game not loaded. Exiting...\n");
+            System.out.println("Game not loaded. Exiting...\n");
         }
     }
 
