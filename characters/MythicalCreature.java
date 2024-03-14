@@ -1,20 +1,14 @@
 package characters;
 
-public class MythicalCreature extends Character {
-    // All the structures are same as characters
-    public MythicalCreature()
-    {
+public class MythicalCreature extends Character{
 
-    }
-
-    public MythicalCreature(Character other)
-    {
-        super(other);
+    public MythicalCreature(int tier, String name, int price, int hp, int atk, int def, int spd) {
+        super(tier, name, price, hp, atk, def, spd);
     }
 
     @Override
-    public Character makeClone()
-    {
-        return (new MythicalCreature(this));
+    public String getCategory () {
+        return "Mythical Creature";
     }
+    
 }

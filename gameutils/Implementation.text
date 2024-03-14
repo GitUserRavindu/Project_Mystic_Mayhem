@@ -1,0 +1,20 @@
+
+
+Maintain this in the Console
+
+Selected Player: Name (Username)
+Coins: 500
+XP: 4
+Army: Shooter (Archer), Templar (Knight), Saint (Healer)
+Home Ground: None
+
+Enter Key
+1: Look for an opponent to battle - PlayerManager
+2: Purchase character 
+3: Purchase equipment
+4: Sell character
+5: Set Home Ground
+6: Inspect Army
+7: Help
+
+0: Change Player

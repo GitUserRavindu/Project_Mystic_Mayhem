@@ -70,16 +70,16 @@ public class HomeGrounds {
         characterHomegrounds.put("Pegasus", HomeGround.ARCANE);
     }
 
-    public static void addHomeGroundStats(Player player1, Player player2, HomeGround homeGround) {
+    public static void addHomeGroundStats(String p1name, Army p1army, String p2name, Army p2army, HomeGround homeGround) {
         System.out.println("Entering " + homeGround.getName() + "...");
         System.out.println();
-        System.out.println(player1.getName() + "'s Army: ");
-        for (Character character : player1.getArmy().getCharacters()) {
+        System.out.println(p1name + "'s Army: ");
+        for (Character character : p1army.getCharacters()) {
             updateCharacterStats(character, homeGround);
         }
         System.out.println();
-        System.out.println(player2.getName() + "'s Army: ");
-        for (Character character : player2.getArmy().getCharacters()) {
+        System.out.println(p2name + "'s Army: ");
+        for (Character character : p2army.getCharacters()) {
             updateCharacterStats(character, homeGround);
         }
         System.out.println();

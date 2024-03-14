@@ -4,19 +4,33 @@ public abstract class GameItem {
 
     // Shared by Characters and Equipment
 
+    protected String name;
     protected short price;
     protected float hp, atk;
-    protected byte def, spd;
+    protected byte def, spd, tier;
     
     protected GameItem() {       // This constructor is used for every sub-class
-        initStats();             // Sets values as defines by each sub-class
+        //initStats();             // Sets values as defines by each sub-class
     }
-    protected abstract void initStats();  // Resets stats of a game item to default values of that item
+
+    public GameItem(int tier, String name, int price, int hp,  int atk, int def, int spd) {
+        
+        this.name = name;
+        this.tier = (byte) tier;
+        this.price = (short) price;
+        this.hp = (float) hp;
+        this.atk = (float) atk;
+        this.def = (byte) def;
+        this.spd = (byte) spd;
+    }
 
     // Getters
 
     public abstract String getCategory();
-    public abstract String getName();
+
+    public String getName() {
+        return name;
+    }
 
     public String getNameAndCategory() {
         return getName() + " [" + getCategory().substring(0,1) + "]";
@@ -54,10 +68,10 @@ public abstract class GameItem {
     // Setters
     
     public void addStats(double hp, int atk, int def, int spd) {
-        hp += (float) hp;
-        atk += (float) atk;
-        def += (byte) def;
-        spd += (byte) spd;
+        this.hp += (float) hp;
+        this.atk += (float) atk;
+        this.def += (byte) def;
+        this.spd += (byte) spd;
     }
 
     public void addPrice(int change) {

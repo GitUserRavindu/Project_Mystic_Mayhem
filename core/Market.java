@@ -17,8 +17,8 @@ import equipment.Equipment;
 public class Market {
 
     private Player player;
-    private int existingGoldCoins;
-    private int neededGoldCoins;
+    private float existingGoldCoins;
+    private float neededGoldCoins;
 
     
     ////////////////////Market Constructor///////////////////////////////////////////////////////////////////////////////

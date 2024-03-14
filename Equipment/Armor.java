@@ -1,20 +1,14 @@
 package equipment;
 
-public class Armor extends Equipment {
+public class Armor extends Equipment{
 
-    public Armor()
-    {
-
+    public Armor(int tier, String name, int price, int hp, int atk, int def, int spd) {
+        super(tier, name, price, hp, atk, def, spd);
     }
-
-    public Armor(Equipment other)
-    {
-        super(other);
+       
+    @Override
+    public String getCategory () {
+        return "Armor";
     }
-
-    public Equipment makeClone()
-    {
-        return (new Armor(this));
-    }
-
+ 
 }

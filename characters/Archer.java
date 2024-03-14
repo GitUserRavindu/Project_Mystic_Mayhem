@@ -2,19 +2,12 @@ package characters;
 
 public class Archer extends Character {
 
-    public Archer()
-    {
-
-    }
-
-    public Archer(Character other)
-    {
-        super(other);
+    public Archer(int tier, String name, int price, int hp, int atk, int def, int spd) {
+        super(tier, name, price, hp, atk, def, spd);
     }
 
     @Override
-    public Character makeClone()
-    {
-        return (new Archer(this));
-    }
+    public String getCategory () {
+        return "Archer";
+    }   
 }
