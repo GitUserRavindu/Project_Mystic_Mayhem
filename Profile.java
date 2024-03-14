@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 import Utils.ScannerUtil;
 
@@ -71,7 +72,7 @@ public class Profile {
 
         // Player userId
         player.setUserId(profileCount); //Zero based
-        
+
         // Player userName
         System.out.println("---> Please Enter a Username (This has to be unique) : \n");
 
@@ -86,16 +87,16 @@ public class Profile {
 
         // Player Homeground
         System.out.println("---> Please Enter a HomeGround : \n");
-        player.setHomeGround();
+        player.setHomeGround(); // Fix: Correct method call to set the player's home ground
         System.out.println("Your homeground has been set to : " + player.getHomeGround().getName() + "\n");
 
-        
+
         // Player String HomeGroundName
         player.setHomeGroundName(player.getHomeGround().getName());
-        
+
         // Player Army
         System.out.println("---> For building your army, Please visit to the market menu in the main menu. \n");
-              
+
         // Add to playerMap
         playerMap.put(player.getUserId(), player);
 
@@ -119,7 +120,7 @@ public class Profile {
         System.out.println("You have selected to change your name.");
         System.out.println("Your current name is : " + player.getName() + "\n");
         System.out.println("Please enter the new name : ");
-        
+
         String newName = ScannerUtil.scanner.nextLine();
 
         while (newName.length() == 0) {
@@ -138,7 +139,7 @@ public class Profile {
         System.out.println("-------------------------------");
         System.out.println("Select a profile to play with: ");
         System.out.println("-------------------------------\n");
-        
+
         if (playerMap.size() == 0) {
             System.out.println("Sorry, No profiles found. Please create a new profile.\n");
             return null;
@@ -148,18 +149,72 @@ public class Profile {
                 System.out.println("  " + key + ". " + playerMap.get(key).getName());
             }
             System.out.println("Enter the number of the profile you want to select: \n");
-            
+
             while (true) {
                 try {
                     int playerChoice = ScannerUtil.scanner.nextInt();
                     Player player = playerMap.get(playerChoice);
                     return player;
                 } catch (Exception e) {
+                    ScannerUtil.scanner.nextLine();
                     System.out.println("Invalid input. Please enter a valid number.\n");
-                }          
+                }
+            }
+        }
+    }
+
+    public static Player selectOpponent (Player currentPlayer) {
+        System.out.println("-------------------------------");
+        System.out.println("Select an opponent to Battle : ");
+        System.out.println("-------------------------------\n");
+
+        if (playerMap.size() == 0 || playerMap.size() == 1) {
+            System.out.println("Sorry, No opponents found. Please create a new profile.\n");
+            return null;
+        }
+        else {
+            ArrayList<Player> opponentList = new ArrayList<Player>(playerMap.values());
+            Random random = new Random();
+
+            while (true) {
+                int randomIndex = random.nextInt(opponentList.size());
+                Player randomOpponent = opponentList.get(randomIndex);
+
+                if (randomOpponent.getUserId() != currentPlayer.getUserId()) {
+                    System.out.println("Random opponent selected");
+                    System.out.println("------------------------");
+                    System.out.println("    Opponent        : " + randomOpponent.getName());
+                    System.out.println("    Opponent's XP   : " + randomOpponent.getXp() + "\n");
+                    System.out.println("What do you want to do?");
+                    System.out.println("    1. Challenge this opponent");
+                    System.out.println("    2. Skip to another opponent");
+                    System.out.println("    3. Go back");
+                    System.out.println("Please enter the corresponding option : (1/2/3)\n");
+
+                    int choice = 0;
+
+                    while (true) {
+                        try {
+                            choice = ScannerUtil.scanner.nextInt();
+                            if (choice < 1 || choice > 3) {
+                                throw new Exception();
+                            }
+                            break;
+                        } catch (Exception e) {
+                            ScannerUtil.scanner.nextLine();
+                            System.out.println("Invalid input. Please enter a valid number.\n");
+                        }
+                    }
+
+                    if (choice == 1) { return randomOpponent; }
+                    else if (choice == 2) { continue; }
+                    else { return null; }
+                }
+                else {
+                    continue;
+                }
             }
         }
     }
     // End of Other Profile Methods ------------------------------------------------------------------------------------
-
 }
