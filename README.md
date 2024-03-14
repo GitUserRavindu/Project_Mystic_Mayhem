@@ -59,22 +59,25 @@ Enter the number of the option you want to select:
 Welcome to the Market Place!
 ----------------------------
 What you want to do today? Please select an option: 
-    1. Buy Army or Equipment
-    2. Sell Army
-    3. Check the balance of your gold coins
-    4. Exit
+    1. Buy Army
+    2. Buy Equipment
+    3. Sell Army
+    4. Check the balance of your gold coins
+    5. Exit
 Please enter the corresponding number: (1/2/3/4)
 ```
 
 This is the kind of the interface of the Market menu.
-1. For buying related operations
-	- Re-directs the user to the market menu if the user is not eligible to buy the respective army or the equipment.
-	- When buying new equipment for character, the already present equipment will be discarded(**no refunding**).
-2. Selling Army
+1. For buying army
+	- Re-directs the user to the market menu if the user is not eligible to buy the respective army.
+
+2. For buying equipment
+ 	- When buying new equipment for character, the already present equipment will be discarded(**no refunding**).
+3. Selling Army
 	- We can choose the  character that we already have, to sell. And the **refunding** happens when we replace the character.
-3. Checking  the balance
+4. Checking  the balance
 	- Prints out the current gold coins of the player.
-4. Exist
+5. Exist
 	- Exits out of the market and goes to the [Game Menu](#game-menu).
 
 ### <a name="battle-menu"></a> Battle Menu
