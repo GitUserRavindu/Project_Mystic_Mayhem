@@ -1,3 +1,5 @@
+package Core;
+
 import java.lang.Math;
 
 import Utils.ScannerUtil;
@@ -267,7 +269,7 @@ public class Market {
                 }
                 System.out.println("Please select the corresponding number: (1/2/3/4/5)");
                 System.out.println();
-                
+
                 characterChoice = ScannerUtil.scanner.nextInt();
                 System.out.println("You have selected " + characterChoice);
 
@@ -313,7 +315,7 @@ public class Market {
                 }
                 System.out.println("Please select the corresponding number: (1/2/3/4/5)");
                 System.out.println();
-                
+
                 characterChoice = ScannerUtil.scanner.nextInt();
                 System.out.println("You have selected " + characterChoice);
 
@@ -435,7 +437,7 @@ public class Market {
                 System.out.println();
                 break;
         }
-   
+
     }
 
 

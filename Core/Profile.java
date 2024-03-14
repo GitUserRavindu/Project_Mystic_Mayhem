@@ -1,3 +1,5 @@
+package Core;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -12,21 +14,21 @@ public class Profile {
     private static HashMap<Integer, Player> playerMap = new HashMap<Integer, Player>(); // map of userIds to profiles.should it be public?
     // End of Profile Attributes ---------------------------------------------------------------------------------------
 
-    
+
     // Profile Getters -------------------------------------------------------------------------------------------------
     public static int getProfileCount() { return profileCount; }
     public static ArrayList<String> getUserNameList() { return userNameList; } //This will not be used in the game.
     public static HashMap<Integer, Player> getPlayerMap() { return playerMap; }
     // End of Profile Getters ------------------------------------------------------------------------------------------
-    
-    
+
+
     // Need setters for saving and loading purposes.
     // Profile Setters -------------------------------------------------------------------------------------------------
     public static void setProfileCount(int profileCount) { Profile.profileCount = profileCount; }
     public static void setUserNameList(ArrayList<String> userNameList) { Profile.userNameList = userNameList; }
     public static void setPlayerMap(HashMap<Integer, Player> playerMap) { Profile.playerMap = playerMap; }
     // End of Profile Setters ------------------------------------------------------------------------------------------
-    
+
 
     // Other Profile Methods -------------------------------------------------------------------------------------------
     public static Player createProfile() {
@@ -53,7 +55,7 @@ public class Profile {
         // Player name
         System.out.println("---> Please Enter a name : \n");
 
-        
+
         // ScannerUtil.scanner.nextLine(); // This is because we previously used nextInt() and it left a newline character in the buffer.
         String name = ScannerUtil.scanner.nextLine();
 

@@ -1,7 +1,9 @@
+package Core;
+
 import java.util.ArrayList;
 import Character.Character;
 public class battleSub {
-  
+
 public static int getPosition(String[] array, String element) {
     for (int i = 0; i < array.length; i++) {
         if (array[i].equals(element)) {

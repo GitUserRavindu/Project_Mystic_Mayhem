@@ -1,3 +1,5 @@
+package Core;
+
 import java.util.ArrayList;
 import Character.Character;
 import HomeGround.HomeGround;
@@ -75,7 +77,7 @@ public class Battle {
         }
             //Defend order
             battleSub.setOrderDefence(army2);battleSub.setOrderToEqualStats(army2, defenseOrder);
-            
+
             //Selecting the relevant offencer
         for (Character c2:army2) {
             if(c2.getStatus()){
@@ -87,7 +89,7 @@ public class Battle {
         //Check if any bonus events are there
         Boolean bonusAttack1=bonusAttack&&O1.getTribe().equals("Highlander");
         Boolean bonusHeal1=bonusHeal&&O1.getTribe().equals("Mystic");
-            
+
 
         w2=fight.CharacterVsCharacter(O1, D2, bonusAttack1, bonusHeal1, army1, army2, w2);
         if(!w2){break;}

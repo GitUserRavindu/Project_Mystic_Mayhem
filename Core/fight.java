@@ -1,3 +1,5 @@
+package Core;
+
 import java.util.ArrayList;
 import Character.Character;
 public class fight {
@@ -10,10 +12,10 @@ public class fight {
                 H.setHealth(H.getHealth()*0.1f+H.getHealth());}
 
                 System.out.println(O.getName()+" heals "+H.getName());
-                
+
                 if(bonusAttack){H.setHealth((0.2f*H.getHealth()*0.1f+H.getHealth()));}
                 System.out.println(O.getName()+" heals "+H.getName()+" again");
-                
+
                 if(bonusHeal){O.setHealth((O.getHealth()*(1.1f)));
                 System.out.println(O.getName()+" self heal");}
 
@@ -31,11 +33,11 @@ public class fight {
         System.out.println(O.getName()+" self heal");}
 
         D.setHealth(D.getHealth()-damage2);
-        
+
         if(D.getHealth()<=0){
             D.setHealth(0);
             }
-            
+
             //Result of second attack
             System.out.println(D.getName()+"'s health : "+D.getHealth());
             System.out.println(O.getName()+"'s health : "+O.getHealth());
@@ -55,4 +57,3 @@ public class fight {
     return w;
 }
 }
-
