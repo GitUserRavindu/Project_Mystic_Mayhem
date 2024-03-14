@@ -1,6 +1,7 @@
+package Core;
+
 import java.io.IOException;
 import java.io.Serializable;
-
 import java.util.ArrayList;
 
 import Utils.ScannerUtil;
@@ -15,7 +16,7 @@ import HomeGround.Marshland;
 
 public class Player implements Serializable {
 
-    // Player attributes ------------------------------------------------------------------------------    
+    // Player attributes ------------------------------------------------------------------------------
     private String name;//Can be change after creation
     private String userName;//Can not be change after creation. Unique for each user.
     private int userId; // A unique id for each user. Can be generated using number of users.
@@ -23,39 +24,39 @@ public class Player implements Serializable {
     private float xp;
     private String homeGroundName; //This is used to save the home ground name in the file.
     transient private HomeGround homeGround; //HomeGround is a class that contains the home ground of the player. Not saved in the file.
-    public ArrayList<Character> army = new ArrayList<Character>(); //////!!!!!Public, Check with market    
-    // End of Player Attributes -----------------------------------------------------------------------   
-    
-    
+    public ArrayList<Character> army = new ArrayList<Character>(); //////!!!!!Public, Check with market
+    // End of Player Attributes -----------------------------------------------------------------------
+
+
     // Constructor ------------------------------------------------------------------------------------
     public Player() {}
     // End of Constructor -----------------------------------------------------------------------------
-    
-    
+
+
     // Getters ----------------------------------------------------------------------------------------
     public String getName() { return name;}
 
     public String getUserName() { return userName; }
 
     public int getUserId() { return userId; }
-    
+
     public int getGold() { return goldCoins; }
-        
+
     public float getXp() { return xp; }
 
     public String getHomeGroundName() { return homeGroundName; }
-    
+
     public HomeGround getHomeGround() { return homeGround; }
-  
+
     public ArrayList<Character> getArmy() { return army; }
     // End of Getters ---------------------------------------------------------------------------------
-    
-    
+
+
     // Setters ----------------------------------------------------------------------------------------
     public void setName(String name) { this.name = name; }
-    
+
     public void setUserName(String userName) { this.userName = userName; }
-    
+
     public void setUserId(int userId) { this.userId = userId; }
 
     public void setGold(int goldCoins) { this.goldCoins = goldCoins; }
@@ -65,7 +66,7 @@ public class Player implements Serializable {
     public void setHomeGroundName(String homeGroundName) { this.homeGroundName = homeGroundName; }
 
     public void setHomeGround() {
-        System.out.println("Choose a home ground");
+        System.out.println("Choose a home ground\n");
         System.out.println("1. Hillcrest");
         System.out.println("2. Marshland");
         System.out.println("3. Desert");
@@ -105,7 +106,7 @@ public class Player implements Serializable {
     }
 
     //This method is used to set the home ground when the game is loaded from the file. Since homeGround object is not saving.
-    public void setHomeGroundInGameLoad(String homeGroundName) { 
+    public void setHomeGroundInGameLoad(String homeGroundName) {
         switch (homeGroundName) {
             case "Hillcrest":
                 this.homeGround = new Hillcrest();
@@ -123,13 +124,13 @@ public class Player implements Serializable {
                 System.out.println("Invalid input. Please enter a valid number."); //This will never be executed. I guess
         }
     }
-    
-    //Since army attribute is public, this method is not necessary. 
+
+    //Since army attribute is public, this method is not necessary.
     //In the market, the characters are added to the army directly.
-    public void setArmy(ArrayList<Character> army) { this.army = army; }   
+    public void setArmy(ArrayList<Character> army) { this.army = army; }
     // End of Setters ---------------------------------------------------------------------------------
 
-    
+
     // Other Methods ----------------------------------------------------------------------------------
     public void displayCurrentStatus() {
         System.out.println("Here's your profile status :");
@@ -164,22 +165,27 @@ public class Player implements Serializable {
             System.out.println("        Speed   : " + character.getSpeed());
             System.out.println("        Tribe   : " + character.getTribe());
             System.out.println("        Price   : " + character.getPrize());
-            
+
             if (character.getArmor() == null) {
                 System.out.println("        Armor   : No Armor");
             } else {
                 System.out.println("        Armor   : " + character.getArmor().getName());
             }
-            
+
             if (character.getArtefact() == null) {
                 System.out.println("        Artefact: No Artefact");
             } else {
-            System.out.println("        Artefact: " + character.getArtefact().getName());
+                System.out.println("        Artefact: " + character.getArtefact().getName());
             }
-            System.out.println("\n");       
+            System.out.println("\n");
         }
         System.out.println("------------------ End of Army Details -------------------------");
         System.out.println("---------------------------------------------------------------");
+    }
+
+    public boolean checkBattleCompatibility()
+    {
+        return (this.army.size() == 5);
     }
     // End of Other Methods ---------------------------------------------------------------------------
 }
