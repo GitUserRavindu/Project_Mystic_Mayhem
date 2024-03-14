@@ -19,9 +19,10 @@ public class GameSaveManager implements Serializable {
     public GameSaveManager() {}
         
     public void saveGameInsructions() {
-        System.out.println("-----------------------------------");
-        System.out.println("Do you want to save the game? (y/n)");
-        System.out.println("-----------------------------------\n");
+        System.out.println("---------------------------------------------");
+        System.out.println("-> Preserve your progress for future battles!");
+        System.out.println("-> Do you want to save the game? (y/n)");
+        System.out.println("---------------------------------------------\n");
         
         String save = ScannerUtil.scanner.nextLine();
 
@@ -33,7 +34,7 @@ public class GameSaveManager implements Serializable {
             saveGame();
         }
         else {
-            System.out.println("Game not saved. Exiting...\n");
+            System.out.println("Unsuccessful, Game not saved. Exiting...\n");
         }
     }
 
@@ -51,18 +52,19 @@ public class GameSaveManager implements Serializable {
         } catch (IOException e) {
             System.out.println("Error: " + e);
             e.printStackTrace();
-            System.out.println("Game not saved. Exiting...\n");
+            System.out.println("Unsuccessful, Game not saved. Exiting...\n");
         } catch (Exception e) {
             System.out.println("Error: " + e);
             e.printStackTrace();
-            System.out.println("Game not saved. Exiting...\n");
+            System.out.println("Unsuccessful, Game not saved. Exiting...\n");
         }
     }
 
     public void loadGameInstructions() {
-        System.out.println("-----------------------------------------");
-        System.out.println("Do you want to load the saved game? (y/n)");
-        System.out.println("-----------------------------------------\n");
+        System.out.println("-----------------------------------------------");
+        System.out.println("-> Embark on your adventure where you left off!");
+        System.out.println("-> Do you want to load the saved game? (y/n)");
+        System.out.println("-----------------------------------------------\n");
         
         String load = ScannerUtil.scanner.nextLine();
 
@@ -74,7 +76,7 @@ public class GameSaveManager implements Serializable {
             loadGame();
         }
         else {
-            System.out.println("Game not loaded. Exiting...\n");
+            System.out.println("Unsuccessful, Game not loaded. Exiting...\n");
         }
     }
 
@@ -96,15 +98,15 @@ public class GameSaveManager implements Serializable {
         } catch (IOException e) {
             System.out.println("Error: " + e);
             e.printStackTrace();
-            System.out.println("Game not loaded. Exiting...\n");
+            System.out.println("Unsuccessful, Game not loaded. Exiting...\n");
         } catch (ClassNotFoundException e) {
             System.out.println("Error: " + e);
             e.printStackTrace();
-            System.out.println("Game not loaded. Exiting...\n");
+            System.out.println("Unsuccessful, Game not loaded. Exiting...\n");
         } catch (Exception e) {
             System.out.println("Error: " + e);
             e.printStackTrace();
-            System.out.println("Game not loaded. Exiting...\n");
+            System.out.println("Unsuccessful, Game not loaded. Exiting...\n");
         }
     }
 
