@@ -175,12 +175,17 @@ public class Player implements Serializable {
             if (character.getArtefact() == null) {
                 System.out.println("        Artefact: No Artefact");
             } else {
-            System.out.println("        Artefact: " + character.getArtefact().getName());
+                System.out.println("        Artefact: " + character.getArtefact().getName());
             }
             System.out.println("\n");
         }
         System.out.println("------------------ End of Army Details -------------------------");
         System.out.println("---------------------------------------------------------------");
+    }
+
+    public boolean checkBattleCompatibility()
+    {
+        return (this.army.size() == 5);
     }
     // End of Other Methods ---------------------------------------------------------------------------
 }
