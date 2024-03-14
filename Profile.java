@@ -133,6 +133,33 @@ public class Profile {
         System.out.println("Going back to Main Menu...\n");
 
     }
+
+    public static Player selectProfile() {
+        System.out.println("-------------------------------");
+        System.out.println("Select a profile to play with: ");
+        System.out.println("-------------------------------\n");
+        
+        if (playerMap.size() == 0) {
+            System.out.println("Sorry, No profiles found. Please create a new profile.\n");
+            return null;
+        }
+        else {
+            for (Integer key : playerMap.keySet()) {
+                System.out.println("  " + key + ". " + playerMap.get(key).getName());
+            }
+            System.out.println("Enter the number of the profile you want to select: \n");
+            
+            while (true) {
+                try {
+                    int playerChoice = ScannerUtil.scanner.nextInt();
+                    Player player = playerMap.get(playerChoice);
+                    return player;
+                } catch (Exception e) {
+                    System.out.println("Invalid input. Please enter a valid number.\n");
+                }          
+            }
+        }
+    }
     // End of Other Profile Methods ------------------------------------------------------------------------------------
 
 }
