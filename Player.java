@@ -133,21 +133,21 @@ public class Player implements Serializable {
     // Other Methods ----------------------------------------------------------------------------------
     public void displayCurrentStatus() {
         System.out.println("Here's your profile status :");
-        System.out.println("------------------------------------");
-        System.out.println("---------- Profile Status ----------");
-        System.out.format("%12s %3s %20s", "UserName", " : " , userName + "\n");
-        System.out.format("%12s %3s %20s", "UserId", " : " , userId + "\n");
-        System.out.format("%12s %3s %20s", "Name", " : " , name + "\n");
-        System.out.format("%12s %3s %20s", "GoldCoins", " : " , goldCoins + "\n");
-        System.out.format("%12s %3s %20s", "XP", " : " , xp + "\n");
-        System.out.format("%12s %3s %20s", "HomeGround", " : " , homeGround.getName() + "\n");
+        System.out.println("-----------------------------------------------------------------");
+        System.out.println("------------------ Profile Status -------------------------------");
+        System.out.format("%12s %3s %-50s", "UserName", " : " , userName + "\n");
+        System.out.format("%12s %3s %-50s", "UserId", " : " , userId + "\n");
+        System.out.format("%12s %3s %-50s", "Name", " : " , name + "\n");
+        System.out.format("%12s %3s %-50s", "GoldCoins", " : " , goldCoins + "\n");
+        System.out.format("%12s %3s %-50s", "XP", " : " , xp + "\n");
+        System.out.format("%12s %3s %-50s", "HomeGround", " : " , homeGroundName + "\n");
         System.out.print("        Army  : ");
         for (Character character : army) {
             System.out.print(character.getName() + ", ");
         }
         System.out.println("\n");
-        System.out.println("------ End of Profile Status -------");
-        System.out.println("------------------------------------");
+        System.out.println("------------------ End of Profile Status ------------------------");
+        System.out.println("-----------------------------------------------------------------");
     }
     // End of Other Methods ---------------------------------------------------------------------------
 }
