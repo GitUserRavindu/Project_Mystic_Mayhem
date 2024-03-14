@@ -1,4 +1,4 @@
-package character;
+package characters;
 public class Healer extends Character{
     public Healer()
     {

@@ -1,13 +1,15 @@
 package core;
 import java.util.Scanner;
+
+import characters.Archer;
+import characters.Character;
+import characters.Healer;
+import characters.Knight;
+import characters.Mage;
+import characters.MythicalCreature;
+
 import java.lang.Math;
 
-import character.Archer;
-import character.Character;
-import character.Healer;
-import character.Knight;
-import character.Mage;
-import character.MythicalCreature;
 import equipment.Armor;
 import equipment.Artefact;
 import equipment.Equipment;

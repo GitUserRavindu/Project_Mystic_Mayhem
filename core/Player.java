@@ -1,11 +1,13 @@
 package core;
 import java.io.IOException;
 import java.util.Scanner;
+
+import characters.Character;
+
 import java.io.Serializable;
 
 import java.util.ArrayList;
 
-import character.Character;
 import homeground.Arcane;
 import homeground.Desert;
 import homeground.Hillcrest;

@@ -1,8 +1,8 @@
 package core;
 import java.util.ArrayList;
 
-import character.Character;
-import homeground.HomeGround;
+import characters.Character;
+import HomeGrounds;
 
 public class Battle {
     public ArrayList<Character> army1,army2;

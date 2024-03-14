@@ -1,12 +1,12 @@
 package core;
 import java.util.HashMap;
 
-import character.Archer;
-import character.Character;
-import character.Healer;
-import character.Knight;
-import character.Mage;
-import character.MythicalCreature;
+import characters.Archer;
+import characters.Character;
+import characters.Healer;
+import characters.Knight;
+import characters.Mage;
+import characters.MythicalCreature;
 import equipment.Armor;
 import equipment.Artefact;
 import equipment.Equipment;
