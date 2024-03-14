@@ -1,30 +1,24 @@
 import java.util.ArrayList;
-
 import Character.Character;
 import HomeGround.HomeGround;
 
 public class Battle {
     public ArrayList<Character> army1,army2;
+    public Player p1,p2;
     public HomeGround home;
-
     private String name1, name2;
 
     public Battle(Player attacker, Player defender) {
         this.home = defender.getHomeGround();
+
+        this.p1 = attacker;
+        this.p2 = defender;
+
         this.army1 = attacker.getArmy();
         this.army2 = defender.getArmy();
 
         this.name1 = attacker.getName();
         this.name2 = defender.getName();
-    }
-
-    public int getPosition(String[] array, String element) {
-        for (int i = 0; i < array.length; i++) {
-            if (array[i].equals(element)) {
-                return i;
-            }
-        }
-        return -1; // return -1 if the element is not found in the array
     }
 
     public void resetHealth(ArrayList<Character> army){
@@ -33,198 +27,136 @@ public class Battle {
         }
     }
 
-    //Following should be added in player class
-    public void setOrderSpeed(ArrayList<Character> army){
-        Character temp;
-        //ArrayList<Character> order = new ArrayList<Character>();
-        for (int i = 0; i < army.size(); i++) {
-            for (int j = 0; j < army.size() - i - 1; j++) {
-                if (army.get(j).getSpeed() < army.get(j + 1).getSpeed()) { // Modified condition
-                    temp = army.get(j);
-                    army.set(j, army.get(j + 1));
-                    army.set(j + 1, temp);
-                }
-            }
-        }
-        }
-        public void setOrderDefence(ArrayList<Character> army){
-            Character temp;
-            ArrayList<Character> order = new ArrayList<Character>();
-            for (int i = 0; i < army.size(); i++) {
-                for (int j = 0; j < army.size() - i - 1; j++) {
-                    if (army.get(j).getDefense() > army.get(j + 1).getDefense()) {
-                        temp = army.get(j);
-                        army.set(j, army.get(j + 1));
-                        army.set(j + 1, temp);
-                    }
-                }
-            }
-            }
-    public void setOrderToEqualStats(ArrayList<Character> army,String[] Order){
-        int a=0,b=0;
-        for(int i=0;i<army.size();i++){
-            for(int j=0;j<army.size();j++){
-                if(army.get(i).getSpeed()==army.get(a).getSpeed()){
-                    b=i;
-                    }else{
-                        a=i;
-                        break;
-                    }
-                }
-            if(b-a>1){
-                for(int k=a;k<b;k++){
-                    if(getPosition(Order,army.get(k).getType())>getPosition(Order,army.get(k+1).getType())){
-                        Character temp=army.get(k);
-                        army.set(k,army.get(k+1));
-                        army.set(k+1,temp);}}
-            }}
-        }
+//--------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
+        public void fight(){
+            //Checking whether its happens in a specific home ground
+            //Some bonus turns and little more than buffing is happening for some tribes there
+            Boolean bonusAttack=home.getName().equals("Hillcrest");
+            Boolean bonusHeal=home.getName().equals("Arcane");
 
-public void fight(){
-    this.home.buff(army1);
-    this.home.buff(army2);
+            //Buffing the army
+            this.home.buff(army1);
+            this.home.buff(army2);
 
-    Character O1=null,O2=null,D1=null,D2=null;
-    System.out.println(name1+" vs "+name2);
-    Boolean w1=false,w2=false;
+            //These are the offencer and defender in each turn
+            //O-Ofencer, D-Defender
+            Character O1=null,O2=null,D1=null,D2=null;
 
-    String attackOrder[]={"Archer","Knight","Mythical Creature","Mage","Healer"};
-    String defenseOrder[]={"Healer","Mythical Creature","Archer","Knight","Mage"};
+            //Declaration of war or challenge
+            System.out.println(name1+" vs "+name2);
 
-    for(int j=0;j<10;j++){
-        System.out.println("\nTurn "+j+1+":"+name1+"\n");
+            //These are for to check if all characters of the relevant army are dead
+            Boolean w1=true,w2=true;
 
+            //If the parameter for sorting is equal among characters the following order is used
+            String attackOrder[]={"Archer","Knight","Mythical Creature","Mage","Healer"};
+            String defenseOrder[]={"Healer","Mythical Creature","Archer","Knight","Mage"};
 
-        //Offencer1 attack Defender2
+            //Thse will be used to select next character----The previous character can be skipped
+            int tmp1=0,tmp2=0;
 
-        //Offencer1 character choosing
-        setOrderSpeed(army1);setOrderToEqualStats(army1, attackOrder);
-        for (int k = j % (int) army1.size(); k < 2 * (int) army1.size(); k++) {
+        for(int j=0;j<5;j++){
+            System.out.println("\nTurn "+(2*j+1)+":"+name1+"\n");
 
-        int i = k % army1.size();
+            //Attack order
+            battleSub.setOrderSpeed(army1);battleSub.setOrderToEqualStats(army1, attackOrder);
 
+            //Selecting the relevant offencer
+        for (int k = tmp1; k < 2 * (int) army1.size(); k++) {
+            int i = k % army1.size();
         if(army1.get(i).getStatus()){
             O1=army1.get(i);
+            tmp1=i+1;
             break;
         }
-        if(k==9){
-            break;
         }
-    }
-
-        //Defender2 character choosing
-        setOrderDefence(army2);setOrderToEqualStats(army2, defenseOrder);
-        for (int k = j % (int) army2.size(); k < 2 * (int) army2.size(); k++) {
-            int i = k % army1.size();
-        if(army2.get(i).getStatus()){
-            D2=army2.get(i);
-            break;
-        }
-        if(k==9){
-            break;
-        }
-    }
-
-        System.out.println(O1.getName()+" attacks "+D2.getName());
-
-        //Battle happens
-        float damage1=0.5f*(O1.getAttack())-0.1f*(D2.getDefense());
-
-        D2.setHealth(D2.getHealth()-damage1);
-
-        if(D2.getHealth()<=0){
-            D2.setHealth(0);
-            D2.setStatus(false);}
-
-        //Result of first attack
-        System.out.println(D2.getName()+"'s health : "+D2.getHealth());
-        System.out.println(O1.getName()+"'s health : "+O1.getHealth());
-
-    if(D2.getHealth()==0){
-        System.out.println(D2.getName()+" died!");
-        w2=false;
-        for(Character c1:army2){
-            if(c1.getStatus()){
-                w2=true;
-                break;
-            }
-        }if(!w2){break;}
-    }
-
-    //Offencer2 attack Defender1
-
-        setOrderSpeed(army2);setOrderToEqualStats(army2, attackOrder);
-
-        System.out.println("\nTurn "+j+1+":"+name2+"\n");
-
-    //Offencer2 character choosing
-    for (int k = j % (int) army2.size(); k < 2 * (int) army2.size(); k++) {
-        int i = k % army1.size();
-
-        if(army2.get(i).getStatus()){
-            O2=army2.get(i);
-            break;
-        }
-        if(k==9){
-            break;
-        }
-    }
-    //Defender1 character choosing
-    setOrderDefence(army1);setOrderToEqualStats(army1, defenseOrder);
-
-    for(int k=j%(int)army1.size();k<2*(int)army1.size();k++)
-    {
-        int i = k % army1.size();
-
-        if(army1.get(i).getStatus()){
-            D1=army1.get(i);
-            break;
-        }
-        if(k==9){
-            break;
-        }
-    }
-
-        System.out.println(O2.getName()+" attacks "+D1.getName());
-
-        //Battle happens
-        float damage2=0.5f*(O2.getAttack())-0.1f*(D1.getDefense());
-
-        D1.setHealth(D1.getHealth()-damage2);
-
-    if(D1.getHealth()<=0){
-        D1.setHealth(0);;
-        D1.setStatus(false);}
-
-        //Result of second attack
-        System.out.println(D1.getName()+"'s health : "+D1.getHealth());
-        System.out.println(O2.getName()+"'s health : "+O2.getHealth());
-
-    if(D1.getHealth()==0){
-        System.out.println(D1.getName()+" died!");
-        w1=false;
-        for(Character c2:army1){
+            //Defend order
+            battleSub.setOrderDefence(army2);battleSub.setOrderToEqualStats(army2, defenseOrder);
+            
+            //Selecting the relevant offencer
+        for (Character c2:army2) {
             if(c2.getStatus()){
-                w1=true;
+                D2=c2;
                 break;
             }
-        }if(!w1){break;}
+        }
 
-    }}
-    boolean draw,win1,win2;
-    win1=(!w1)&&w2;
-    win2=w1&&(!w2);
-    draw=(!w1)&&(!w2);
+        //Check if any bonus events are there
+        Boolean bonusAttack1=bonusAttack&&O1.getTribe().equals("Highlander");
+        Boolean bonusHeal1=bonusHeal&&O1.getTribe().equals("Mystic");
+            
 
-        //Resetting the status of the characters
-        this.home.resetBuff(army1);
-        this.home.resetBuff(army2);
-        resetHealth(army1);
-        resetHealth(army2);
-    }
+        w2=fight.CharacterVsCharacter(O1, D2, bonusAttack1, bonusHeal1, army1, army2, w2);
+        if(!w2){break;}
 
-private void checkVictory(Boolean w1, Boolean w2,Boolean draw) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'checkVictory'");
-}
-}
+        /////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////
+        //Offencer2 attack Defender1
+
+        System.out.println("\nTurn "+(2*j+2)+":"+name2+"\n");
+
+        battleSub.setOrderSpeed(army2);battleSub.setOrderToEqualStats(army2, attackOrder);
+
+        //Offencer2 character choosing
+        for (int k = tmp2; k < 2 * (int) army2.size(); k++) {
+            int i = k % army2.size();
+
+            if(army2.get(i).getStatus()){
+                O2=army2.get(i);
+                tmp2=i+1;
+                break;
+            }
+        }
+        //Defender1 character choosing
+        battleSub.setOrderDefence(army1);battleSub.setOrderToEqualStats(army1, defenseOrder);
+
+        for(Character c2:army1)
+        {if(c2.getStatus()){
+                D1=c2;
+                break;
+            }
+        }
+
+        Boolean bonusAttack2=bonusAttack&&O2.getTribe().equals("Highlander");
+        Boolean bonusHeal2=bonusHeal&&O2.getTribe().equals("Mystic");
+
+
+        w1=fight.CharacterVsCharacter(O2, D1, bonusAttack2, bonusHeal2, army1, army2, w1);
+        if(!w1){break;}
+            }
+
+        boolean draw,win1,win2;
+        win1=w1&&(!w2);
+        win2=(!w1)&&w2;
+        draw=w1&&w2;
+        checkVictory(win1,win2,draw);
+
+            //Resetting the status of the characters
+            this.home.resetBuff(army1);
+            this.home.resetBuff(army2);
+            resetHealth(army1);
+            resetHealth(army2);
+        }
+
+        private void checkVictory(Boolean win1, Boolean win2,Boolean draw) {
+        if(win1){
+            System.out.println("\n"+name1+" won!");
+            p1.setXp(p1.getXp()+1f);
+            p1.setGold((int)(p1.getGold()+p2.getGold()*0.1));
+            p2.setGold((int)(p2.getGold()-p2.getGold()*0.1));
+        }else if(win2){
+            System.out.println("\n"+name2+" won!");
+            p2.setXp(p2.getXp()+1f);
+            p2.setGold((int)(p2.getGold()+p1.getGold()*0.1));
+            p1.setGold((int)(p1.getGold()-p1.getGold()*0.1));
+        }else if(draw){
+        System.out.println("\n"+"It's a draw!");}
+
+        System.out.println(name1+ "XP:"+p1.getXp()+" gold coins:"+p1.getGold());
+        System.out.println(name2+ "XP:"+p2.getXp()+" gold coins:"+p2.getGold()+"\n");
+        }
+        }
