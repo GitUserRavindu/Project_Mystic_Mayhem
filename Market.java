@@ -1,5 +1,6 @@
-import java.util.Scanner;
 import java.lang.Math;
+
+import Utils.ScannerUtil;
 
 import Character.Character;
 import Character.Archer;
@@ -54,8 +55,7 @@ public class Market {
         System.out.println("Please enter the corresponding number: (1/2/3/4)");
         System.out.println();
 
-        Scanner scanner = new Scanner(System.in);
-        int choice = scanner.nextInt();
+        int choice = ScannerUtil.scanner.nextInt();
 
         switch (choice) {
             case 1:
@@ -104,9 +104,7 @@ public class Market {
         System.out.println("Please enter the corresponding number: (1/2/3/4)");
         System.out.println();
 
-        Scanner scanner = new Scanner(System.in);
-        int choice = scanner.nextInt();
-        ////scanner.close();
+        int choice = ScannerUtil.scanner.nextInt();
 
         switch (choice) {
             case 1:
@@ -197,8 +195,7 @@ public class Market {
         System.out.println("Please enter the corresponding number: (1/2/3/4/5)");
         System.out.println();
 
-        Scanner scanner = new Scanner(System.in);
-        int choice = scanner.nextInt();
+        int choice = ScannerUtil.scanner.nextInt();
 
         int characterChoice;
 
@@ -225,7 +222,7 @@ public class Market {
                 System.out.println("Please select the corresponding number: (1/2/3/4/5)");
                 System.out.println();
 
-                characterChoice = scanner.nextInt();
+                characterChoice = ScannerUtil.scanner.nextInt();
                 System.out.println("You have selected " + characterChoice);
 
                 switch (characterChoice) {
@@ -270,8 +267,8 @@ public class Market {
                 }
                 System.out.println("Please select the corresponding number: (1/2/3/4/5)");
                 System.out.println();
-
-                characterChoice = scanner.nextInt();
+                
+                characterChoice = ScannerUtil.scanner.nextInt();
                 System.out.println("You have selected " + characterChoice);
 
                 switch (characterChoice) {
@@ -316,8 +313,8 @@ public class Market {
                 }
                 System.out.println("Please select the corresponding number: (1/2/3/4/5)");
                 System.out.println();
-
-                characterChoice = scanner.nextInt();
+                
+                characterChoice = ScannerUtil.scanner.nextInt();
                 System.out.println("You have selected " + characterChoice);
 
                 switch (characterChoice) {
@@ -362,7 +359,7 @@ public class Market {
                 System.out.println("Please select the corresponding number: (1/2/3/4/5)");
                 System.out.println();
 
-                characterChoice = scanner.nextInt();
+                characterChoice = ScannerUtil.scanner.nextInt();
                 System.out.println("You have selected " + characterChoice);
 
                 switch (characterChoice) {
@@ -408,7 +405,7 @@ public class Market {
                 System.out.println("Please select the corresponding number: (1/2/3/4/5)");
                 System.out.println();
 
-                characterChoice = scanner.nextInt();
+                characterChoice = ScannerUtil.scanner.nextInt();
                 System.out.println("You have selected " + characterChoice);
 
                 switch (characterChoice) {
@@ -502,8 +499,7 @@ public class Market {
         System.out.println("Please enter the corresponding number: ");
         System.out.println();
 
-        Scanner scanner = new Scanner(System.in);
-        int characterChoice = scanner.nextInt();
+        int characterChoice = ScannerUtil.scanner.nextInt();
 
         try {
             if (characterChoice < 1 || characterChoice > player.army.size()) {
@@ -528,7 +524,7 @@ public class Market {
         System.out.println("Please enter the corresponding number: (1/2)");
         System.out.println();
 
-        int choice = scanner.nextInt();
+        int choice = ScannerUtil.scanner.nextInt();
 
         try {
             if (choice < 1 || choice > 2) {
@@ -553,7 +549,7 @@ public class Market {
                             System.out.println();
                             System.out.println("Do you want to replace " + selectedCharacter.getArmor().getName() + "? (y/n)");
 
-                            char c = scanner.next().charAt(0);
+                            char c = ScannerUtil.scanner.next().charAt(0);
 
                             if(c == 'N' || c == 'n')
                             {
@@ -574,7 +570,7 @@ public class Market {
                 System.out.println("Please select the corresponding number: (1/2/3)");
                 System.out.println();
 
-                int armourChoice = scanner.nextInt();
+                int armourChoice = ScannerUtil.scanner.nextInt();
                 System.out.println("You have selected " + armourChoice);
                 System.out.println();
 
@@ -620,7 +616,7 @@ public class Market {
                 System.out.println("Please select the corresponding number: (1/2/3)");
                 System.out.println();
 
-                int artefactChoice = scanner.nextInt();
+                int artefactChoice = ScannerUtil.scanner.nextInt();
                 System.out.println("You have selected " + artefactChoice);
                 System.out.println();
 
@@ -728,8 +724,7 @@ public class Market {
         System.out.println("Please enter the corresponding number: ");
         System.out.println();
 
-        Scanner scanner = new Scanner(System.in);
-        int characterChoice = scanner.nextInt();
+        int characterChoice = ScannerUtil.scanner.nextInt();
 
         try {
             if (characterChoice < 1 || characterChoice > player.army.size()) {
@@ -747,7 +742,7 @@ public class Market {
         System.out.println("Are you sure you want to sell " + selectedCharacter.getName() + "? (y/n)");
         System.out.println();
 
-        char c = scanner.next().charAt(0);
+        char c = ScannerUtil.scanner.next().charAt(0);
         if(c == 'Y' || c == 'y') {
             int sellPrice = Math.round(selectedCharacter.getPrize() * 90/100);
             existingGoldCoins += sellPrice;
