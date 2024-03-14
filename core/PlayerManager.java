@@ -76,6 +76,10 @@ public class PlayerManager implements Serializable {
 
     public void battleSomeone(Player player) {
 
+        if (!player.battleCompatible()) {
+            
+        }
+
         if (playerList.size() < 2) {
             System.out.println("You're the only player .-.");
             return;
@@ -93,6 +97,7 @@ public class PlayerManager implements Serializable {
         } while (playerChoice.toUpperCase().equals("N"));
 
         if (playerChoice.toUpperCase().equals("Y")) {
+            System.out.println("Initiating battle...");
             char result = Combat.battle(player, opponent);
             System.out.println();
             switch (result) {
@@ -101,10 +106,11 @@ public class PlayerManager implements Serializable {
                     player.addXP(1);
                     break;
                 case 'L':
+                    System.out.println("You lose!");
                     opponent.addXP(1);
                     break;
                 case 'D':
-                    
+                    System.out.println("Draw");
                     break;
             
                 default:

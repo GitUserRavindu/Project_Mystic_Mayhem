@@ -1,9 +1,9 @@
-package temp;
+package core;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import core.Player;
 import gameutils.Utils;
+import temp.Profile;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;

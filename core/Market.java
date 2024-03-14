@@ -1,9 +1,5 @@
 package core;
 
-import java.util.Scanner;
-import java.lang.Math;
-import java.rmi.registry.Registry;
-
 import equipment.*;
 import gameutils.Utils;
 import characters.*;
@@ -27,7 +23,7 @@ public class Market {
         System.out.println("    3. Sell Character");
         System.out.println("    4. Exit the Market");
         System.out.println();
-        int choice = Utils.readInt(">>>", 1, 4);
+        int choice = Utils.readInt(">>> ", 1, 4);
         System.out.println();
 
 
@@ -72,7 +68,17 @@ public class Market {
         System.out.println("   4. Healer");
         System.out.println("   5. Mythical Creature");
         System.out.println();
-        int choice = Utils.readInt(">>>", 1, 5);
+        int choice = Utils.readInt(">>> ", 1, 5);
+
+        
+
+        if (!player.battleCompatible()) {
+            System.out.println("Since your army is not consiting of at least one character from each category,");
+            System.out.println("we encourage you to buy one character from each category to make your army complete.");
+            System.out.println("For now, stick to buying only Level 1 characters");
+            System.out.println("You can buy the advanced characters as you win more battles and earn more gold.");
+            System.out.println("You can always sell your army characters in the sell menu and buy new ones here.\n");
+        }
 
         switch (choice) {
             case 1:
@@ -159,7 +165,7 @@ public class Market {
         }
 
         int armySize = player.getArmy().getSize();
-        int choice = Utils.readInt(">>>",1,armySize);
+        int choice = Utils.readInt(">>> ",1,armySize);
 
         String category = player.getArmy().getCharacterbyIndex(choice);
         Character character = player.getArmy().getCharacter(category);
@@ -202,6 +208,14 @@ public class Market {
     //Displays the equipment that can be bought.
 
     private static void buyEquipment(Player player){
+
+        if (!player.battleCompatible()) {
+            System.out.println("Since your army is not consiting of at least one character from each category,");
+            System.out.println("we encourage you to buy one character from each category to make your army complete.");
+            System.out.println("After that, you can buy the equipment for each character.");
+            return;
+        }
+
         System.out.println("-------------------------------------------------------------");
         System.out.println("Please select which character you want to buy equipment for: ");
         System.out.println("-------------------------------------------------------------");
@@ -213,7 +227,7 @@ public class Market {
         }
 
         int armySize = player.getArmy().getSize();
-        int choice = Utils.readInt(">>>",1,armySize);
+        int choice = Utils.readInt(">>> ",1,armySize);
 
         String category = player.getArmy().getCharacterbyIndex(choice);
         Character character = player.getArmy().getCharacter(category);
@@ -227,7 +241,7 @@ public class Market {
         System.out.println("    2. Artifact");
         System.out.println();
 
-        int choice2 = Utils.readInt(">>>",1,2);
+        int choice2 = Utils.readInt(">>> ",1,2);
 
         switch (choice2) {
             case 1:

@@ -114,5 +114,9 @@ public class Player implements Serializable {
         return army.getInfoString();
     }
 
+    public boolean battleCompatible() {
+        return (army.getSize() == 5);
+    }
+
 
 }
