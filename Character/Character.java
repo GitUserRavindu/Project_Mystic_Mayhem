@@ -1,7 +1,8 @@
-package Character;
+package character;
 
-import Equipment.Equipment;
-import Interfaces.MakeClone;
+import equipment.Equipment;
+import interfaces.MakeClone;
+
 import java.io.Serializable;
 
 

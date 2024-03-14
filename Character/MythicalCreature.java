@@ -1,4 +1,4 @@
-package Character;
+package character;
 
 public class MythicalCreature extends Character {
     // All the structures are same as characters

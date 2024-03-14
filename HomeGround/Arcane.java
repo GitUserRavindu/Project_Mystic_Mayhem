@@ -1,7 +1,8 @@
-package HomeGround;
+package homeground;
 
-import Character.Character;
 import java.util.ArrayList;
+
+import character.Character;
 
 public class Arcane extends HomeGround {
 

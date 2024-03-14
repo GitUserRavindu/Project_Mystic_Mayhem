@@ -1,6 +1,12 @@
+
 import java.io.*;
 
 import java.util.Scanner;
+
+import core.Market;
+import core.Player;
+import core.Profile;
+import core.Registry;
 
 // import Character.Character;
 // import Equipment.Equipment;

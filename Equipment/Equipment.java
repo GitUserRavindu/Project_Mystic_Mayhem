@@ -1,8 +1,8 @@
-package Equipment;
+package equipment;
 
 import java.io.Serializable;
 
-import Interfaces.MakeClone;
+import interfaces.MakeClone;
 
 public abstract class Equipment implements MakeClone, Serializable {
     protected String name;

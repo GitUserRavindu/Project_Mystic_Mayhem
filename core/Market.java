@@ -1,16 +1,16 @@
+package core;
 import java.util.Scanner;
 import java.lang.Math;
 
-import Character.Character;
-import Character.Archer;
-import Character.Knight;
-import Character.Mage;
-import Character.Healer;
-import Character.MythicalCreature;
-
-import Equipment.Equipment;
-import Equipment.Armor;
-import Equipment.Artefact;
+import character.Archer;
+import character.Character;
+import character.Healer;
+import character.Knight;
+import character.Mage;
+import character.MythicalCreature;
+import equipment.Armor;
+import equipment.Artefact;
+import equipment.Equipment;
 
 public class Market {
 

@@ -1,14 +1,15 @@
+package core;
 import java.util.HashMap;
 
-import Character.Archer;
-import Character.Character;
-import Character.Healer;
-import Character.Knight;
-import Character.Mage;
-import Character.MythicalCreature;
-import Equipment.Armor;
-import Equipment.Artefact;
-import Equipment.Equipment;
+import character.Archer;
+import character.Character;
+import character.Healer;
+import character.Knight;
+import character.Mage;
+import character.MythicalCreature;
+import equipment.Armor;
+import equipment.Artefact;
+import equipment.Equipment;
 
 public class Registry {
     private static HashMap<String, Character> characters = new HashMap<>();

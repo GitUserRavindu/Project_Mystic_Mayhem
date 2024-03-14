@@ -1,15 +1,16 @@
+package core;
 import java.io.IOException;
 import java.util.Scanner;
 import java.io.Serializable;
 
 import java.util.ArrayList;
 
-import Character.Character;
-import HomeGround.Arcane;
-import HomeGround.Desert;
-import HomeGround.Hillcrest;
-import HomeGround.HomeGround;
-import HomeGround.Marshland;
+import character.Character;
+import homeground.Arcane;
+import homeground.Desert;
+import homeground.Hillcrest;
+import homeground.HomeGround;
+import homeground.Marshland;
 
 public class Player implements Serializable {
 
