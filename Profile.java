@@ -89,6 +89,10 @@ public class Profile {
         player.setHomeGround();
         System.out.println("Your homeground has been set to : " + player.getHomeGround().getName() + "\n");
 
+        
+        // Player String HomeGroundName
+        player.setHomeGroundName(player.getHomeGround().getName());
+        
         // Player Army
         System.out.println("---> For building your army, Please visit to the market menu in the main menu. \n");
               

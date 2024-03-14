@@ -66,13 +66,14 @@ public class Main {
                 System.out.println("Select a player to play with: ");
                 for (Integer key : selectPlayerMap.keySet()) {
                     System.out.println(key + ". " + selectPlayerMap.get(key).getName());
+                    System.out.println(selectPlayerMap.get(key).getHomeGround().getName());
                 }
                 int playerChoice = scanner.nextInt();
                 playerP = selectPlayerMap.get(playerChoice);
             }
             
-        }   
-
+        } 
+        
         Market market = Market.getInstance();
         market.marketMenu(playerP);
 

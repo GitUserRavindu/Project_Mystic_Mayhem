@@ -21,7 +21,8 @@ public class Player implements Serializable {
     private int userId; // A unique id for each user. Can be generated using number of users.
     private int goldCoins;
     private float xp;
-    transient private HomeGround homeGround; //HomeGround is a class that contains the home ground of the player.
+    private String homeGroundName; //This is used to save the home ground name in the file.
+    transient private HomeGround homeGround; //HomeGround is a class that contains the home ground of the player. Not saved in the file.
     public ArrayList<Character> army = new ArrayList<Character>(); //////!!!!!Public, Check with market    
     // End of Player Attributes -----------------------------------------------------------------------   
     
@@ -41,6 +42,8 @@ public class Player implements Serializable {
     public int getGold() { return goldCoins; }
         
     public float getXp() { return xp; }
+
+    public String getHomeGroundName() { return homeGroundName; }
     
     public HomeGround getHomeGround() { return homeGround; }
   
@@ -58,6 +61,8 @@ public class Player implements Serializable {
     public void setGold(int goldCoins) { this.goldCoins = goldCoins; }
 
     public void setXp(float xp) { this.xp = xp; }
+
+    public void setHomeGroundName(String homeGroundName) { this.homeGroundName = homeGroundName; }
 
     public void setHomeGround() {
         System.out.println("Choose a home ground");
@@ -93,6 +98,26 @@ public class Player implements Serializable {
                 break;
             case 4:
                 homeGround = new Arcane();
+                break;
+            default:
+                System.out.println("Invalid input. Please enter a valid number."); //This will never be executed. I guess
+        }
+    }
+
+    //This method is used to set the home ground when the game is loaded from the file. Since homeGround object is not saving.
+    public void setHomeGroundInGameLoad(String homeGroundName) { 
+        switch (homeGroundName) {
+            case "Hillcrest":
+                this.homeGround = new Hillcrest();
+                break;
+            case "Marshland":
+                this.homeGround = new Marshland();
+                break;
+            case "Desert":
+                this.homeGround = new Desert();
+                break;
+            case "Arcane":
+                this.homeGround = new Arcane();
                 break;
             default:
                 System.out.println("Invalid input. Please enter a valid number."); //This will never be executed. I guess

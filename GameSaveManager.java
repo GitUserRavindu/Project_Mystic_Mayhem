@@ -87,6 +87,11 @@ public class GameSaveManager implements Serializable {
             Profile.setProfileCount(loadedGame.profileCount);
             Profile.setUserNameList(loadedGame.userNameList);
             Profile.setPlayerMap(loadedGame.playerMap);
+
+            for (Player p : loadedGame.playerMap.values()) {
+                p.setHomeGroundInGameLoad(p.getHomeGroundName());
+            }
+
             System.out.println("Game loaded successfully! Exiting...\n");
         } catch (IOException e) {
             System.out.println("Error: " + e);
