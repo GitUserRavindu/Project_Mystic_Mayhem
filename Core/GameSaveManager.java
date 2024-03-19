@@ -1,3 +1,5 @@
+package Core;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,25 +13,25 @@ import java.io.Serializable;
 import Utils.ScannerUtil;
 
 public class GameSaveManager implements Serializable {
-    
+
     private int profileCount;
     private ArrayList<String> userNameList = new ArrayList<String>();
     private HashMap<Integer, Player> playerMap = new HashMap<Integer, Player>();
 
     public GameSaveManager() {}
-        
+
     public void saveGameInsructions() {
         System.out.println("---------------------------------------------");
         System.out.println("-> Preserve your progress for future battles!");
         System.out.println("-> Do you want to save the game? (y/n)");
         System.out.println("---------------------------------------------\n");
-        
+
         String save = ScannerUtil.scanner.nextLine();
 
         if (save.isEmpty()) {
             save = ScannerUtil.scanner.nextLine();
         }
-        
+
         if (save.equals("y") || save.equals("Y")) {
             saveGame();
         }
@@ -45,7 +47,7 @@ public class GameSaveManager implements Serializable {
 
         try {
             FileOutputStream savefile = new FileOutputStream("GameSave.ser");
-            ObjectOutputStream saveObj = new ObjectOutputStream(savefile); 
+            ObjectOutputStream saveObj = new ObjectOutputStream(savefile);
             saveObj.writeObject(this);
             saveObj.close();
             System.out.println("Game saved successfully! Exiting...\n");
@@ -65,7 +67,7 @@ public class GameSaveManager implements Serializable {
         System.out.println("-> Embark on your adventure where you left off!");
         System.out.println("-> Do you want to load the saved game? (y/n)");
         System.out.println("-----------------------------------------------\n");
-        
+
         String load = ScannerUtil.scanner.nextLine();
 
         if (load.isEmpty()) {

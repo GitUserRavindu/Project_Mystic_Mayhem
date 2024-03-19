@@ -1,3 +1,5 @@
+package Core;
+
 import java.lang.Math;
 
 import Utils.ScannerUtil;
@@ -19,10 +21,8 @@ public class Market {
     private int existingGoldCoins;
     private int neededGoldCoins;
 
-
-    ////////////////////Market Constructor///////////////////////////////////////////////////////////////////////////////
-
-    //Singleton Design Pattern is used. Only one Market object can be created.
+    //....Market Constructor....//
+    //Singleton Design Pattern is used.
     private static Market instance = null;
 
     private Market() {}
@@ -35,10 +35,9 @@ public class Market {
         return instance;
     }
 
-
-    //////////////////// Market Menu /////////////////////////////////////////////////////////////////////////////////////
-
-    //Displays the options for the player to choose. Market Menu is the main menu of the Market Place.
+    
+    //....Market Menu....//
+    //Displays the options for the player to choose.
     public void marketMenu(Player player) {
         this.player = player;
         this.existingGoldCoins = player.getGold();
@@ -47,28 +46,31 @@ public class Market {
         System.out.println("Welcome to the Market Place!");
         System.out.println("----------------------------");
         System.out.println("What you want to do today? Please select an option: ");
-        System.out.println("    1. Buy Army or Equipment");
-        System.out.println("    2. Sell Army");
-        System.out.println("    3. Check the balance of your gold coins");
-        System.out.println("    4. Exit");
-        System.out.println("Please enter the corresponding number: (1/2/3/4)");
-        System.out.println();
+        System.out.println("    1. Buy Army");
+        System.out.println("    2. Buy Equipment");
+        System.out.println("    3. Sell Army");
+        System.out.println("    4. Check the balance of your gold coins");
+        System.out.println("    5. Exit");
+        System.out.println("Please enter the corresponding number: (1/2/3/4/5)\n");
 
         int choice = ScannerUtil.scanner.nextInt();
 
         switch (choice) {
             case 1:
-                buyMenu();
+                buyArmy();
                 break;
             case 2:
-                sellArmy();
+                buyEquipment();
                 break;
             case 3:
+                sellArmy();
+                break;
+            case 4:
                 System.out.println("You have selected to check the balance of your gold coins. Here is your balance details: ");
                 System.out.println("You have " + player.getGold() + " gold coins.");
                 System.out.println();
                 break;
-            case 4:
+            case 5:
                 System.out.println("You have selected to exit.");
                 System.out.println("---------------------------------------------------------------");
                 System.out.println("Thank you for visiting the Market Place! Goodbye! See you soon!");
@@ -81,7 +83,7 @@ public class Market {
                 break;
         }
 
-        while (choice != 4) {
+        while (choice != 5) {
             marketMenu(player);
             return;
         }
@@ -89,50 +91,6 @@ public class Market {
 
 
     //////////////////// Buy Menu /////////////////////////////////////////////////////////////////////////////////////
-
-    //Displays the options for the player to choose what to buy.
-    private void buyMenu() {
-        System.out.println("You have selected to buy Army or Equipment.");
-        System.out.println("-----------------------------------------------");
-        System.out.println("What you want to buy? Please select an option: ");
-        System.out.println("-----------------------------------------------");
-        System.out.println("    1. Army");
-        System.out.println("    2. Equipment");
-        System.out.println("    3. Check the balance of your gold coins");
-        System.out.println("    4. Go back to the Market Menu");
-        System.out.println("Please enter the corresponding number: (1/2/3/4)");
-        System.out.println();
-
-        int choice = ScannerUtil.scanner.nextInt();
-
-        switch (choice) {
-            case 1:
-                buyArmy();
-                break;
-            case 2:
-                buyEquipment();
-                break;
-            case 3:
-                System.out.println("You have selected to check the balance of your gold coins. Here is your balance details: ");
-                System.out.println("You have " + player.getGold() + " gold coins.");
-                System.out.println();
-                break;
-            case 4:
-                System.out.println("You have selected to go back to the Market Menu. Going back to the Market Menu...");
-                System.out.println("---------------------------------------------------------------------------------");
-                System.out.println();
-                return;
-            default:
-                System.out.println("Invalid choice. Please enter a valid number.");
-                System.out.println();
-                break;
-        }
-
-        while (choice != 4) {
-            buyMenu();
-            return;
-        }
-    }
 
 
     /////////////////////////// Show Room - Display Items //////////////////////////////////////////////////////////////////////
@@ -184,7 +142,7 @@ public class Market {
     private void buyArmy(){
         System.out.println("You have selected to buy an army.\n");
 
-        if (!player.battleCompatibility()) {
+        if (!player.checkBattleCompatibility()) {
             System.out.println("Since your army is not consiting of at least one character from each category,");
             System.out.println("we encourage you to buy one character from each category to make your army complete.");
             System.out.println("You can buy the advanced characters as you win more battles and earn more golds.");
@@ -194,6 +152,7 @@ public class Market {
             System.out.println("You army is already complete with at least one character from each category.");
             System.out.println("If you want to buy advanced characters, you can always sell your army characters first.");
             System.out.println("However, check the balance of your gold coins first before proceeding to buy advanced characters.\n");
+            return;
         }
 
 
@@ -293,7 +252,7 @@ public class Market {
                 }
                 System.out.println("Please select the corresponding number: (1/2/3/4/5)");
                 System.out.println();
-                
+
                 characterChoice = ScannerUtil.scanner.nextInt();
                 System.out.println("You have selected " + characterChoice);
 
@@ -339,7 +298,7 @@ public class Market {
                 }
                 System.out.println("Please select the corresponding number: (1/2/3/4/5)");
                 System.out.println();
-                
+
                 characterChoice = ScannerUtil.scanner.nextInt();
                 System.out.println("You have selected " + characterChoice);
 
@@ -461,7 +420,7 @@ public class Market {
                 System.out.println();
                 break;
         }
-   
+
     }
 
 
@@ -513,7 +472,7 @@ public class Market {
     private void buyEquipment(){
         System.out.println("You have selected to buy an equipment.");
 
-        if (!player.battleCompatibility()) {
+        if (!player.checkBattleCompatibility()) {
             System.out.println("Since your army is not consiting of at least one character from each category,");
             System.out.println("we encourage you to buy one character from each category to make your army complete.");
             System.out.println("After that, you can buy the equipment for each character.");

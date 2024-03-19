@@ -1,3 +1,5 @@
+package Core;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -5,6 +7,7 @@ import java.util.Random;
 import Utils.ScannerUtil;
 
 import Character.Character;
+import Equipment.Equipment;
 
 public class Profile {
 
@@ -20,15 +23,15 @@ public class Profile {
     public static ArrayList<String> getUserNameList() { return userNameList; } //This will not be used in the game.
     public static HashMap<Integer, Player> getPlayerMap() { return playerMap; }
     // End of Profile Getters ------------------------------------------------------------------------------------------
-    
-    
+
+
     // Need setters for saving and loading purposes.
     // Profile Setters -------------------------------------------------------------------------------------------------
     public static void setProfileCount(int profileCount) { Profile.profileCount = profileCount; }
     public static void setUserNameList(ArrayList<String> userNameList) { Profile.userNameList = userNameList; }
     public static void setPlayerMap(HashMap<Integer, Player> playerMap) { Profile.playerMap = playerMap; }
     // End of Profile Setters ------------------------------------------------------------------------------------------
-    
+
 
     // Other Profile Methods -------------------------------------------------------------------------------------------
     public static Player createProfile() {
@@ -55,7 +58,7 @@ public class Profile {
         // Player name
         System.out.println("---> Please Enter a name : \n");
 
-        
+
         // ScannerUtil.scanner.nextLine(); // This is because we previously used nextInt() and it left a newline character in the buffer.
         String name = ScannerUtil.scanner.nextLine();
 
@@ -261,6 +264,35 @@ public class Profile {
                     continue;
                 }
             }
+        }
+    }
+    
+    public static void firstP(){
+        if(!userNameList.contains("whitewolf")){
+        Player pl = new Player();
+        pl.setName("GeraltofRivia");
+        pl.setUserName("whitewolf");
+        pl.setGold(215);
+        pl.setXp(32.0f);
+        pl.setUserId(-1);
+        pl.setHomeGroundInGameLoad("Marshland");
+        pl.setHomeGroundName("Marshland");
+        
+        pl.army.add(Registry.returnCharacter("Ranger"));
+        pl.army.add(Registry.returnCharacter("Squire"));
+        pl.army.add(Registry.returnCharacter("Warlock"));
+        pl.army.add(Registry.returnCharacter("Medic"));
+        pl.army.add(Registry.returnCharacter("Dragon"));
+        
+        Equipment[] eq1 = new Equipment[2];
+        eq1[0] = Registry.returnEquipment("Chainmail");
+        eq1[1] = null;
+        pl.getArmy().get(0).setEquipments(eq1);
+        Equipment[] eq2 = new Equipment[2];
+        eq2[0]=null;
+        eq2[1]=Registry.returnEquipment("Amulet");
+        pl.getArmy().get(3).setEquipments(eq2);
+        playerMap.put(-1,pl);
         }
     }
     // End of Other Profile Methods ------------------------------------------------------------------------------------
