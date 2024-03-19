@@ -69,11 +69,11 @@ public class Battle {
             //Selecting the relevant offencer
         for (int k = tmp1; k < 2 * (int) army1.size(); k++) {
             int i = k % army1.size();
-        if(army1.get(i).getStatus()){
-            O1=army1.get(i);
-            tmp1=i+1;
-            break;
-        }
+            if(army1.get(i).getStatus()){
+                O1=army1.get(i);
+                tmp1=i+1;
+                break;
+            }
         }
             //Defend order
             battleSub.setOrderDefence(army2);battleSub.setOrderToEqualStats(army2, defenseOrder);
@@ -90,7 +90,6 @@ public class Battle {
         Boolean bonusAttack1=bonusAttack&&O1.getTribe().equals("Highlander");
         Boolean bonusHeal1=bonusHeal&&O1.getTribe().equals("Mystic");
 
-
         w2=fight.CharacterVsCharacter(O1, D2, bonusAttack1, bonusHeal1, army1, army2, w2);
         if(!w2){break;}
 
@@ -99,7 +98,7 @@ public class Battle {
         /////////////////////////////////////////////////////////////////////
         //Offencer2 attack Defender1
 
-        System.out.println("\nTurn "+(2*j+2)+":"+name2+"\n");
+        System.out.println("\nTurn "+(2*j+2)+" : "+name2+"\n");
 
         battleSub.setOrderSpeed(army2);battleSub.setOrderToEqualStats(army2, attackOrder);
 
@@ -142,6 +141,10 @@ public class Battle {
             this.home.resetBuff(army2);
             resetHealth(army1);
             resetHealth(army2);
+
+            for (int i = 0; i < army1.size(); i++) {
+                army1.get(i).setStatus(true);
+            }
         }
 
         private void checkVictory(Boolean win1, Boolean win2,Boolean draw) {
