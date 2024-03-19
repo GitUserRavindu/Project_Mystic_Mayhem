@@ -90,9 +90,6 @@ public class Market {
     }
 
 
-    //////////////////// Buy Menu /////////////////////////////////////////////////////////////////////////////////////
-
-
     /////////////////////////// Show Room - Display Items //////////////////////////////////////////////////////////////////////
 
     //Display items - Header of the table
@@ -142,20 +139,15 @@ public class Market {
     private void buyArmy(){
         System.out.println("You have selected to buy an army.\n");
 
-        if (!player.checkBattleCompatibility()) {
-            System.out.println("Since your army is not consiting of at least one character from each category,");
-            System.out.println("we encourage you to buy one character from each category to make your army complete.");
-            System.out.println("You can buy the advanced characters as you win more battles and earn more golds.");
-            System.out.println("You can always sell your army characters in the sell menu and buy new ones here.\n");
-        }
-        else {
-            System.out.println("You army is already complete with at least one character from each category.");
-            System.out.println("If you want to buy advanced characters, you can always sell your army characters first.");
+        if (player.checkBattleCompatibility()) {
+            System.out.println("You army is  already complete with  at least one character from each category.");
+            System.out.println("If you want to buy advanced characters from some category, you can always sell");
+            System.out.println("your existing army character of that category first.");
             System.out.println("However, check the balance of your gold coins first before proceeding to buy advanced characters.\n");
+            System.out.println("Please come back later. Going back to the Main Menu...\n");
             return;
         }
-
-
+  
         System.out.println("------------------------------------------------------");
         System.out.println("Please select the character category you want to buy: ");
         System.out.println("------------------------------------------------------");
@@ -179,7 +171,7 @@ public class Market {
                 //Check whether an archer is already in the army.
                 for (Character character : player.army) {
                     if (character instanceof Archer) {
-                        System.out.println("You already have an Archer in your army. Going back to the Buy menu...");
+                        System.out.println("You already have an Archer in your army. Going back to the Market Menu...");
                         System.out.println();
                         return;
                     }
@@ -200,7 +192,7 @@ public class Market {
 
                 while(true) {
                     if (characterChoice < 1 || characterChoice > 5) {
-                        System.out.println("Invalid choice. Please enter a valid number. Going back to the Buy menu...");
+                        System.out.println("Invalid choice. Please enter a valid number. Going back to the Market Menu...");
                         System.out.println();
                         return;
                     }
@@ -227,7 +219,7 @@ public class Market {
                         buyTransaction("Saggitarius");
                         break;
                     default:
-                        System.out.println("Invalid choice. Please enter a valid number. Going back to the Buy menu...");
+                        System.out.println("Invalid choice. Please enter a valid number. Going back to the Market Menu...");
                         System.out.println();
                         break;
                 }
@@ -238,7 +230,7 @@ public class Market {
                 //Check whether a knight is already in the army.
                 for (Character character : player.army) {
                     if (character instanceof Knight) {
-                        System.out.println("You already have a Knight in your army. Going back to the Buy menu...");
+                        System.out.println("You already have a Knight in your army. Going back to the Market Menu...");
                         System.out.println();
                         return;
                     }
@@ -273,7 +265,7 @@ public class Market {
                         buyTransaction("Swiftblade");
                         break;
                     default:
-                        System.out.println("Invalid choice. Please enter a valid number. Going back to the Buy menu...");
+                        System.out.println("Invalid choice. Please enter a valid number. Going back to the Market Menu...");
                         System.out.println();
                         break;
                 }
@@ -284,7 +276,7 @@ public class Market {
                 //Check whether a mage is already in the army.
                 for (Character character : player.army) {
                     if (character instanceof Mage) {
-                        System.out.println("You already have a Mage in your army. Going back to the Buy menu...");
+                        System.out.println("You already have a Mage in your army. Going back to the Market Menu...");
                         System.out.println();
                         return;
                     }
@@ -319,7 +311,7 @@ public class Market {
                         buyTransaction("Eldritch");
                         break;
                     default:
-                        System.out.println("Invalid choice. Please enter a valid number. Going back to the Buy menu...");
+                        System.out.println("Invalid choice. Please enter a valid number. Going back to the Market Menu...");
                         break;
                 }
                 break;
@@ -364,7 +356,7 @@ public class Market {
                         buyTransaction("Lightbringer");
                         break;
                     default:
-                        System.out.println("Invalid choice. Please enter a valid number. Going back to the Buy menu...");
+                        System.out.println("Invalid choice. Please enter a valid number. Going back to the Market Menu...");
                         System.out.println();
                         break;
                 }
@@ -375,7 +367,7 @@ public class Market {
                 //Check whether a mythical creature is already in the army.
                 for (Character character : player.army) {
                     if (character instanceof MythicalCreature) {
-                        System.out.println("You already have a Mythical Creature in your army. Going back to the Buy menu...");
+                        System.out.println("You already have a Mythical Creature in your army. Going back to the Market Menu...");
                         System.out.println();
                         return;
                     }
@@ -410,13 +402,13 @@ public class Market {
                         buyTransaction("Pegasus");
                         break;
                     default:
-                        System.out.println("Invalid choice. Please enter a valid number. Going back to the Buy menu...");
+                        System.out.println("Invalid choice. Please enter a valid number. Going back to the Market Menu...");
                         System.out.println();
                         break;
                 }
                 break;
             default:
-                System.out.println("Invalid choice. Please enter a valid number. Going back to the Buy menu...");
+                System.out.println("Invalid choice. Please enter a valid number. Going back to the Market Menu...");
                 System.out.println();
                 break;
         }
@@ -447,7 +439,7 @@ public class Market {
                 System.out.println(c.getName());
             }
             System.out.println();
-            System.out.println("Please come back later. Going back to the Buy menu...");
+            System.out.println("Please come back later. Going back to the Market Menu...");
             System.out.println();
             return;
         } else {
@@ -459,7 +451,7 @@ public class Market {
             System.out.println("Available gold coins: " + existingGoldCoins + " gold coins.");
             System.out.println("Needed gold coins: " + neededGoldCoins + " gold coins.");
             System.out.println();
-            System.out.println("Please come back later. Going back to the Buy menu...");
+            System.out.println("Please come back later. Going back to the Market Menu...");
             System.out.println();
             return;
         }
@@ -471,13 +463,6 @@ public class Market {
     //Displays the equipment that can be bought.
     private void buyEquipment(){
         System.out.println("You have selected to buy an equipment.");
-
-        if (!player.checkBattleCompatibility()) {
-            System.out.println("Since your army is not consiting of at least one character from each category,");
-            System.out.println("we encourage you to buy one character from each category to make your army complete.");
-            System.out.println("After that, you can buy the equipment for each character.");
-            return;
-        }
 
         System.out.println("-------------------------------------------------------------");
         System.out.println("Please select which character you want to buy equipment for: ");
@@ -500,7 +485,7 @@ public class Market {
             }
         } catch (Exception e) {
             System.out.println(e);
-            System.out.println("Going back to the Buy menu...");
+            System.out.println("Going back to the Market Menu...");
             System.out.println();
             return;
         }
@@ -524,7 +509,7 @@ public class Market {
             }
         } catch (Exception e) {
             System.out.println(e);
-            System.out.println("Going back to the Buy menu...");
+            System.out.println("Going back to the Market Menu...");
             System.out.println();
             return;
         }
@@ -545,7 +530,7 @@ public class Market {
 
                             if(c == 'N' || c == 'n')
                             {
-                                System.out.println("Going back to the Buy menu...");
+                                System.out.println("Going back to the Market Menu...");
                                 return;
                             }
 
@@ -578,7 +563,7 @@ public class Market {
                         break;
                     default:
                         System.out.println("Invalid choice. Please enter a valid number.");
-                        System.out.println("Going back to the Buy menu...");
+                        System.out.println("Going back to the Market Menu...");
                         System.out.println();
                         return;
                 }
@@ -593,8 +578,15 @@ public class Market {
                         if (equipment instanceof Artefact) {
                             System.out.println("You already have an artefact equipped by " + selectedCharacter.getName());
                             System.out.println();
-                            System.out.println("Going back to the Buy menu...");
-                            return;
+                            System.out.println("Do you want to replace " + selectedCharacter.getArtefact().getName() + "? (y/n)");
+
+                            char c = ScannerUtil.scanner.next().charAt(0);
+
+                            if(c == 'N' || c == 'n')
+                            {
+                                System.out.println("Going back to the Market Menu...");
+                                return;
+                            }
                         }
                     }
                 }
@@ -624,14 +616,14 @@ public class Market {
                         break;
                     default:
                         System.out.println("Invalid choice. Please enter a valid number.");
-                        System.out.println("Going back to the Buy menu...");
+                        System.out.println("Going back to the Market Menu...");
                         System.out.println();
                         return;
                 }
                 break;
             default:
                 System.out.println("Invalid choice. Please enter a valid number.");
-                System.out.println("Going back to the Buy menu...");
+                System.out.println("Going back to the Market Menu...");
                 System.out.println();
                 return;
         }
@@ -684,7 +676,7 @@ public class Market {
             System.out.println("You don't have enough gold!");
             System.out.println("Available gold coins: " + existingGoldCoins + " gold coins.");
             System.out.println("Needed gold coins: " + neededGoldCoins + " gold coins.\n");
-            System.out.println("Please come back later. Going back to the Buy menu...\n");
+            System.out.println("Please come back later. Going back to the Market Menu...\n");
             return;
         }
     }
