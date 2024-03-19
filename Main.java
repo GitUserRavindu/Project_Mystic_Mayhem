@@ -70,6 +70,10 @@ public class Main {
                     System.out.println("No profile selected. Please select a profile or create a new one.\n");
                     continue;
                 }
+                if (currentPlayer.getArmy().size() == 0) {
+                    System.out.println("You don't have an army to battle. Please visit the market place to buy some soldiers.\n");
+                    continue;
+                }
 
                 // Select Opponent
                 Player opponentPlayer = Profile.selectOpponent(currentPlayer);
@@ -96,6 +100,7 @@ public class Main {
         MainMenu.displayGameEnd();
 
         // Close Scanner
+        ScannerUtil.scanner.nextLine();
         ScannerUtil.scanner.close();
     }
 }
