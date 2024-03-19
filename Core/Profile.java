@@ -6,7 +6,6 @@ import java.util.Random;
 
 import Utils.ScannerUtil;
 
-import Character.Character;
 import Equipment.Equipment;
 
 public class Profile {
